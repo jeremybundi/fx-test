@@ -12,6 +12,11 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      fontFamily: {
+        poppins: "var(--font-poppins), sans-serif",
+        manrope: "var(--font-manrope), sans-serif",
+        lufga: "'Lufga', sans-serif", // Custom font from CDN
+      },
     },
   },
   plugins: [],
