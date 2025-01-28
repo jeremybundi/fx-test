@@ -49,7 +49,7 @@ export default function MarketComparison() {
   };
 
   return (
-    <div className="bg-white rounded-lg px-8 py-6">
+    <div className="bg-white font-poppins rounded-lg px-8 py-6">
       {/* Header Section */}
       <h1 className="font-semibold text-[20px] mb-6">Market Comparison</h1>
 
@@ -90,7 +90,7 @@ export default function MarketComparison() {
         {/* Terrapage */}
         <div className="flex gap-2 justify-between mb-6">
           <Image src={terrapageImage} alt="Terrapage" width={110} height={80} className="py-1" />
-          <span className="px-4 py-1 bg-green-50 text-sm font-semibold text-green-900 w-[90px] text-center">
+          <span className="px-4 py-1 bg-green-50 text-sm font-semibold text-green-500 w-[90px] text-center">
             {exchangeRates[selectedPair].terrapage}
           </span>
         </div>
@@ -98,7 +98,7 @@ export default function MarketComparison() {
         {/* Tuma */}
         <div className="flex gap-2 justify-between mb-">
           <Image src={tumaImage} alt="Tuma" width={60} height={20} className="py-1" />
-          <span className="px-2 py-1 bg-green-50 text-sm font-semibold text-green-900 w-[90px] text-center">
+          <span className="px-2 py-1 bg-green-50 text-sm font-semibold text-green-500 w-[90px] text-center">
             {exchangeRates[selectedPair].tuma}
           </span>
         </div>
@@ -109,7 +109,7 @@ export default function MarketComparison() {
         {/* Wise */}
         <div className="flex gap-2 justify-between mb-6">
           <Image src={wiseImage} alt="Wise" width={65} height={40} className="py-2" />
-          <span className="px-4 py-1 bg-green-50 text-sm font-semibold text-green-900 w-[90px] text-center">
+          <span className="px-4 py-1 bg-green-50 text-sm font-semibold text-green-500 w-[90px] text-center">
             {exchangeRates[selectedPair].wise}
           </span>
         </div>
@@ -117,7 +117,7 @@ export default function MarketComparison() {
         {/* Verto */}
         <div className="flex gap-2 justify-between ">
           <Image src={vertoImage} alt="Verto" width={60} height={40} className="py-1" />
-          <span className="px-4 py-1 bg-green-50 text-sm font-semibold text-green-900 w-[90px] text-center">
+          <span className="px-4 py-1 bg-green-50 text-sm font-semibold text-green-500 w-[90px] text-center">
             {exchangeRates[selectedPair].verto}
           </span>
         </div>

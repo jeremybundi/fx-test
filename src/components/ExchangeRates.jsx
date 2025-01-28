@@ -52,7 +52,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-white rounded-lg py-6 pl-5 pr-11">
+    <footer className="bg-white font-poppins rounded-lg py-6 pl-5 pr-11">
       <div>
         {/* Header Section */}
         <div className="flex items-center justify-between">
@@ -104,58 +104,38 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="my-4 border-t border-gray-300"></div>
-
-        {/* Currency and Exchange Rate List */}
-        <div className="space-y-4 max-h-60 text-sm font-medium overflow-y-auto">
-          {/* Show only first 5 currencies */}
-          {currencies.slice(0, 5).map((currency) => (
-            <div key={currency} className="flex items-center justify-between">
-              <div className="flex mb-3  items-center gap-2">
-                <Image
-                  src={currencyDetails[currency].flag}
-                  alt={`${currency} flag`}
-                  width={20}
-                  height={15}
-                />
-                <span className="font-medium text-sm">
-                  {currency} - {currencyDetails[currency].fullName}
-                </span>
-              </div>
-              <span className="px-4 bg-green-50 text-sm font-medium text-green-900">
-                {exchangeRates[currency]}
-              </span>
-              <button className="text-sm text-blue-500 underline focus:outline-none">
-                Edit
-              </button>
-            </div>
-          ))}
-        </div>
-
-        {/* Scrollable Section for Remaining Currencies */}
-        <div className="mt-4 max-h-40 overflow-y-scroll">
-          {currencies.slice(5).map((currency) => (
-            <div key={currency} className="flex items-center justify-between mb-4">
+        <div className="mt-4 mb-6  border-t border-gray-300"></div>
+        <div className="space-y-7 max-h-64 text-sm font-medium overflow-y-auto">
+          {currencies.map((currency) => (
+            <div
+              key={currency}
+              className="flex items-center justify-between mb-4 gap-2"
+            >
               <div className="flex items-center gap-2">
                 <Image
                   src={currencyDetails[currency].flag}
                   alt={`${currency} flag`}
-                  width={20}
+                  width={25}
                   height={15}
                 />
                 <span className="font-medium text-sm">
                   {currency} - {currencyDetails[currency].fullName}
                 </span>
               </div>
-              <span className="px-4 bg-green-50 text-sm font-medium text-green-900">
-                {exchangeRates[currency]}
-              </span>
-              <button className="text-sm text-blue-500 underline focus:outline-none">
-                Edit
-              </button>
+              <div className="flex items-center gap-4">
+                <span className="px-4 bg-green-50 text-sm w-[70px] mr-3 text-center font-semibold text-green-500">
+                  {exchangeRates[currency]}
+                </span>
+                <button className="text-sm underline focus:outline-none">
+                  Edit
+                </button>
+              </div>
             </div>
           ))}
         </div>
+
+
+
       </div>
     </footer>
   );
