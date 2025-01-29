@@ -6,7 +6,7 @@ import AuditTrail from "@/components/AuditTrail";
 
 export default function Home() {
   return (
-    <div className="flex bg-gray-100 h-screen  overflow-hidden">
+    <div className="flex bg-gray-100  overflow-hidden">
       {/* Sidebar */}
       <SideNav />
 

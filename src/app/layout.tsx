@@ -1,6 +1,8 @@
+// app/layout.tsx (or _app.js depending on your Next.js version)
 import type { Metadata } from "next";
 import { Poppins, Manrope } from "next/font/google"; // Import the Google Fonts
 import "./globals.css";
+import ReduxProvider from './ReduxProvider'; // Import the new Client Component
 
 // Define the fonts
 const poppins = Poppins({
@@ -40,7 +42,10 @@ export default function RootLayout({
           fontFamily: "var(--font-poppins), var(--font-manrope), 'Lufga', sans-serif",
         }}
       >
-        {children}
+        {/* Wrap the whole app with the Provider */}
+        <ReduxProvider>
+          {children}
+        </ReduxProvider>
       </body>
     </html>
   );
