@@ -126,7 +126,7 @@ export default function Footer() {
                 <span className="px-4 bg-green-50 text-sm w-[70px] mr-3 text-center font-semibold text-green-500">
                   {exchangeRates[currency]}
                 </span>
-                <button className="text-sm underline focus:outline-none">
+                <button className="text-sm underline mr-5 focus:outline-none">
                   Edit
                 </button>
               </div>

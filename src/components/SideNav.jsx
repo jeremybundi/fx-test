@@ -9,7 +9,7 @@ import message from '../../public/images/message.png';
 
 export default function SideNav() {
   return (
-    <div className="w-1/4 h-screen font-poppins border-r px-12 pt-8 bg-white">
+    <div className="w-1/4 h-screen font-poppins  px-12 pt-8 bg-white">
       <div className="flex justify-start mb-16">
         <Image src={logo} alt="Logo" width={32} height={32} />
         <p className="font-semibold text-[22px] ml-3">FX Navigator</p>
@@ -18,7 +18,7 @@ export default function SideNav() {
       <div className="relative group ">
         <Link href="/about"> 
         <button
-          className="flex items-center pl-4 pr-12 py-2 rounded-lg hover:bg-gray-200 focus:bg-gray-200 transition duration-300 ease-in-out"
+          className="flex items-center pl-4 pr-12 py-2 rounded-lg hover:bg-[#F3F5F8] focus:bg-gray-200 transition duration-300 ease-in-out"
           >
             <svg
               width="20"
@@ -39,7 +39,7 @@ export default function SideNav() {
         </Link>
         <Link href="/"> {/* Link to the homepage */}
         <button
-          className="flex items-center pl-4 pr-4 py-2 mt-2 rounded-lg hover:bg-gray-200 focus:bg-gray-200 transition duration-300 ease-in-out"
+          className="flex items-center pl-4 pr-4 py-2 mt-2 rounded-lg hover:bg-[#F3F5F8] focus:bg-gray-200 transition duration-300 ease-in-out"
           >
             {/* Provided SVG Icon */}
             <svg
@@ -61,7 +61,7 @@ export default function SideNav() {
         </Link>
         <Link href="/"> {/* Link to the homepage */}
         <button
-          className="flex items-center pl-4 pr-5 py-2 rounded-lg mt-2 hover:bg-gray-200 focus:bg-gray-200 transition duration-300 ease-in-out"
+          className="flex items-center pl-4 pr-5 py-2 rounded-lg mt-2 hover:bg-[#F3F5F8] focus:bg-gray-200 transition duration-300 ease-in-out"
         >
           <svg
             width="20"
@@ -81,7 +81,7 @@ export default function SideNav() {
       </Link>
         <Link href="/"> 
           <button
-          className="flex items-center pl-4 pr-12 py-2 rounded-lg mt-2 hover:bg-gray-200 focus:bg-gray-200 transition duration-300 ease-in-out"
+          className="flex items-center pl-4 pr-12 py-2 rounded-lg mt-2 hover:bg-[#F3F5F8] focus:bg-gray-200 transition duration-300 ease-in-out"
           >
             <Image
               src={trend}
@@ -95,7 +95,7 @@ export default function SideNav() {
         </Link>
         <Link href="/"> 
           <button
-            className="flex items-center pl-4 pr-12 py-2 mt-2 rounded-lg hover:bg-gray-200 focus:bg-gray-200 transition duration-300 ease-in-out"
+            className="flex items-center pl-4 pr-12 py-2 mt-2 rounded-lg hover:bg-[#F3F5F8] focus:bg-gray-200 transition duration-300 ease-in-out"
           >
             <svg
               width="20"
@@ -116,7 +116,7 @@ export default function SideNav() {
         </Link>
         <Link href="/"> {/* Link to the homepage */}
           <button
-          className="flex items-center pl-4 pr-12 py-2 mt-2 rounded-lg hover:bg-gray-200 focus:bg-gray-200 transition duration-300 ease-in-out"
+          className="flex items-center pl-4 pr-12 py-2 mt-2 rounded-lg hover:bg-[#F3F5F8] focus:bg-gray-200 transition duration-300 ease-in-out"
           >
             <Image
               src={set}
