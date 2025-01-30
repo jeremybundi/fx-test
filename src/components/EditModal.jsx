@@ -1,22 +1,21 @@
-"use client";
-
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setCurrency } from "../redux/features/currencySlice";
 import Image from "next/image";
-import gbpFlag from "../../public/images/gbp.png"; 
-import usdFlag from "../../public/images/usd.png"; 
-import eurFlag from "../../public/images/eur.png"; 
+import gbpFlag from "../../public/images/gbp.png";
+import usdFlag from "../../public/images/usd.png";
+import eurFlag from "../../public/images/eur.png";
 import zarFlag from "../../public/images/zar.png";
-import jpyFlag from "../../public/images/jpy.png"; 
-import audFlag from "../../public/images/aud.png"; 
-import cadFlag from "../../public/images/cad.png"; 
-import inrFlag from "../../public/images/inr.png"; 
-import cnyFlag from "../../public/images/cny.png"; 
-import mxnFlag from "../../public/images/mxn.png"; 
-import arrowClose from "../../public/images/arrowclose.png"; 
-import closeIcon from "../../public/images/close.png"; 
-import arrow from "../../public/images/arrow.png"; 
+import jpyFlag from "../../public/images/jpy.png";
+import audFlag from "../../public/images/aud.png";
+import cadFlag from "../../public/images/cad.png";
+import inrFlag from "../../public/images/inr.png";
+import cnyFlag from "../../public/images/cny.png";
+import mxnFlag from "../../public/images/mxn.png";
+import arrowClose from "../../public/images/arrowclose.png";
+import closeIcon from "../../public/images/close.png";
+import arrow from "../../public/images/arrow.png";
+import ConfirmationAlert from './ConfirmAlert';
 
 const currencyDetails = {
   GBP: { flag: gbpFlag, fullName: "British Pound" },
@@ -48,29 +47,46 @@ function EditModal({ data, onClose }) {
   };
 
   const handleUpdate = () => {
-    // Ensure all required fields are filled before updating
-    if (!form.baseCurrency || !form.destinationCurrency || !form.exchangeRate || 
-        !form.finalRate || !form.dateOfEffect) {
+    // Ensure all required fields are filled before proceeding
+    if (!form.baseCurrency || !form.destinationCurrency || !form.exchangeRate ||
+      !form.finalRate || !form.dateOfEffect) {
       alert("Please fill all required fields before updating.");
       return;
     }
 
-    dispatch(
-      setCurrency({
-        baseCurrency: form.baseCurrency,
-        destinationCurrency: form.destinationCurrency,
-        exchangeRate: parseFloat(form.finalRate),
-      })
-    );
+    // Trigger confirmation alert before saving
+    ConfirmationAlert({
+      form,
+      onConfirm: () => {
+        dispatch(
+          setCurrency({
+            baseCurrency: form.baseCurrency,
+            destinationCurrency: form.destinationCurrency,
+            exchangeRate: parseFloat(form.finalRate),
+          })
+        );
+        onClose();
+      },
+      onCancel: () => {
+        console.log("Update cancelled");
+      },
+    });
+  };
 
-    console.log("Updated Data Sent to Store:", form);
+  const handleReset = () => {
+    // Reset form to initial data
+    setForm(data);
+  };
+
+  const handleCancel = () => {
+    // Close the modal without making changes
     onClose();
   };
 
   return (
     <div className="fixed font-poppins inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-10">
       <div className="bg-white px-24 py-6 rounded-xl w-[42%] h-[calc(100vh*0.85)] relative">
-        <button onClick={onClose} className="absolute top-3 right-3">
+        <button onClick={handleCancel} className="absolute top-3 right-3">
           <Image src={closeIcon} alt="Close Modal" width={30} height={30} />
         </button>
         <h2 className="text-xl text-center font-semibold mb-2">Edit Rate</h2>
@@ -157,7 +173,7 @@ function EditModal({ data, onClose }) {
         </div>
 
         <div className="flex justify-between gap-4">
-          <button className="px-12 py-2 border-2 border-gray-950 rounded-md">
+          <button onClick={handleReset} className="px-12 py-2 border-2 border-gray-950 rounded-md">
             Reset
           </button>
           <button onClick={handleUpdate} className="px-12 py-2 bg-gray-950 font-semibold text-white rounded-md">
