@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setCurrency } from "../redux/features/currencySlice";
 import Image from "next/image";
 import gbpFlag from "../../public/images/gbp.png";
@@ -15,7 +15,7 @@ import mxnFlag from "../../public/images/mxn.png";
 import arrowClose from "../../public/images/arrowclose.png";
 import closeIcon from "../../public/images/close.png";
 import arrow from "../../public/images/arrow.png";
-import ConfirmationAlert from './ConfirmAlert';
+import SingleConfirmationModal from './SingleConfirmationModal';
 
 const currencyDetails = {
   GBP: { flag: gbpFlag, fullName: "British Pound" },
@@ -32,7 +32,13 @@ const currencyDetails = {
 
 function EditModal({ data, onClose }) {
   const [form, setForm] = useState(data);
+  const [showConfirmation, setShowConfirmation] = useState(false);
   const dispatch = useDispatch();
+  const storeData = useSelector((state) => state.currency);
+
+  // Get today's date in the format YYYY-MM-DD
+  const today = new Date().toISOString().split('T')[0];
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -47,46 +53,46 @@ function EditModal({ data, onClose }) {
   };
 
   const handleUpdate = () => {
-    // Ensure all required fields are filled before proceeding
     if (!form.baseCurrency || !form.destinationCurrency || !form.exchangeRate ||
-      !form.finalRate || !form.dateOfEffect) {
+        !form.finalRate || !form.dateOfEffect) {
       alert("Please fill all required fields before updating.");
       return;
     }
-
-    // Trigger confirmation alert before saving
-    ConfirmationAlert({
-      form,
-      onConfirm: () => {
-        dispatch(
-          setCurrency({
-            baseCurrency: form.baseCurrency,
-            destinationCurrency: form.destinationCurrency,
-            exchangeRate: parseFloat(form.finalRate),
-          })
-        );
-        onClose();
-      },
-      onCancel: () => {
-        console.log("Update cancelled");
-      },
-    });
+    setShowConfirmation(true); // Show confirmation modal
   };
 
   const handleReset = () => {
-    // Reset form to initial data
-    setForm(data);
+    setForm(data); // Reset form to initial state
   };
 
   const handleCancel = () => {
-    // Close the modal without making changes
-    onClose();
+    setShowConfirmation(false); // Close confirmation modal
+    setForm(storeData); // Reload the data from the store to the form
+  };
+
+  const handleConfirmUpdate = () => {
+    dispatch(
+      setCurrency({
+        baseCurrency: form.baseCurrency,
+        destinationCurrency: form.destinationCurrency,
+        exchangeRate: parseFloat(form.finalRate),
+      })
+    );
+
+    // After updating data in store, close both modals
+    setShowConfirmation(false);
+    onClose(); // Close the EditModal
+  };
+  const handlecCancel = () => {
+    setShowConfirmation(false); 
+    setForm(storeData); 
+    onClose(); 
   };
 
   return (
     <div className="fixed font-poppins inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-10">
       <div className="bg-white px-24 py-6 rounded-xl w-[42%] h-[calc(100vh*0.85)] relative">
-        <button onClick={handleCancel} className="absolute top-3 right-3">
+      <button onClick={handlecCancel} className="absolute top-3 right-3">
           <Image src={closeIcon} alt="Close Modal" width={30} height={30} />
         </button>
         <h2 className="text-xl text-center font-semibold mb-2">Edit Rate</h2>
@@ -162,15 +168,16 @@ function EditModal({ data, onClose }) {
         </div>
 
         <div className="mb-4 border p-4 rounded-md">
-          <label className="block text-sm text-gray-500 font-medium mb-2">Date of Effect</label>
-          <input
-            type="date"
-            name="dateOfEffect"
-            value={form.dateOfEffect}
-            onChange={handleChange}
-            className="w-full border px-3 py-2 rounded-md"
-          />
-        </div>
+        <label className="block text-sm text-gray-500 font-medium mb-2">Date of Effect</label>
+        <input
+          type="date"
+          name="dateOfEffect"
+          value={form.dateOfEffect}
+          onChange={handleChange}
+          className="w-full border px-3 py-2 rounded-md"
+          min={today}  
+        />
+      </div>
 
         <div className="flex justify-between gap-4">
           <button onClick={handleReset} className="px-12 py-2 border-2 border-gray-950 rounded-md">
@@ -181,7 +188,18 @@ function EditModal({ data, onClose }) {
           </button>
         </div>
       </div>
-    </div>
+    
+       {/* Modal content here */}
+        {showConfirmation && (
+          <SingleConfirmationModal
+            form={form}
+            onConfirm={handleConfirmUpdate}
+            onCancel={handleCancel}
+            oncClose={handlecCancel}
+
+          />
+        )}
+      </div>
   );
 }
 

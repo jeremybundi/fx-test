@@ -26,11 +26,11 @@ const currencySlice = createSlice({
       state.exchangeRate = action.payload.exchangeRate;
 
       // Log the updated data in the state
-      console.log('Data saved to store:', {
+     /* console.log('Data saved to store:', {
         baseCurrency: state.baseCurrency,
         destinationCurrency: state.destinationCurrency,
         exchangeRate: state.exchangeRate,
-      });
+      });*/
     },
   },
 });

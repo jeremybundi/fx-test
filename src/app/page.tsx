@@ -6,7 +6,7 @@ import AuditTrail from "@/components/AuditTrail";
 
 export default function Home() {
   return (
-    <div className="flex bg-gray-100  overflow-hidden">
+    <div className="flex bg-gray-100">
       {/* Sidebar */}
       <SideNav />
 
@@ -23,7 +23,8 @@ export default function Home() {
         </div>
 
         {/* Two-Column Layout */}
-        <div className="grid grid-cols-[59%_39%] gap-6">
+        <div className='overflow-y-auto h-[calc(100vh*0.87)]'>
+        <div className="grid grid-cols-[59%_39%]  max-h-[100vh] gap-6">
             <Exchange/>
            
 
@@ -34,6 +35,8 @@ export default function Home() {
         <div className='mt-8 mb-3'>
         <AuditTrail />
         </div>
+        </div>
+       
 
       </div>
     </div>

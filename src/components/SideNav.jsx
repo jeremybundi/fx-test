@@ -9,7 +9,7 @@ import message from '../../public/images/message.png';
 
 export default function SideNav() {
   return (
-    <div className="w-1/4 h-screen font-poppins  px-12 pt-8 bg-white">
+    <div className="w-1/4 max-h-screen font-poppins  px-12 pt-8 bg-white">
       <div className="flex justify-start mb-16">
         <Image src={logo} alt="Logo" width={32} height={32} />
         <p className="font-semibold text-[22px] ml-3">FX Navigator</p>
