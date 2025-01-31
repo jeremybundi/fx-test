@@ -15,7 +15,7 @@ import cnyFlag from "../../public/images/cny.png";
 import mxnFlag from "../../public/images/mxn.png";
 import arrowClose from "../../public/images/arrowclose.png";
 import closeIcon from "../../public/images/close.png";
-import arrow from "../../public/images/arrow.png";
+//import arrow from "../../public/images/arrow.png";
 import SingleConfirmationModal from './SingleConfirmationModal';
 import SuccessfulUpdateModal from './SuccessfulUpdateModal'; 
 

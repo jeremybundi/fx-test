@@ -23,7 +23,7 @@ export default function Home() {
         </div>
 
         {/* Two-Column Layout */}
-        <div className='overflow-y-auto h-[calc(100vh*0.88)]'>
+        <div /*className='overflow-y-auto h-[calc(100vh*0.88)]'*/>
         <div className="grid grid-cols-[59%_39%]  max-h-[100vh] gap-6">
             <Exchange/>
            

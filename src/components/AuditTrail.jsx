@@ -18,6 +18,8 @@ export default function AuditTrail() {
 
   // State to store audit records
   const [records, setRecords] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const recordsPerPage = 10;
 
   useEffect(() => {
     // Get stored audit trail from localStorage
@@ -48,9 +50,20 @@ export default function AuditTrail() {
     }
   }, []);
 
+  // Get the records for the current page
+  const indexOfLastRecord = currentPage * recordsPerPage;
+  const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
+  const currentRecords = records.slice(indexOfFirstRecord, indexOfLastRecord);
+
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  // Calculate total number of pages
+  const totalPages = Math.ceil(records.length / recordsPerPage);
+
   return (
-    <div className="p-4 rounded-t-lg mb-6 bg-white w-full flex flex-col">
-      <h1 className="text-2xl font-bold mb-4">Audit Trail</h1>
+    <div className="p-4 rounded-t-lg mb- bg-white w-full flex flex-col">
+      <h1 className="text-2xl ml-3 font-bold mb-4">Audit Trail</h1>
 
       {/* Scrollable Table Container */}
       <div className="flex-1 rounded-lg pb-6">
@@ -68,7 +81,7 @@ export default function AuditTrail() {
           </thead>
           {/* Table Body */}
           <tbody>
-            {records.map((record) => (
+            {currentRecords.map((record) => (
               <tr key={record.id} className="border-b">
                 <td className="py-1 text-xs px-4">{record.currencyPair}</td>
                 <td>
@@ -88,12 +101,49 @@ export default function AuditTrail() {
             ))}
             {/* Spacer Row */}
             <tr>
-              <td colSpan="6" className="h-6"></td>
+              <td colSpan="6" className="h-3"></td>
             </tr>
           </tbody>
         </table>
       </div>
+
+      {/* Pagination Controls */}
+      <div className="flex justify-between mt-2">
+        <div>
+      <button
+          onClick={() => paginate(1)}
+          className="px-4 py-2 mx-1 bg-gray-700 text-white rounded-xl disabled:opacity-50"
+          disabled={currentPage === 1}
+        >
+          &lt;&lt; First
+        </button>
+
+        <button
+          onClick={() => paginate(currentPage - 1)}
+          className="px-4 py-2 mx-1 ml-4 bg-gray-700 text-white rounded-xl disabled:opacity-50"
+          disabled={currentPage === 1}
+        >
+          &lt; Previous
+        </button>
+        </div>
+        <div>
+        <button
+          onClick={() => paginate(currentPage + 1)}
+          className="px-4 py-2 mx-1 bg-gray-700 text-white rounded-xl disabled:opacity-50"
+          disabled={currentPage === totalPages}
+        >
+          Next &gt;
+        </button>
+
+        <button
+          onClick={() => paginate(totalPages)}
+          className="px-4 py-2 mx-1 ml-4 bg-gray-700 text-white rounded-xl disabled:opacity-50"
+          disabled={currentPage === totalPages}
+        >
+          Last &gt;&gt;
+        </button>
+        </div>
+      </div>
     </div>
   );
 }
-
