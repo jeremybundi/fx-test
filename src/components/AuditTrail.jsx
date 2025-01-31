@@ -1,7 +1,9 @@
-import React from "react";
+"use client";
+
+import React, { useState, useEffect } from "react";
 
 export default function AuditTrail() {
-  // Function to format date
+  // Function to format date and time
   const formatDateTime = (dateString) => {
     const date = new Date(dateString);
     return new Intl.DateTimeFormat("en-US", {
@@ -14,27 +16,50 @@ export default function AuditTrail() {
     }).format(date);
   };
 
-  const records = Array.from({ length: 80 }, (_, i) => ({
-    id: i + 1,
-    currencyPair: "USD/EUR",
-    rate: "0.85",
-    dateOfEffect: formatDateTime("2023-10-12T10:00:00"), 
-    lastUpdated: formatDateTime("2024-01-05T14:30:00"), 
-    updatedBy: "Kennedy",
-  }));
+  // State to store audit records
+  const [records, setRecords] = useState([]);
+
+  useEffect(() => {
+    // Get stored audit trail from localStorage
+    const savedRecords = JSON.parse(localStorage.getItem("auditTrail")) || [];
+
+    // Get latest currency data
+    const savedData = JSON.parse(localStorage.getItem("currencyData"));
+
+    if (savedData) {
+      // Construct a new audit record
+      const newRecord = {
+        id: savedRecords.length + 1,
+        currencyPair: `${savedData.baseCurrency}/${savedData.destinationCurrency}`,
+        rate: savedData.exchangeRate.toFixed(2),
+        dateOfEffect: formatDateTime(`${savedData.dateOfEffect}T10:00:00`), 
+        lastUpdated: formatDateTime(new Date()), 
+        updatedBy: "Admin User",
+      };
+
+      // Append new record to existing records
+      const updatedRecords = [newRecord, ...savedRecords];
+
+      // Save updated records to localStorage
+      localStorage.setItem("auditTrail", JSON.stringify(updatedRecords));
+
+      // Update state
+      setRecords(updatedRecords);
+    }
+  }, []);
 
   return (
-    <div className="p-4 rounded-t-lg mb-6 bg-white w-full flex flex-col ">
+    <div className="p-4 rounded-t-lg mb-6 bg-white w-full flex flex-col">
       <h1 className="text-2xl font-bold mb-4">Audit Trail</h1>
 
-      {/* Scrollable Table Container with Custom Scrollbar */}
-      <div className="flex-1  rounded-lg pb-6  ">
+      {/* Scrollable Table Container */}
+      <div className="flex-1 rounded-lg pb-6">
         <table className="w-full bg-white">
-          {/* Table Head (Sticky) */}
-          <thead className="bg-white  top-0 z-10">
+          {/* Table Head */}
+          <thead className="bg-white top-0 z-10">
             <tr className="text-left text-[#808A92] font-light text-sm">
               <th className="py-2 px-4 border-b">Currency Pair</th>
-              <th className="py-2 px-4  border-b">Rate</th>
+              <th className="py-2 px-4 border-b">Rate</th>
               <th className="py-2 px-4 border-b">Date of Effect</th>
               <th className="py-2 px-4 border-b">Last Updated</th>
               <th className="py-2 px-4 border-b">Updated By</th>
@@ -46,7 +71,11 @@ export default function AuditTrail() {
             {records.map((record) => (
               <tr key={record.id} className="border-b">
                 <td className="py-1 text-xs px-4">{record.currencyPair}</td>
-                <td > <span className="py-1 text-xs px-6 bg-green-50  text-center font-semibold text-green-500">{record.rate}</span></td>
+                <td>
+                  <span className="py-1 text-xs px-6 bg-green-50 text-center font-semibold text-green-500">
+                    {record.rate}
+                  </span>
+                </td>
                 <td className="py-1 text-xs px-4">{record.dateOfEffect}</td>
                 <td className="py-1 text-xs px-4">{record.lastUpdated}</td>
                 <td className="py-1 text-xs px-4">{record.updatedBy}</td>
@@ -57,7 +86,7 @@ export default function AuditTrail() {
                 </td>
               </tr>
             ))}
-            {/* Extra Spacer Row */}
+            {/* Spacer Row */}
             <tr>
               <td colSpan="6" className="h-6"></td>
             </tr>
@@ -67,3 +96,4 @@ export default function AuditTrail() {
     </div>
   );
 }
+

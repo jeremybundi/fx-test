@@ -1,20 +1,20 @@
 // app/layout.tsx (or _app.js depending on your Next.js version)
 import type { Metadata } from "next";
-import { Poppins, Manrope } from "next/font/google"; // Import the Google Fonts
+import { Poppins, Manrope } from "next/font/google"; 
 import "./globals.css";
-import ReduxProvider from './ReduxProvider'; // Import the new Client Component
+import ReduxProvider from './ReduxProvider'; 
 
 // Define the fonts
 const poppins = Poppins({
   variable: "--font-poppins",
   subsets: ["latin"],
-  weight: ["400", "600", "700"], // Include necessary font weights
+  weight: ["400", "600", "700"], 
 });
 
 const manrope = Manrope({
   variable: "--font-manrope",
   subsets: ["latin"],
-  weight: ["400", "600", "700"], // Include necessary font weights
+  weight: ["400", "600", "700"], 
 });
 
 export const metadata: Metadata = {

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrency } from "../redux/features/currencySlice";
 import Image from "next/image";
@@ -16,6 +17,7 @@ import arrowClose from "../../public/images/arrowclose.png";
 import closeIcon from "../../public/images/close.png";
 import arrow from "../../public/images/arrow.png";
 import SingleConfirmationModal from './SingleConfirmationModal';
+import SuccessfulUpdateModal from './SuccessfulUpdateModal'; 
 
 const currencyDetails = {
   GBP: { flag: gbpFlag, fullName: "British Pound" },
@@ -33,6 +35,7 @@ const currencyDetails = {
 function EditModal({ data, onClose }) {
   const [form, setForm] = useState(data);
   const [showConfirmation, setShowConfirmation] = useState(false);
+  const [showSuccessfulUpdate, setShowSuccessfulUpdate] = useState(false); 
   const dispatch = useDispatch();
   const storeData = useSelector((state) => state.currency);
 
@@ -43,14 +46,18 @@ function EditModal({ data, onClose }) {
   const handleChange = (e) => {
     const { name, value } = e.target;
     let newForm = { ...form, [name]: value };
-
+  
     if (name === "markup") {
       const markup = parseFloat(value) || 0;
       newForm.finalRate = (form.exchangeRate * (1 + markup / 100)).toFixed(2);
+    } else if (name === "finalRate") {
+      const finalRate = parseFloat(value) || 0;
+      newForm.markup = ((finalRate / form.exchangeRate - 1) * 100).toFixed(2);
     }
-
+  
     setForm(newForm);
   };
+  
 
   const handleUpdate = () => {
     if (!form.baseCurrency || !form.destinationCurrency || !form.exchangeRate ||
@@ -58,40 +65,67 @@ function EditModal({ data, onClose }) {
       alert("Please fill all required fields before updating.");
       return;
     }
-    setShowConfirmation(true); // Show confirmation modal
+    setShowConfirmation(true); 
   };
 
   const handleReset = () => {
-    setForm(data); // Reset form to initial state
+    setForm(data); 
   };
 
   const handleCancel = () => {
-    setShowConfirmation(false); // Close confirmation modal
-    setForm(storeData); // Reload the data from the store to the form
+    console.log("Back clicked. Current form data:", form); 
+    setShowConfirmation(false); 
+    setForm(storeData); 
   };
 
   const handleConfirmUpdate = () => {
-    dispatch(
-      setCurrency({
-        baseCurrency: form.baseCurrency,
-        destinationCurrency: form.destinationCurrency,
-        exchangeRate: parseFloat(form.finalRate),
-      })
-    );
+    const updatedData = {
+      baseCurrency: form.baseCurrency,
+      destinationCurrency: form.destinationCurrency,
+      exchangeRate: parseFloat(form.finalRate),
+      markup: parseFloat(form.markup),
+      dateOfEffect: form.dateOfEffect
+    };
+  
+    dispatch(setCurrency(updatedData));
+    localStorage.setItem("currencyData", JSON.stringify(updatedData));
 
-    // After updating data in store, close both modals
+    console.log("Data saved to store store:", updatedData);
+  
     setShowConfirmation(false);
-    onClose(); // Close the EditModal
+    setShowSuccessfulUpdate(true); 
+  };
+  
+  useEffect(() => {
+    const savedData = localStorage.getItem("currencyData");
+    if (savedData) {
+      setForm(JSON.parse(savedData));
+    }
+  }, []);
+  
+  const handleSuccessfulUpdateClose = () => {
+    setShowSuccessfulUpdate(false); 
+    onClose(); 
   };
   const handlecCancel = () => {
     setShowConfirmation(false); 
     setForm(storeData); 
     onClose(); 
   };
+  useEffect(() => {
+    if (data) {
+      setForm(data);
+    }
+  }, [data]);  
+
+  if (!form) {
+    return <div>Loading...</div>; 
+  }
+  
 
   return (
     <div className="fixed font-poppins inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-10">
-      <div className="bg-white px-24 py-6 rounded-xl w-[42%] h-[calc(100vh*0.85)] relative">
+      <div className="bg-white px-20 py-6 rounded-xl w-[38%] h-[calc(100vh*0.9)] relative">
       <button onClick={handlecCancel} className="absolute top-3 right-3">
           <Image src={closeIcon} alt="Close Modal" width={30} height={30} />
         </button>
@@ -115,7 +149,6 @@ function EditModal({ data, onClose }) {
                 />
                 <span className="font-medium">{form.baseCurrency}</span>
               </div>
-              <Image src={arrow} alt="Arrow" width={16} height={16} className="ml-2" />
             </div>
           </div>
 
@@ -131,42 +164,44 @@ function EditModal({ data, onClose }) {
                 />
                 <span className="font-medium">{form.destinationCurrency}</span>
               </div>
-              <Image src={arrow} alt="Arrow" width={16} height={16} className="ml-2" />
             </div>
           </div>
         </div>
 
         <div className="mb-4 border px-4 py-2 rounded-md">
           <label className="block text-sm font-medium text-gray-500 mb-1">Current Tuma Rate</label>
-          <div className="px-3 py-1 font-semibold text-xl rounded-md w-[110px] bg-green-50 text-green-800">
+          <div className="px-3 py-1 font-semibold text-xl rounded-md w-[120px] bg-green-50 text-green-800">
             {form.exchangeRate}
           </div>
         </div>
 
         <div className="mb-4 border px-4 py-2 rounded-md">
-          <label className="block text-sm text-gray-500 font-medium mb-2">Tuma Markup</label>
-          <div className="flex items-center justify-between">
-            <input
-              type="number"
-              name="markup"
-              value={form.markup}
-              onChange={handleChange}
-              className="border px-3 py-2 w-[40px] rounded-md flex-1 focus:border-gray-800 focus:border-2 focus:outline-none"
-            />
-            <span className="ml-32 mr-8 text-2xl text-gray-500">%</span>
-          </div>
-        </div>
-
-        <div className="mb-4 border px-4 py-2 rounded-md">
-          <label className="block text-sm text-gray-500 font-medium mb-2">Final Rate</label>
+        <label className="block text-sm text-gray-500 font-medium mb-2">Tuma Markup</label>
+        <div className="flex items-center justify-between">
           <input
-            type="text"
-            value={form.finalRate}
-            readOnly
-            className="px-3 py-1 font-semibold text-xl rounded-md w-[110px] bg-green-50 text-green-800"
+            type="number"
+            name="markup"
+            value={form.markup}
+            onChange={handleChange}
+            className="border px-3 py-2 w-[40px] rounded-md flex-1 focus:border-gray-800 focus:border-2 focus:outline-none"
+            placeholder="Enter percentage"
           />
+          <span className="ml-32 mr-8 text-2xl text-gray-500">%</span>
         </div>
+      </div>
 
+      <div className="mb-4 border px-4 py-2 rounded-md">
+        <label className="block text-sm text-gray-500 font-medium mb-2">Final Rate</label>
+        <input
+          type="text"
+          name="finalRate"
+          value={form.finalRate}
+          onChange={handleChange}
+          className="px-3 py-1 font-semibold text-xl  rounded-md w-[120px] placeholder:text-xs placeholder:px-0
+           bg-green-50 text-green-800 focus:border-gray-800 focus:border-2 focus:outline-none"
+          placeholder="Enter final rate"
+        />
+      </div>
         <div className="mb-4 border p-4 rounded-md">
         <label className="block text-sm text-gray-500 font-medium mb-2">Date of Effect</label>
         <input
@@ -189,16 +224,19 @@ function EditModal({ data, onClose }) {
         </div>
       </div>
     
-       {/* Modal content here */}
-        {showConfirmation && (
-          <SingleConfirmationModal
-            form={form}
-            onConfirm={handleConfirmUpdate}
-            onCancel={handleCancel}
-            oncClose={handlecCancel}
+      {showConfirmation && (
+        <SingleConfirmationModal
+          form={form}
+          onConfirm={handleConfirmUpdate}
+          onCancel={handleCancel}
+          oncClose={handlecCancel}
+        />
+      )}
 
-          />
-        )}
+      {showSuccessfulUpdate && (
+        <SuccessfulUpdateModal onClose={handleSuccessfulUpdateClose} />
+      )}
+
       </div>
   );
 }

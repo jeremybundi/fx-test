@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useState } from "react";
 import Image from "next/image";
 import closeIcon from "../../public/images/close.png";
@@ -14,17 +15,17 @@ const SingleConfirmationModal = ({ form, onConfirm, onCancel,oncClose }) => {
   }
 
   return (
-<div className="fixed font-poppins inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-10">
-  <div className="bg-white p-6 px-16 rounded-xl h-[calc(100vh*0.85)] w-[42%] relative">
+    <div className="fixed font-poppins inset-0 bg-gray-500 bg-opacity-5 flex justify-center items-center z-10">
+  <div className="bg-white p-6 px-16 rounded-xl h-[calc(100vh*0.9)] w-[38%] relative">
     <button className="absolute top-3 right-3" onClick={oncClose} >
       <Image src={closeIcon} alt="Close Modal" width={30} height={30} />
     </button>
     <h2 className="text-3xl font-semibold text-center mb-2 mt-20">You’ve Set    </h2>
     
-    <h2  className="text-3xl font-semibold text-center mb-4"> Tuma Markups as follows:</h2>
+    <h2  className="text-3xl font-semibold text-center mb-4"> Tuma Markup as follows:</h2> 
     <ul className="text-center mt-12 mb-4">
       <li>
-        {form.baseCurrency} → {form.destinationCurrency}
+        <span className="font-semibold">{form.baseCurrency}</span> → <span className="font-semibold">{form.destinationCurrency}</span>
       </li>
       <li className="my-2">
       <span className=" mr-3 font-semibold"> By: </span>  {form.markup}%
@@ -34,7 +35,7 @@ const SingleConfirmationModal = ({ form, onConfirm, onCancel,oncClose }) => {
       </li>
     </ul>
     <p className="text-center text-[#808A92] px-16 text-lg mt-14 mb-16">
-    Confirm you want to proceed with applying these rates to all destination currencies?    </p>
+    Confirm you want to proceed with applying these rates to the destination currency?    </p>
     <div className="flex justify-between  px-10">
       <button
         onClick={onCancel}

@@ -21,19 +21,28 @@ export default function Footer() {
   const [selectedCurrency, setSelectedCurrency] = useState("GBP");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false); 
-  const [modalData, setModalData] = useState(null); 
+  const [modalData, setModalData] = useState(null); // Local state to hold data for the modal
 
   const dispatch = useDispatch();
   const { baseCurrency, destinationCurrency, exchangeRate } = useSelector(
     (state) => state.currency 
   );
 
-  // Log the Redux state whenever it changes
   useEffect(() => {
-    console.log("Redux State - Base Currency:", baseCurrency);
-    console.log("Redux State - Destination Currency:", destinationCurrency);
-    console.log("Redux State - Exchange Rate:", exchangeRate);
-  }, [baseCurrency, destinationCurrency, exchangeRate]);
+    // Ensure baseCurrency, destinationCurrency, and exchangeRate are not null/empty
+    if (baseCurrency && destinationCurrency && exchangeRate !== 0) {
+      setModalData({
+        baseCurrency,
+        destinationCurrency,
+        exchangeRate,
+        markup: 0,
+        finalRate: exchangeRate,
+        dateOfEffect: "",
+      });
+    }
+  }, [baseCurrency, destinationCurrency, exchangeRate]); // Trigger when the Redux state changes
+  
+  
 
   // Currency details with flags and names
   const currencyDetails = {
@@ -58,51 +67,34 @@ export default function Footer() {
 
   const currencies = Object.keys(currencyDetails);
 
-  const handleCurrencyChange = (currency, string) => {
-    console.log("Changing currency from", selectedCurrency, "to", currency); 
-
+  const handleCurrencyChange = (currency) => {
+    console.log("Changing base currency to:", currency);
+  
     setSelectedCurrency(currency);
     setIsDropdownOpen(false);
-
-    // Update Redux store with selected currency
-    const rate = exchangeRates[selectedCurrency][currency];
-    dispatch(
-      setCurrency({
-        baseCurrency: selectedCurrency,
-        destinationCurrency: currency,
-        exchangeRate: rate,
-      })
-    );
   };
-
-  const handleEditClick = (currency) => {
-    // Calculate exchange rate
-    const rate = exchangeRates[selectedCurrency][currency];
-    
-    // Update the Redux store with the selected baseCurrency, destinationCurrency, and exchangeRate
-    dispatch(
-      setCurrency({
-        baseCurrency: selectedCurrency,
-        destinationCurrency: currency,
-        exchangeRate: rate,
-      })
-    );
   
-    // Prepare the data for the modal
-    const data = {
-      baseCurrency: selectedCurrency,
+  const handleEditClick = (currency) => {
+    const base = baseCurrency || selectedCurrency;
+    const rate = exchangeRates[base]?.[currency] || 1;
+  
+    dispatch(setCurrency({
+      baseCurrency: base,
       destinationCurrency: currency,
       exchangeRate: rate,
-      markup: 0, 
-      finalRate: rate,
-      dateOfEffect: "", 
-    };
+      markup: 0, // Set default value for markup
+      dateOfEffect: "", // Set default value for dateOfEffect
+    }));
   
- 
+    console.log("Dispatched action:", {
+      baseCurrency: base,
+      destinationCurrency: currency,
+      exchangeRate: rate,
+    });
   
-    setModalData(data); 
-    setIsModalOpen(true); 
+    setIsModalOpen(true);
   };
+  
   
 
   return (
@@ -191,9 +183,11 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Edit Modal */}
       {isModalOpen && (
-        <EditModal data={modalData} onClose={() => setIsModalOpen(false)} />
+        <EditModal
+          data={modalData} // Use modalData, not Redux state
+          onClose={() => setIsModalOpen(false)}
+        />
       )}
     </footer>
   );
