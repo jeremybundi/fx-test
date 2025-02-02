@@ -6,12 +6,19 @@ import gbpFlag from "../../public/images/gbp.png";
 import eurFlag from "../../public/images/eur.png";
 import ConfirmationModal from './MultipleConfirmationModal';
 import SuccessfulUpdateModal from './SuccessfulUpdate'; // Import success modal
+import { FaCalendarAlt } from 'react-icons/fa'; // Import calendar icon from react-icons
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css"; // Import datepicker styles
+import { setHours, setMinutes } from 'date-fns';
+import '@/app/globals.css'; // Import the global CSS file
+
+
 
 const BulkUpdate = ({ onClose }) => {
   const [usdMarkup, setUsdMarkup] = useState('0');
   const [gbpMarkup, setGbpMarkup] = useState('0');
   const [eurMarkup, setEurMarkup] = useState('0');
-  const [dateOfEffect, setDateOfEffect] = useState('');
+  const [dateOfEffect, setDateOfEffect] = useState(new Date());
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
 
@@ -67,17 +74,33 @@ const BulkUpdate = ({ onClose }) => {
             ))}
           </div>
 
-          {/* Date of Effect */}
-          <div className="mt-6">
-            <label className="block text-gray-600 font-medium mb-2">Date of Effect</label>
-            <input
-              type="date"
-              value={dateOfEffect}
-              onChange={(e) => setDateOfEffect(e.target.value)}
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500"
-              min={today}
-            />
-          </div>
+
+{/* Date of Effect */}
+<div className="mt-6">
+  <label className="block text-gray-600 font-medium mb-2">Date of Effect</label>
+  <div className="relative">
+    {/* Calendar Icon inside the DatePicker */}
+    <FaCalendarAlt className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-600 z-10 mr-2" />
+
+    <DatePicker
+      selected={dateOfEffect}
+      onChange={(date) => setDateOfEffect(date)}
+      showTimeSelect
+      excludeTimes={[
+        setHours(setMinutes(new Date(), 0), 17),
+        setHours(setMinutes(new Date(), 30), 18),
+        setHours(setMinutes(new Date(), 30), 19),
+        setHours(setMinutes(new Date(), 30), 17),
+      ]}
+      dateFormat="MMMM d, yyyy h:mm aa"
+      minDate={new Date()} // Prevent selecting dates in the past
+      className="pl-10 pr-4 border-2 border-gray-300 rounded-md p-2 w-full focus:outline-none focus:border-gray-500" // Adjusted padding
+    />
+  </div>
+</div>
+
+
+
 
           {/* Buttons */}
           <div className="flex justify-between px-10 mt-10">
@@ -124,3 +147,18 @@ const BulkUpdate = ({ onClose }) => {
       };
 
 export default BulkUpdate;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
