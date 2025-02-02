@@ -23,8 +23,8 @@ export default function Footer() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalData, setModalData] = useState(null);
 
-  const [currentPage, setCurrentPage] = useState(1); // For pagination
-  const itemsPerPage = 5; // Items to show per page
+  const [currentPage, setCurrentPage] = useState(1); 
+  const itemsPerPage = 5; 
 
   const dispatch = useDispatch();
   const { baseCurrency, destinationCurrency, exchangeRate } = useSelector(
@@ -184,18 +184,18 @@ export default function Footer() {
           <button
             onClick={() => handlePageChange(currentPage - 1)}
             disabled={currentPage === 1}
-            className="px-3 py-2 bg-gray-200 rounded-md disabled:opacity-50"
+            className="px-3 py-1 bg-gray-200 rounded-md disabled:opacity-50"
           >
             &lt;&lt;
           </button>
           <button
             onClick={() => handlePageChange(currentPage - 1)}
             disabled={currentPage === 1}
-            className="px-3 py-2 bg-gray-200 rounded-md disabled:opacity-50"
+            className="px-3 py-1 bg-gray-200 rounded-md disabled:opacity-50"
           >
             &lt;
           </button>
-          <span className="flex items-center justify-center px-4 py-2 bg-gray-200 rounded-md">
+          <span className="flex items-center  text-sm justify-center px-4 py-1 bg-gray-200 rounded-md">
             Page {currentPage} of {totalPages}
           </span>
           <button
@@ -208,7 +208,7 @@ export default function Footer() {
           <button
             onClick={() => handlePageChange(currentPage + 1)}
             disabled={currentPage === totalPages}
-            className="px-3 py-2 bg-gray-200 rounded-md disabled:opacity-50"
+            className="px-3 py-2 bg-gray-200  rounded-md disabled:opacity-50"
           >
             &gt;&gt;
           </button>
