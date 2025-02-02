@@ -4,22 +4,30 @@ import closeIcon from "../../public/images/close.png";
 import usdFlag from "../../public/images/usd.png";
 import gbpFlag from "../../public/images/gbp.png";
 import eurFlag from "../../public/images/eur.png";
-import ConfirmationModal from './MultipleConfirmationModal'; // Import the new modal
+import ConfirmationModal from './MultipleConfirmationModal';
+import SuccessfulUpdateModal from './SuccessfulUpdate'; // Import success modal
 
 const BulkUpdate = ({ onClose }) => {
-  const [usdMarkup, setUsdMarkup] = useState('');
-  const [gbpMarkup, setGbpMarkup] = useState('');
-  const [eurMarkup, setEurMarkup] = useState('');
+  const [usdMarkup, setUsdMarkup] = useState('0');
+  const [gbpMarkup, setGbpMarkup] = useState('0');
+  const [eurMarkup, setEurMarkup] = useState('0');
   const [dateOfEffect, setDateOfEffect] = useState('');
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+
+  const today = new Date().toISOString().split('T')[0];
 
   const handleUpdate = () => {
+    if (!dateOfEffect) {
+      alert("Please select a valid date of effect.");
+      return;
+    }
     setShowConfirmationModal(true);
   };
 
-  const handleSave = () => {
-    // Handle the save logic here (e.g., make an API call to update markups)
+  const handleConfirm = () => {
     setShowConfirmationModal(false);
+    setShowSuccessModal(true);
   };
 
   return (
@@ -32,66 +40,31 @@ const BulkUpdate = ({ onClose }) => {
             <Image src={closeIcon} alt="Close Modal" width={30} height={30} />
           </button>
 
-          <h2 className="text-3xl font-semibold text-center mb-6 mt-10">
-            Edit Tuma Markups
-          </h2>
-
+          <h2 className="text-3xl font-semibold text-center mb-6 mt-10">Edit Tuma Markups</h2>
           <p className="text-center text-gray-400 mb-6">
             Changes made here will apply across all destination currencies. Ensure you review before saving.
           </p>
 
-          {/* Headings for Labels and Inputs */}
-          <div className="flex justify-between text-gray-600 font-medium mb-2">
-            <span>Base Currency</span>
-            <span className="mr-24">Tuma Markup</span>
-          </div>
-
-          {/* Currency Input Fields */}
+          {/* Currency Inputs */}
           <div className="space-y-4">
-            {/* USD */}
-            <div className="flex space-x-3">
-              <span className="border flex items-center rounded-md py-2 w-64">
-                <Image src={usdFlag} alt="USD Flag" width={30} height={20} className="ml-2" />
-                <label className="font-semibold ml-2">USD</label>
-              </span>
-              <input
-                type="number"
-                placeholder="Enter Markup %"
-                value={usdMarkup}
-                onChange={(e) => setUsdMarkup(e.target.value)}
-                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500"
-              />
-            </div>
-
-            {/* GBP */}
-            <div className="flex space-x-3">
-              <span className="border flex items-center rounded-md py-2 w-64">
-                <Image src={gbpFlag} alt="GBP Flag" width={30} height={20} className="ml-2" />
-                <label className="font-semibold ml-2">GBP</label>
-              </span>
-              <input
-                type="number"
-                placeholder="Enter Markup %"
-                value={gbpMarkup}
-                onChange={(e) => setGbpMarkup(e.target.value)}
-                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500"
-              />
-            </div>
-
-            {/* EUR */}
-            <div className="flex space-x-3">
-              <span className="border flex items-center rounded-md py-2 w-64">
-                <Image src={eurFlag} alt="EUR Flag" width={30} height={20} className="ml-2" />
-                <label className="font-semibold ml-2">EUR</label>
-              </span>
-              <input
-                type="number"
-                placeholder="Enter Markup %"
-                value={eurMarkup}
-                onChange={(e) => setEurMarkup(e.target.value)}
-                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500"
-              />
-            </div>
+            {[{ label: 'USD', flag: usdFlag, value: usdMarkup, setValue: setUsdMarkup },
+              { label: 'GBP', flag: gbpFlag, value: gbpMarkup, setValue: setGbpMarkup },
+              { label: 'EUR', flag: eurFlag, value: eurMarkup, setValue: setEurMarkup }].map((currency, index) => (
+              <div key={index} className="flex space-x-3">
+                <span className="border flex items-center rounded-md py-2 w-64">
+                  <Image src={currency.flag} alt={`${currency.label} Flag`} width={30} height={20} className="ml-2" />
+                  <label className="font-semibold ml-2">{currency.label}</label>
+                </span>
+                <input
+                  type="number"
+                  placeholder="Enter Markup %"
+                  value={currency.value}
+                  onChange={(e) => currency.setValue(e.target.value)}
+                  onBlur={() => currency.setValue(currency.value || '0')}
+                  className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500"
+                />
+              </div>
+            ))}
           </div>
 
           {/* Date of Effect */}
@@ -102,7 +75,7 @@ const BulkUpdate = ({ onClose }) => {
               value={dateOfEffect}
               onChange={(e) => setDateOfEffect(e.target.value)}
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500"
-              min={today}  
+              min={today}
             />
           </div>
 
@@ -132,11 +105,22 @@ const BulkUpdate = ({ onClose }) => {
           gbpMarkup={gbpMarkup}
           eurMarkup={eurMarkup}
           dateOfEffect={dateOfEffect}
-          onSave={handleSave}
+          onSave={handleConfirm} // Call success modal on confirm
         />
       )}
-    </div>
-  );
-};
+
+          {/* Success Modal */}
+      {showSuccessModal && (
+        <SuccessfulUpdateModal
+          onClose={() => setShowSuccessModal(false)}
+          usdMarkup={usdMarkup}
+          gbpMarkup={gbpMarkup}
+          eurMarkup={eurMarkup}
+          dateOfEffect={dateOfEffect}
+        />
+      )}
+          </div>
+        );
+      };
 
 export default BulkUpdate;
