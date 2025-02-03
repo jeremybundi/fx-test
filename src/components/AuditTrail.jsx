@@ -148,7 +148,7 @@ export default function AuditTrail() {
         <div>
           <button
             onClick={() => paginate(1)}
-            className="px-4 py-2 mx-1 bg-gray-700 text-white rounded-xl disabled:opacity-50"
+            className="px-4 py-1 mx-1 bg-gray-700 text-white rounded-lg disabled:opacity-50"
             disabled={currentPage === 1}
           >
             &lt;&lt; First
@@ -156,7 +156,7 @@ export default function AuditTrail() {
 
           <button
             onClick={() => paginate(currentPage - 1)}
-            className="px-4 py-2 mx-1 ml-4 bg-gray-700 text-white rounded-xl disabled:opacity-50"
+            className="px-2 py-1 mx-1 ml-4 bg-gray-700 text-white rounded-lg disabled:opacity-50"
             disabled={currentPage === 1}
           >
             &lt; Previous
@@ -165,7 +165,7 @@ export default function AuditTrail() {
         <div>
           <button
             onClick={() => paginate(currentPage + 1)}
-            className="px-4 py-2 mx-1 bg-gray-700 text-white rounded-xl disabled:opacity-50"
+            className="px-4 py-1 mx-1 bg-gray-700 text-white rounded-lg disabled:opacity-50"
             disabled={currentPage === totalPages}
           >
             Next &gt;
@@ -173,7 +173,7 @@ export default function AuditTrail() {
 
           <button
             onClick={() => paginate(totalPages)}
-            className="px-4 py-2 mx-1 ml-4 bg-gray-700 text-white rounded-xl disabled:opacity-50"
+            className="px-4 py-1 mx-1 ml-4 bg-gray-700 text-white rounded-lg disabled:opacity-50"
             disabled={currentPage === totalPages}
           >
             Last &gt;&gt;
