@@ -3,7 +3,7 @@ import Link from 'next/link';
 import logo from '../../public/images/logo.png';
 import trend from '../../public/images/trending.png'; 
 import set from '../../public/images/settings.png'; 
-import User from './User'; // Import the new User component
+import User from './User'; 
 
 
 
@@ -35,7 +35,7 @@ export default function SideNav() {
                 strokeWidth="2"
               />
             </svg>
-            <span className="text-lg font-medium">Dashboard</span>
+            <span className="text-[16px] font-medium">Dashboard</span>
           </button>
         </Link>
         <Link href="/"> {/* Link to the homepage */}
@@ -57,7 +57,7 @@ export default function SideNav() {
                 strokeWidth="2"
               />
             </svg>
-            <span className="text-lg font-medium">Rate Manager</span>
+            <span className="text-[16px] font-medium">Rate Manager</span>
           </button>
         </Link>
         <Link href="/"> {/* Link to the homepage */}
@@ -77,7 +77,7 @@ export default function SideNav() {
               fill="#101820"
             />
           </svg>
-          <span className="text-lg font-medium">All Messages</span>
+          <span className="text-[16px] font-medium">All Messages</span>
         </button>
       </Link>
         <Link href="/"> 
@@ -91,7 +91,7 @@ export default function SideNav() {
               height={20}
               className="mr-4 font-bold"
             />
-            <span className="text-lg font-medium">Trends</span>
+            <span className="text-[16px] font-medium">Trends</span>
           </button>
         </Link>
         <Link href="/"> 
@@ -112,7 +112,7 @@ export default function SideNav() {
                 stroke-linejoin="round"
               />
             </svg>
-            <span className="text-lg font-medium">Reports</span>
+            <span className="text-[16px] font-medium">Reports</span>
           </button>
         </Link>
         <Link href="/"> {/* Link to the homepage */}
@@ -126,7 +126,7 @@ export default function SideNav() {
               height={20}
               className="mr-4"
             />
-            <span className="text-lg font-medium">Settings</span>
+            <span className="text-[16px] font-medium">Settings</span>
           </button>
         </Link>
       </div>

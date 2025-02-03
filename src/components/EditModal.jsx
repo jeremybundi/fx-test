@@ -179,24 +179,23 @@ const EditModal = ({ data, onClose }) => {
         </div>
 
         <div className="mb-4 flex justify-between gap-4">
-          <div className="flex-1 border px-4 py-3 rounded-md">
-            <label className="block text-sm font-medium text-gray-500 mb-2">Base Currency</label>
-            <div className="flex items-center justify-between gap-2">
-              <div className="flex items-center gap-2">
-              {currencyDetails[form.baseCurrency]?.flag ? (
-                <Image
-                  src={currencyDetails[form.baseCurrency]?.flag}
-                  alt={`${form.baseCurrency} flag`}
-                  width={24}
-                  height={16}
-                />
-              ) : (
-                <span>No flag available</span> // Fallback content or component
-              )}
+        <div className="flex-1 border px-4 py-3 rounded-md">
+        <label className="block text-sm font-medium text-gray-500 mb-2">Base Currency</label>
+        <div className="flex items-center gap-2">
+          {currencyDetails[form.baseCurrency]?.flag ? (
+            <Image
+              src={currencyDetails[form.baseCurrency]?.flag}
+              alt={`${form.baseCurrency} flag`}
+              width={24}
+              height={16}
+            />
+          ) : (
+            <span>No flag available</span>
+          )}
+          <span className="font-medium">{form.baseCurrency}</span> {/* Display currency code */}
+        </div>
+      </div>
 
-              </div>
-            </div>
-          </div>
 
           <div className="flex-1 border px-4 py-3 rounded-md">
             <label className="block text-sm font-medium text-gray-500 mb-2">Destination Currency</label>

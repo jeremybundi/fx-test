@@ -40,7 +40,7 @@ export default function Home() {
               <Market />
             </div>
           </div>
-          <div className="mt-8 mb-3">
+          <div className="mt-8 ">
             <AuditTrail />
           </div>
         </div>

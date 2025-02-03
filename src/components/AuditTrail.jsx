@@ -43,9 +43,8 @@ export default function AuditTrail() {
     // Get latest currency data
     const savedData = JSON.parse(localStorage.getItem("currencyData"));
 
-    // Fallback to a placeholder past date if there's no savedData or its date is invalid
-    const defaultDate = "2021-01-01T10:00:00"; // Set to any past date you like
-
+    // Fallback to a placeholder past date 
+    const defaultDate = "2021-01-01T10:00:00"; 
     if (savedData) {
       // Construct a new audit record
       const newRecord = {
@@ -53,7 +52,7 @@ export default function AuditTrail() {
         currencyPair: `${savedData.baseCurrency}/${savedData.destinationCurrency}`,
         rate: savedData.exchangeRate.toFixed(2),
         dateOfEffect: formatDateTime(`${savedData.dateOfEffect}T10:00:00`), 
-        lastUpdated: formatDateTime(new Date()) || formatDateTime(defaultDate),  // Use defaultDate if current date is invalid
+        lastUpdated: formatDateTime(new Date()) || formatDateTime(defaultDate),  
         updatedBy: "Admin User",
       };
 
@@ -99,8 +98,8 @@ export default function AuditTrail() {
   const totalPages = Math.ceil(records.length / recordsPerPage);
 
   return (
-    <div className="p-4 rounded-t-lg mb- bg-white w-full flex flex-col">
-      <h1 className="text-2xl ml-3 font-bold mb-4">Audit Trail</h1>
+    <div className="p-4 rounded-t-lg  bg-white w-full flex flex-col">
+      <h1 className="text-[19px] ml-3 font-bold mb-4">Audit Trail</h1>
 
       {/* Scrollable Table Container */}
       <div className="flex-1 rounded-lg pb-6">
@@ -127,10 +126,10 @@ export default function AuditTrail() {
                   </span>
                 </td>
                 <td className="py-1 text-xs px-4">{record.dateOfEffect}</td>
-                <td className="py-1 text-xs px-4">{record.lastUpdated}</td>
-                <td className="py-1 text-xs px-4">{record.updatedBy}</td>
+                <td className="py-1 text-xs text-gray-500 px-4">{record.lastUpdated}</td>
+                <td className="py-1 text-xs text-gray-500 px-4">{record.updatedBy}</td>
                 <td className="py-1 text-xs px-4">
-                  <button className="px-4 py-1 text-blue-500 rounded-lg text-sm underline focus:outline-none">
+                  <button className="px-4 py-1  rounded-lg text-xs underline focus:outline-none">
                     Edit
                   </button>
                 </td>

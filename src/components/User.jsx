@@ -1,14 +1,14 @@
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import userImage from '../../public/images/user.png';
-import logImage from '../../public/images/log.png'; // Import the log.png image
-import accountImage from '../../public/images/account.png'; // Import the account.png image
-import notificationImage from '../../public/images/notification.png'; // Import the notification.png image
-import settingImage from '../../public/images/logout.png'; // Import the logout.png image
+import logImage from '../../public/images/log.png'; 
+import accountImage from '../../public/images/account.png';
+import notificationImage from '../../public/images/notification.png'; 
+import settingImage from '../../public/images/logout.png';
 
 export default function User() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const modalRef = useRef(null); // Reference for the modal
+  const modalRef = useRef(null); 
 
   const handleModalToggle = () => {
     setIsModalOpen(!isModalOpen);
@@ -33,7 +33,7 @@ export default function User() {
 
   // Handle button clicks inside the modal to close it
   const handleButtonClick = () => {
-    setIsModalOpen(false); // Close modal when button is clicked
+    setIsModalOpen(false); 
   };
 
   return (

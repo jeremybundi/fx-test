@@ -102,10 +102,10 @@ export default function Footer() {
     <footer className="bg-white font-poppins rounded-lg py-6 pl-5 pr-11">
       <div>
         <div className="flex items-center justify-between">
-          <h1 className="font-semibold text-[20px]">Exchange Rates</h1>
+          <h1 className="font-semibold text-[16px]">Exchange Rates</h1>
 
           <div className="flex items-center gap-4">
-            <label className="font-medium text-sm text-gray-800">
+            <label className="font-medium text-sm text-gray-500">
               Base Currency
             </label>
             <div className="relative">
@@ -150,9 +150,9 @@ export default function Footer() {
 
         <div className="mt-4 mb-6 border-t border-gray-300"></div>
 
-        <div className="space-y-7 max-h-64 text-sm font-medium overflow-y-auto">
+        <div className="space-y-5 max-h-64 text-sm font-medium overflow-y-auto">
           {currentCurrencies.map((currency) => (
-            <div key={currency} className="flex items-center justify-between mb-4 gap-2">
+            <div key={currency} className="flex items-center justify-between mb-1 gap-2">
               <div className="flex items-center gap-2">
                 <Image
                   src={currencyDetails[currency].flag}
@@ -160,7 +160,7 @@ export default function Footer() {
                   width={25}
                   height={15}
                 />
-                <span className="font-medium text-sm">
+                <span className="font-medium text-[13px]">
                   {currency} - {currencyDetails[currency].fullName}
                 </span>
               </div>

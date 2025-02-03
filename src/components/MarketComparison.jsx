@@ -51,11 +51,11 @@ export default function MarketComparison() {
   return (
     <div className="bg-white font-poppins rounded-lg px-8 py-6">
       {/* Header Section */}
-      <h1 className="font-semibold text-[20px] mb-6">Market Comparison</h1>
+      <h1 className="font-semibold text-[18px] mb-6">Market Comparison</h1>
 
       {/* Label and Dropdown */}
       <div className="flex flex-col gap-2">
-        <label className="text-sm font-medium text-gray-700">Currency Pair</label>
+        <label className="text-sm font-medium text-gray-500">Currency Pair</label>
         <div className="relative">
           <button
             className="flex items-center w-full justify-between gap-2 px-4 py-2 border border-gray-300 
@@ -68,7 +68,7 @@ export default function MarketComparison() {
 
           {/* Dropdown Menu */}
           {isDropdownOpen && (
-            <div className="absolute mt-2 w-40 bg-white border border-gray-300 rounded-lg shadow-lg z-10">
+            <div className="absolute mt-2 w-40 text-[12px] bg-white border border-gray-300 rounded-lg shadow-lg z-10">
               <ul>
                 {currencyPairs.map((pair) => (
                   <li

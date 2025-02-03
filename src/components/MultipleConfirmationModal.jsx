@@ -3,7 +3,7 @@ import closeIcon from "../../public/images/close.png";
 
 const MultipleConfirmationModal = ({ onClose, usdMarkup, gbpMarkup, eurMarkup, dateOfEffect, onSave }) => {
 
-    // Convert dateOfEffect to a Date object if it's a valid string or already a Date object
+    // Convert dateOfEffect to a Date 
     const parsedDate = dateOfEffect ? new Date(dateOfEffect) : null;
 
     // Check if parsedDate is a valid Date object

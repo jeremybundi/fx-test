@@ -8,7 +8,7 @@ const SuccessfulUpdate = ({ onClose, usdMarkup, gbpMarkup, eurMarkup, dateOfEffe
 
     useEffect(() => {
         const img = new window.Image();
-        img.src = require("../../public/images/success.png").default.src; // ✅ Correct way to load static image
+        img.src = require("../../public/images/success.png").default.src; 
         img.onload = () => setSuccessImageLoaded(true);
     }, []);
 
