@@ -167,7 +167,7 @@ const EditModal = ({ data, onClose }) => {
 
   return (
     <div className="fixed font-poppins inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-10">
-      <div className="bg-white px-12 py-6 rounded-xl w-[35%] h-[calc(100vh*0.78)] relative">
+      <div className="bg-white px-14 py-6 rounded-xl w-[35%] h-[calc(100vh*0.78)] relative">
       <button onClick={handlecCancel} className="absolute top-3 right-3">
           <Image src={closeIcon} alt="Close Modal" width={30} height={30} />
         </button>
