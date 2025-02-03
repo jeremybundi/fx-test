@@ -143,7 +143,26 @@ const EditModal = ({ data, onClose }) => {
 
   if (!form) {
     return <div>Loading...</div>; 
-  }
+  };
+
+  useEffect(() => {
+    if (!data) {
+      setForm({
+        baseCurrency: '',
+        destinationCurrency: '',
+        exchangeRate: '',
+        finalRate: '',
+        markup: '',
+        dateOfEffect: new Date(), // Set today's date when no data is provided
+      });
+    } else {
+      setForm({
+        ...data,
+        dateOfEffect: data.dateOfEffect ? new Date(data.dateOfEffect) : new Date(), // Set the date from data or today's date
+      });
+    }
+  }, [data]);
+  
   
 
   return (
@@ -229,7 +248,7 @@ const EditModal = ({ data, onClose }) => {
           placeholder="Enter final rate"
         />
       </div>
-      <div className="mt-6">
+      <div className="mt-6 mb-7">
       <label className="block text-gray-600 font-medium mb-2">Date of Effect</label>
       <div className="relative">
         <FaCalendarAlt className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-600 z-10 mr-2" />

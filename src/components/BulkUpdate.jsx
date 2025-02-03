@@ -5,12 +5,12 @@ import usdFlag from "../../public/images/usd.png";
 import gbpFlag from "../../public/images/gbp.png";
 import eurFlag from "../../public/images/eur.png";
 import ConfirmationModal from './MultipleConfirmationModal';
-import SuccessfulUpdateModal from './SuccessfulUpdate'; // Import success modal
-import { FaCalendarAlt } from 'react-icons/fa'; // Import calendar icon from react-icons
+import SuccessfulUpdateModal from './SuccessfulUpdate'; 
+import { FaCalendarAlt } from 'react-icons/fa'; 
 import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css"; // Import datepicker styles
+import "react-datepicker/dist/react-datepicker.css"; 
 //import { setHours, setMinutes } from 'date-fns';
-import '@/app/globals.css'; // Import the global CSS file
+import '@/app/globals.css'; 
 
 
 
@@ -69,7 +69,6 @@ const BulkUpdate = ({ onClose }) => {
             <span className="mr-24">Tuma Markup</span>
           </div>
 
-
           {/* Currency Inputs */}
           <div className="space-y-4">
             {[{ label: 'USD', flag: usdFlag, value: usdMarkup, setValue: setUsdMarkup },
@@ -80,14 +79,18 @@ const BulkUpdate = ({ onClose }) => {
                   <Image src={currency.flag} alt={`${currency.label} Flag`} width={30} height={20} className="ml-2" />
                   <label className="font-semibold ml-2">{currency.label}</label>
                 </span>
-                <input
-                  type="number"
-                  placeholder="Enter Markup %"
-                  value={currency.value}
-                  onChange={(e) => currency.setValue(e.target.value)}
-                  onBlur={() => currency.setValue(currency.value || '0')}
-                  className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500"
-                />
+                <div className="relative w-full">
+                  <input
+                    type="number"
+                    placeholder="Enter Markup %"
+                    value={currency.value}
+                    onChange={(e) => currency.setValue(e.target.value)}
+                    onBlur={() => currency.setValue(currency.value || '0')}
+                    className="w-full px-4 py-3 pr-10 border rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500"
+                  />
+                  <span className="absolute right-4 top-1/2 text-gray-500
+                   transform -translate-y-1/2 text-xl">%</span>
+                </div>
               </div>
             ))}
           </div>
