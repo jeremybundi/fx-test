@@ -53,14 +53,14 @@ const BulkUpdate = ({ onClose }) => {
     <div>
       {/* Main BulkUpdate Modal */}
       <div className="fixed font-poppins inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center z-10">
-        <div className="bg-white p-6 px-16 rounded-xl h-[calc(100vh*0.9)] w-[38%] relative">
+      <div className="bg-white px-12 py-6 rounded-xl w-[35%] h-[calc(100vh*0.78)] relative">
           {/* Close Button */}
           <button className="absolute top-3 right-3" onClick={onClose}>
             <Image src={closeIcon} alt="Close Modal" width={30} height={30} />
           </button>
 
-          <h2 className="text-3xl font-semibold text-center mb-6 mt-10">Edit Tuma Markups</h2>
-          <p className="text-center text-gray-400 mb-6">
+          <h2 className="text-2xl font-semibold text-center mb-6 mt-6">Edit Tuma Markups</h2>
+          <p className="text-center text-lg text-gray-400 mb-6">
             Changes made here will apply across all destination currencies. Ensure you review before saving.
           </p>
                   {/* Headings for Labels and Inputs */}
@@ -75,7 +75,7 @@ const BulkUpdate = ({ onClose }) => {
               { label: 'GBP', flag: gbpFlag, value: gbpMarkup, setValue: setGbpMarkup },
               { label: 'EUR', flag: eurFlag, value: eurMarkup, setValue: setEurMarkup }].map((currency, index) => (
               <div key={index} className="flex space-x-3">
-                <span className="border flex items-center rounded-md py-2 w-64">
+                <span className="border flex items-center rounded-md py-1 w-64">
                   <Image src={currency.flag} alt={`${currency.label} Flag`} width={30} height={20} className="ml-2" />
                   <label className="font-semibold ml-2">{currency.label}</label>
                 </span>
@@ -86,7 +86,7 @@ const BulkUpdate = ({ onClose }) => {
                     value={currency.value}
                     onChange={(e) => currency.setValue(e.target.value)}
                     onBlur={() => currency.setValue(currency.value || '0')}
-                    className="w-full px-4 py-3 pr-10 border rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500"
+                    className="w-full px-4 py-2 pr-10 border rounded-md focus:outline-none  text-gray-500 focus:ring-2 focus:ring-gray-500"
                   />
                   <span className="absolute right-4 top-1/2 text-gray-500
                    transform -translate-y-1/2 text-xl">%</span>
@@ -95,7 +95,7 @@ const BulkUpdate = ({ onClose }) => {
             ))}
           </div>
           {/* Date of Effect */}
-          <div className="mt-6">
+          <div className="mt-5">
             <label className="block text-gray-600 font-medium mb-2">Date of Effect</label>
             <div className="relative">
               {/* Calendar Icon inside the DatePicker */}
@@ -104,23 +104,23 @@ const BulkUpdate = ({ onClose }) => {
               <DatePicker
             selected={dateOfEffect}
             onChange={(date) => setDateOfEffect(date)}
-            dateFormat="MMMM d, yyyy" // Only display date
-            minDate={new Date()} // Prevent selecting past dates
-            className="pl-10 pr-4 border-2 border-gray-300 rounded-md p-2 w-full focus:outline-none focus:border-gray-500"
+            dateFormat="MMMM d, yyyy" 
+            minDate={new Date()} 
+            className="pl-10 pr-4 border-2 text-sm border-gray-300 rounded-md p-2 w-full focus:outline-none focus:border-gray-500"
           />
             </div>
           </div>
 
           {/* Buttons */}
-          <div className="flex justify-between px-10 mt-10">
+          <div className="flex justify-between px-6 mt-16">
             <button
-              className="px-10 py-2 border-2 border-gray-800 text-lg font-semibold rounded-md hover:text-white hover:bg-gray-600"
+              className="px-10 py-1 border-2 border-gray-800 text-lg font-semibold rounded-md hover:text-white hover:bg-gray-600"
               onClick={handleReset}
             >
               Reset
             </button>
             <button
-              className="px-10 py-2 bg-gray-800 text-lg font-semibold text-white rounded-md hover:bg-gray-600"
+              className="px-10 py-1 bg-gray-800 text-lg font-semibold text-white rounded-md hover:bg-gray-600"
               onClick={handleUpdate}
             >
               Update

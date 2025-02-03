@@ -158,7 +158,7 @@ const EditModal = ({ data, onClose }) => {
     } else {
       setForm({
         ...data,
-        dateOfEffect: data.dateOfEffect ? new Date(data.dateOfEffect) : new Date(), // Set the date from data or today's date
+        dateOfEffect: data.dateOfEffect ? new Date(data.dateOfEffect) : new Date(), 
       });
     }
   }, [data]);
@@ -167,20 +167,20 @@ const EditModal = ({ data, onClose }) => {
 
   return (
     <div className="fixed font-poppins inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-10">
-      <div className="bg-white px-20 py-6 rounded-xl w-[38%] h-[calc(100vh*0.9)] relative">
+      <div className="bg-white px-12 py-6 rounded-xl w-[35%] h-[calc(100vh*0.78)] relative">
       <button onClick={handlecCancel} className="absolute top-3 right-3">
           <Image src={closeIcon} alt="Close Modal" width={30} height={30} />
         </button>
-        <h2 className="text-xl text-center font-semibold mb-2">Edit Rate</h2>
-        <div className="flex items-center text-3xl font-semibold mb-4 justify-center">
+        <h2 className="text-lg text-center font-semibold mb-2">Edit Rate</h2>
+        <div className="flex items-center text-xl font-semibold mb-4 justify-center">
           <span className="mx-2">{form.baseCurrency}</span>
           <Image src={arrowClose} alt="Arrow" width={16} height={12} className="mx-2" />
           <span className="mx-2">{form.destinationCurrency}</span>
         </div>
 
         <div className="mb-4 flex justify-between gap-4">
-        <div className="flex-1 border px-4 py-3 rounded-md">
-        <label className="block text-sm font-medium text-gray-500 mb-2">Base Currency</label>
+        <div className="flex-1 border px-4 py-2 rounded-md">
+        <label className="block text-sm font-medium text-gray-500 mb-1">Base Currency</label>
         <div className="flex items-center gap-2">
           {currencyDetails[form.baseCurrency]?.flag ? (
             <Image
@@ -192,13 +192,13 @@ const EditModal = ({ data, onClose }) => {
           ) : (
             <span>No flag available</span>
           )}
-          <span className="font-medium">{form.baseCurrency}</span> {/* Display currency code */}
+          <span className="font-medium ">{form.baseCurrency}</span> {/* Display currency code */}
         </div>
       </div>
 
 
-          <div className="flex-1 border px-4 py-3 rounded-md">
-            <label className="block text-sm font-medium text-gray-500 mb-2">Destination Currency</label>
+          <div className="flex-1 border px-4 py-2 rounded-md">
+            <label className="block text-sm font-medium text-gray-500 mb-1">Destination Currency</label>
             <div className="flex items-center justify-between gap-2">
               <div className="flex items-center gap-2">
                 <Image
@@ -213,14 +213,14 @@ const EditModal = ({ data, onClose }) => {
           </div>
         </div>
 
-        <div className="mb-4 border px-4 py-2 rounded-md">
+        <div className="mb-4 border px-4 py-1 rounded-md">
           <label className="block text-sm font-medium text-gray-500 mb-1">Current Tuma Rate</label>
-          <div className="px-3 py-1 font-semibold text-xl rounded-md w-[120px] bg-green-50 text-green-800">
+          <div className="px-3 py-1 font-semibold text-lg rounded-md w-[120px] bg-green-50 text-green-800">
             {form.exchangeRate}
           </div>
         </div>
 
-        <div className="mb-4 border px-4 py-2 rounded-md">
+        <div className="mb-4 border px-4 py-1 rounded-md">
         <label className="block text-sm text-gray-500 font-medium mb-2">Tuma Markup</label>
         <div className="flex items-center justify-between">
           <input
@@ -228,26 +228,26 @@ const EditModal = ({ data, onClose }) => {
             name="markup"
             value={form.markup}
             onChange={handleChange}
-            className="border px-3 py-2 w-[40px] rounded-md flex-1 focus:border-gray-800 focus:border-2 focus:outline-none"
+            className="border px-3 py-1 w-[40px] rounded-md flex-1 focus:border-gray-800 focus:border-2 focus:outline-none"
             placeholder="Enter percentage"
           />
           <span className="ml-32 mr-8 text-2xl text-gray-500">%</span>
         </div>
       </div>
 
-      <div className="mb-4 border px-4 py-2 rounded-md">
+      <div className="mb-3 border px-4 py-1 rounded-md">
         <label className="block text-sm text-gray-500 font-medium mb-2">Final Rate</label>
         <input
           type="text"
           name="finalRate"
           value={form.finalRate}
           onChange={handleChange}
-          className="px-3 py-1 font-semibold text-xl  rounded-md w-[120px] placeholder:text-xs placeholder:px-0
+          className="px-3 py-1 font-semibold text-lg  rounded-md w-[120px] placeholder:text-xs placeholder:px-0
            bg-green-50 text-green-800 focus:border-gray-800 focus:border-2 focus:outline-none"
           placeholder="Enter final rate"
         />
       </div>
-      <div className="mt-6 mb-7">
+      <div className="mt-6 mb-9">
       <label className="block text-gray-600 font-medium mb-2">Date of Effect</label>
       <div className="relative">
         <FaCalendarAlt className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-600 z-10 mr-2" />
@@ -257,15 +257,15 @@ const EditModal = ({ data, onClose }) => {
           onChange={handleDateChange}
           dateFormat="MMMM d, yyyy" // Display only date
           minDate={new Date()} // Prevent past dates
-          className="pl-10 pr-4 border-2 border-gray-300 rounded-md p-2 w-full focus:outline-none focus:border-gray-500"
+          className="pl-10 pr-4 border-2 border-gray-300 text-sm rounded-md p-2 w-full focus:outline-none focus:border-gray-500"
         />
       </div>
     </div>
         <div className="flex justify-between gap-4">
-          <button onClick={handleReset} className="px-12 py-2 border-2 border-gray-950 rounded-md">
+          <button onClick={handleReset} className="px-12 py-2 text-sm border-2 border-gray-950 rounded-md">
             Reset
           </button>
-          <button onClick={handleUpdate} className="px-12 py-2 bg-gray-950 font-semibold text-white rounded-md">
+          <button onClick={handleUpdate} className="px-12 py-2 text-sm  bg-gray-950 font-semibold text-white rounded-md">
             Update
           </button>
         </div>

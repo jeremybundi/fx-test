@@ -17,15 +17,15 @@ const SuccessfulUpdate = ({ onClose, usdMarkup, gbpMarkup, eurMarkup, dateOfEffe
 
     return (
         <div className="fixed font-poppins inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center z-20">
-            <div className="bg-white p-6 px-16 rounded-xl h-[calc(100vh*0.9)] w-[38%] relative">
-                {/* Close Button */}
+          <div className="bg-white px-12 py-6 rounded-xl w-[35%] h-[calc(100vh*0.78)] relative">
+          {/* Close Button */}
                 <button className="absolute top-3 right-3" onClick={onClose}>
                     <Image src={closeIcon} alt="Close Modal" width={30} height={30} />
                 </button>
 
                 {/* Success Icon (Wait for preload) */}
                 {successImageLoaded ? (
-                    <Image src={success} alt="Success Icon" width={70} height={60} className="mx-auto mt-8" />
+                    <Image src={success} alt="Success Icon" width={50} height={60} className="mx-auto mt-8" />
                 ) : (
                     <div className="mx-auto mt-8 w-[70px] h-[60px] bg-gray-200 animate-pulse"></div>
                 )}
@@ -34,9 +34,11 @@ const SuccessfulUpdate = ({ onClose, usdMarkup, gbpMarkup, eurMarkup, dateOfEffe
                 <h2 className="text-3xl font-semibold text-center">Successfully Updated</h2>
 
                 {/* Updated Markups */}
-                <div className="text-center mt-10 text-lg mb-4">
+                <div className="text-center mt-10 text-[16px] mb-4">
                     <p className="text-gray-900 font-semibold">
-                        GBP - {gbpMarkup}%, USD - {usdMarkup}%, EUR - {eurMarkup}%
+                        GBP - <span className="text-gray-500">{gbpMarkup}%</span>,
+                         USD - <span className="text-gray-500">{usdMarkup}%</span>, 
+                         EUR - <span className="text-gray-500"> {eurMarkup}%</span> 
                     </p>
                     <p className="mt-4">
                         <span className="mr-3 font-semibold">Date of Effect:</span>
