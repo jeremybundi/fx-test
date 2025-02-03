@@ -3,13 +3,14 @@ import Link from 'next/link';
 import logo from '../../public/images/logo.png';
 import trend from '../../public/images/trending.png'; 
 import set from '../../public/images/settings.png'; 
-import message from '../../public/images/message.png'; 
+import User from './User'; // Import the new User component
+
 
 
 
 export default function SideNav() {
   return (
-    <div className="w-1/4 min-h-screen font-poppins  px-12 pt-8 bg-white">
+    <div className="w-1/4 min-h-screen font-poppins  px-12 pt-8 bg-white flex flex-col">
       <div className="flex justify-start mb-16">
         <Image src={logo} alt="Logo" width={32} height={32} />
         <p className="font-semibold text-[22px] ml-3">FX Navigator</p>
@@ -129,6 +130,11 @@ export default function SideNav() {
           </button>
         </Link>
       </div>
+      {/* Bottom Section */}
+      <div className="mt-auto mb-4">
+        <User />
+      </div>
+
     </div>
   );
 }

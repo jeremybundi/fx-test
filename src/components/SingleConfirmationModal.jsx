@@ -19,7 +19,7 @@ const SingleConfirmationModal = ({ form, onConfirm, onCancel, oncClose }) => {
         <h2 className="text-3xl font-semibold text-center mb-2 mt-20">You’ve Set</h2>
 
         <h2 className="text-3xl font-semibold text-center mb-4">Tuma Markup as follows:</h2>
-        <ul className="text-center mt-12 mb-4">
+        <ul className="text-center mt-8 mb-4">
           <li>
             <span className="font-semibold">{form.baseCurrency}</span> →{" "}
             <span className="font-semibold">{form.destinationCurrency}</span>
