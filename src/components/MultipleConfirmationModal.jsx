@@ -37,12 +37,12 @@ const MultipleConfirmationModal = ({ onClose, usdMarkup, gbpMarkup, eurMarkup, d
               : "No Date Selected"}
           </p>        </div>
 
-        <p className="text-gray-400 text-center text-2xl mt-32 px-6 mb-16">
+        <p className="text-gray-400 text-center text-xl mt-16 px-6 mb-16">
           Confirm you want to proceed with applying these rates to all destination currencies?
         </p>
 
         {/* Buttons */}
-        <div className="flex justify-between px-10 mt-32">
+        <div className="flex justify-between px-10">
           <button
             className="px-12 py-1 border-2 border-gray-800 text-lg font-semibold rounded-md hover:text-white hover:bg-gray-600"
             onClick={onClose}
