@@ -1,9 +1,16 @@
+"use client";
 import React from "react";
 import Image from "next/image";
 import closeIcon from "../../public/images/close.png";
 import success from "../../public/images/success.png";
 
 const SuccessfulUpdate = ({ onClose, usdMarkup, gbpMarkup, eurMarkup, dateOfEffect }) => {
+  // Convert dateOfEffect to a Date object if it's a valid string or already a Date object
+  const parsedDate = dateOfEffect ? new Date(dateOfEffect) : null;
+
+  // Check if parsedDate is a valid Date object
+  const isValidDate = parsedDate instanceof Date && !isNaN(parsedDate);
+
   return (
     <div className="fixed font-poppins inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center z-20">
       <div className="bg-white p-6 px-16 rounded-xl h-[calc(100vh*0.9)] w-[38%] relative">
@@ -25,7 +32,9 @@ const SuccessfulUpdate = ({ onClose, usdMarkup, gbpMarkup, eurMarkup, dateOfEffe
           </p>
           <p className="mt-4">
             <span className="mr-3 font-semibold">Date of Effect:</span>
-            {dateOfEffect}
+            {isValidDate
+              ? parsedDate.toLocaleString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
+              : "No Date Selected"}
           </p>
         </div>
 

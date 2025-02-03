@@ -2,6 +2,12 @@ import Image from "next/image";
 import closeIcon from "../../public/images/close.png";
 
 const MultipleConfirmationModal = ({ onClose, usdMarkup, gbpMarkup, eurMarkup, dateOfEffect, onSave }) => {
+
+    // Convert dateOfEffect to a Date object if it's a valid string or already a Date object
+    const parsedDate = dateOfEffect ? new Date(dateOfEffect) : null;
+
+    // Check if parsedDate is a valid Date object
+    const isValidDate = parsedDate instanceof Date && !isNaN(parsedDate);
   return (
     <div className="fixed font-poppins inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center z-20">
       <div className="bg-white p-6 px-16 rounded-xl h-[calc(100vh*0.9)] w-[38%] relative">
@@ -24,8 +30,12 @@ const MultipleConfirmationModal = ({ onClose, usdMarkup, gbpMarkup, eurMarkup, d
         </div>
 
         <div className="flex justify-center mt-4">
-          <p className="text-center">Date of Effect: <span className="text-gray-500 ml-3">{dateOfEffect}</span></p>
-        </div>
+        <p className="mt-4">
+            <span className="mr-3 font-semibold">Date of Effect:</span>
+            {isValidDate
+              ? parsedDate.toLocaleString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
+              : "No Date Selected"}
+          </p>        </div>
 
         <p className="text-gray-400 text-center text-2xl mt-32 px-6 mb-16">
           Confirm you want to proceed with applying these rates to all destination currencies?

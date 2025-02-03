@@ -9,7 +9,7 @@ import SuccessfulUpdateModal from './SuccessfulUpdate'; // Import success modal
 import { FaCalendarAlt } from 'react-icons/fa'; // Import calendar icon from react-icons
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css"; // Import datepicker styles
-import { setHours, setMinutes } from 'date-fns';
+//import { setHours, setMinutes } from 'date-fns';
 import '@/app/globals.css'; // Import the global CSS file
 
 
@@ -36,6 +36,18 @@ const BulkUpdate = ({ onClose }) => {
     setShowConfirmationModal(false);
     setShowSuccessModal(true);
   };
+  const handleReset = () => {
+    setUsdMarkup('0');
+    setGbpMarkup('0');
+    setEurMarkup('0');
+    setDateOfEffect(new Date()); // Reset to today's date
+  };
+  const handleCloseAll = () => {
+    setShowConfirmationModal(false);
+    setShowSuccessModal(false);
+    onClose(); // Close the BulkUpdate modal
+  };
+  
 
   return (
     <div>
@@ -51,6 +63,12 @@ const BulkUpdate = ({ onClose }) => {
           <p className="text-center text-gray-400 mb-6">
             Changes made here will apply across all destination currencies. Ensure you review before saving.
           </p>
+                  {/* Headings for Labels and Inputs */}
+                  <div className="flex justify-between text-gray-600 font-medium mb-2">
+            <span>Base Currency</span>
+            <span className="mr-24">Tuma Markup</span>
+          </div>
+
 
           {/* Currency Inputs */}
           <div className="space-y-4">
@@ -73,40 +91,28 @@ const BulkUpdate = ({ onClose }) => {
               </div>
             ))}
           </div>
+          {/* Date of Effect */}
+          <div className="mt-6">
+            <label className="block text-gray-600 font-medium mb-2">Date of Effect</label>
+            <div className="relative">
+              {/* Calendar Icon inside the DatePicker */}
+              <FaCalendarAlt className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-600 z-10 mr-2" />
 
-
-{/* Date of Effect */}
-<div className="mt-6">
-  <label className="block text-gray-600 font-medium mb-2">Date of Effect</label>
-  <div className="relative">
-    {/* Calendar Icon inside the DatePicker */}
-    <FaCalendarAlt className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-600 z-10 mr-2" />
-
-    <DatePicker
-      selected={dateOfEffect}
-      onChange={(date) => setDateOfEffect(date)}
-      showTimeSelect
-      excludeTimes={[
-        setHours(setMinutes(new Date(), 0), 17),
-        setHours(setMinutes(new Date(), 30), 18),
-        setHours(setMinutes(new Date(), 30), 19),
-        setHours(setMinutes(new Date(), 30), 17),
-      ]}
-      dateFormat="MMMM d, yyyy h:mm aa"
-      minDate={new Date()} // Prevent selecting dates in the past
-      className="pl-10 pr-4 border-2 border-gray-300 rounded-md p-2 w-full focus:outline-none focus:border-gray-500" // Adjusted padding
-    />
-  </div>
-</div>
-
-
-
+              <DatePicker
+            selected={dateOfEffect}
+            onChange={(date) => setDateOfEffect(date)}
+            dateFormat="MMMM d, yyyy" // Only display date
+            minDate={new Date()} // Prevent selecting past dates
+            className="pl-10 pr-4 border-2 border-gray-300 rounded-md p-2 w-full focus:outline-none focus:border-gray-500"
+          />
+            </div>
+          </div>
 
           {/* Buttons */}
           <div className="flex justify-between px-10 mt-10">
             <button
               className="px-10 py-2 border-2 border-gray-800 text-lg font-semibold rounded-md hover:text-white hover:bg-gray-600"
-              onClick={onClose}
+              onClick={handleReset}
             >
               Reset
             </button>
@@ -127,7 +133,7 @@ const BulkUpdate = ({ onClose }) => {
           usdMarkup={usdMarkup}
           gbpMarkup={gbpMarkup}
           eurMarkup={eurMarkup}
-          dateOfEffect={dateOfEffect}
+          dateOfEffect={dateOfEffect ? dateOfEffect.toISOString() : null} // Convert Date to string
           onSave={handleConfirm} // Call success modal on confirm
         />
       )}
@@ -135,8 +141,8 @@ const BulkUpdate = ({ onClose }) => {
           {/* Success Modal */}
       {showSuccessModal && (
         <SuccessfulUpdateModal
-          onClose={() => setShowSuccessModal(false)}
-          usdMarkup={usdMarkup}
+        onClose={handleCloseAll}
+        usdMarkup={usdMarkup}
           gbpMarkup={gbpMarkup}
           eurMarkup={eurMarkup}
           dateOfEffect={dateOfEffect}
@@ -147,7 +153,6 @@ const BulkUpdate = ({ onClose }) => {
       };
 
 export default BulkUpdate;
-
 
 
 
