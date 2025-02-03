@@ -4,7 +4,6 @@ import Image from "next/image";
 import closeIcon from "../../public/images/close.png";
 import success from "../../public/images/success.png";
 
-
 const SuccessfulUpdateModal = ({ onClose }) => {
   const updatedData = useSelector((state) => state.currency);
 
@@ -16,33 +15,41 @@ const SuccessfulUpdateModal = ({ onClose }) => {
         </button>
         <Image src={success} alt="Success Icon" width={70} height={60} className="mx-auto mt-8" />
 
-        <h2 className="text-3xl font-semibold text-center mb-2 mt-4">Tuma markup </h2>
-        
+        <h2 className="text-3xl font-semibold text-center mb-2 mt-4">Tuma markup</h2>
+
         <h2 className="text-3xl font-semibold text-center">successfully updated</h2>
         <ul className="text-center mt-10 text-lg mb-4">
           <li>
             <span className="font-semibold">{updatedData.baseCurrency}</span> →{" "}
             <span className="font-semibold">{updatedData.destinationCurrency}</span>
-
           </li>
           <li>
-          <p className="font-semibold text-gray-600"><span className="text-gray-900 mr-3">Exchange Rate:</span>{updatedData.exchangeRate}</p>
-
+            <p className="font-semibold text-gray-600">
+              <span className="text-gray-900 mr-3">Exchange Rate:</span>
+              {updatedData.exchangeRate}
+            </p>
           </li>
           <li className="my-2">
-            <p className="font-semibold text-gray-600"><span className="mr-3 text-gray-900 font-semibold">Markup:</span> {updatedData.markup}%</p>
+            <p className="font-semibold text-gray-600">
+              <span className="mr-3 text-gray-900 font-semibold">Markup:</span> {updatedData.markup}%
+            </p>
           </li>
           <li>
-           <p><span className="mr-3 font-semibold">Date of Effect:</span> {updatedData.dateOfEffect}</p> 
+            <p>
+              <span className="mr-3 font-semibold">Date of Effect:</span> 
+              {updatedData.dateOfEffect 
+                ? new Date(updatedData.dateOfEffect).toLocaleDateString() 
+                : "N/A"}
+            </p>
           </li>
         </ul>
-        <p className="text-[#808A92] mt-12 px-16 text-center text-xl mb-16">The changes have been applied to the destination currency.
-
+        <p className="text-[#808A92] mt-12 px-16 text-center text-xl mb-16">
+          The changes have been applied to the destination currency.
         </p>
         <div className="flex justify-center px-10">
           <button
             onClick={onClose}
-            className="px-16 py-2  text-lg  border-2 border-gray-600 rounded-md hover:bg-gray-200"
+            className="px-16 py-2 text-lg border-2 border-gray-600 rounded-md hover:bg-gray-200"
           >
             Close
           </button>

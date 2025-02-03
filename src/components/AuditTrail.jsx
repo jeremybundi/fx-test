@@ -3,9 +3,24 @@
 import React, { useState, useEffect } from "react";
 
 export default function AuditTrail() {
-  // Function to format date and time
   const formatDateTime = (dateString) => {
-    const date = new Date(dateString);
+    console.log("Received date string:", dateString); // Log the date string
+  
+    // Ensure the input is a string
+    if (typeof dateString !== 'string') {
+      console.log("Invalid date string, not a string:", dateString);
+      return ""; // Return empty or handle as needed
+    }
+  
+    // Fix the date format by removing the invalid part
+    const validDateString = dateString.split('T')[0] + 'T' + dateString.split('T')[1].split('Z')[0];
+    const date = new Date(validDateString);
+  
+    if (isNaN(date)) {
+      console.log("Invalid date string after processing:", validDateString); // Log if date is invalid
+      return "";  // Return an empty string or a fallback value if the date is invalid
+    }
+  
     return new Intl.DateTimeFormat("en-US", {
       year: "2-digit",
       month: "2-digit",
@@ -28,6 +43,9 @@ export default function AuditTrail() {
     // Get latest currency data
     const savedData = JSON.parse(localStorage.getItem("currencyData"));
 
+    // Fallback to a placeholder past date if there's no savedData or its date is invalid
+    const defaultDate = "2021-01-01T10:00:00"; // Set to any past date you like
+
     if (savedData) {
       // Construct a new audit record
       const newRecord = {
@@ -35,7 +53,26 @@ export default function AuditTrail() {
         currencyPair: `${savedData.baseCurrency}/${savedData.destinationCurrency}`,
         rate: savedData.exchangeRate.toFixed(2),
         dateOfEffect: formatDateTime(`${savedData.dateOfEffect}T10:00:00`), 
-        lastUpdated: formatDateTime(new Date()), 
+        lastUpdated: formatDateTime(new Date()) || formatDateTime(defaultDate),  // Use defaultDate if current date is invalid
+        updatedBy: "Admin User",
+      };
+
+      // Append new record to existing records
+      const updatedRecords = [newRecord, ...savedRecords];
+
+      // Save updated records to localStorage
+      localStorage.setItem("auditTrail", JSON.stringify(updatedRecords));
+
+      // Update state
+      setRecords(updatedRecords);
+    } else {
+      // If no savedData, create a new record with a default date
+      const newRecord = {
+        id: savedRecords.length + 1,
+        currencyPair: "USD/INR", // Set default values
+        rate: "75.00",
+        dateOfEffect: formatDateTime(defaultDate),
+        lastUpdated: formatDateTime(defaultDate),
         updatedBy: "Admin User",
       };
 
@@ -110,38 +147,38 @@ export default function AuditTrail() {
       {/* Pagination Controls */}
       <div className="flex justify-between mt-2">
         <div>
-      <button
-          onClick={() => paginate(1)}
-          className="px-4 py-2 mx-1 bg-gray-700 text-white rounded-xl disabled:opacity-50"
-          disabled={currentPage === 1}
-        >
-          &lt;&lt; First
-        </button>
+          <button
+            onClick={() => paginate(1)}
+            className="px-4 py-2 mx-1 bg-gray-700 text-white rounded-xl disabled:opacity-50"
+            disabled={currentPage === 1}
+          >
+            &lt;&lt; First
+          </button>
 
-        <button
-          onClick={() => paginate(currentPage - 1)}
-          className="px-4 py-2 mx-1 ml-4 bg-gray-700 text-white rounded-xl disabled:opacity-50"
-          disabled={currentPage === 1}
-        >
-          &lt; Previous
-        </button>
+          <button
+            onClick={() => paginate(currentPage - 1)}
+            className="px-4 py-2 mx-1 ml-4 bg-gray-700 text-white rounded-xl disabled:opacity-50"
+            disabled={currentPage === 1}
+          >
+            &lt; Previous
+          </button>
         </div>
         <div>
-        <button
-          onClick={() => paginate(currentPage + 1)}
-          className="px-4 py-2 mx-1 bg-gray-700 text-white rounded-xl disabled:opacity-50"
-          disabled={currentPage === totalPages}
-        >
-          Next &gt;
-        </button>
+          <button
+            onClick={() => paginate(currentPage + 1)}
+            className="px-4 py-2 mx-1 bg-gray-700 text-white rounded-xl disabled:opacity-50"
+            disabled={currentPage === totalPages}
+          >
+            Next &gt;
+          </button>
 
-        <button
-          onClick={() => paginate(totalPages)}
-          className="px-4 py-2 mx-1 ml-4 bg-gray-700 text-white rounded-xl disabled:opacity-50"
-          disabled={currentPage === totalPages}
-        >
-          Last &gt;&gt;
-        </button>
+          <button
+            onClick={() => paginate(totalPages)}
+            className="px-4 py-2 mx-1 ml-4 bg-gray-700 text-white rounded-xl disabled:opacity-50"
+            disabled={currentPage === totalPages}
+          >
+            Last &gt;&gt;
+          </button>
         </div>
       </div>
     </div>

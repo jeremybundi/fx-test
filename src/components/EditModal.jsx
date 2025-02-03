@@ -18,6 +18,10 @@ import closeIcon from "../../public/images/close.png";
 //import arrow from "../../public/images/arrow.png";
 import SingleConfirmationModal from './SingleConfirmationModal';
 import SuccessfulUpdateModal from './SuccessfulUpdateModal'; 
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { FaCalendarAlt } from 'react-icons/fa'; // Import calendar icon
+
 
 const currencyDetails = {
   GBP: { flag: gbpFlag, fullName: "British Pound" },
@@ -32,21 +36,35 @@ const currencyDetails = {
   MXN: { flag: mxnFlag, fullName: "Mexican Peso" },
 };
 
-function EditModal({ data, onClose }) {
-  const [form, setForm] = useState(data);
+const EditModal = ({ data, onClose }) => {
+  const [form, setForm] = useState(() => {
+    if (data) {
+      return {
+        ...data,
+        dateOfEffect: data.dateOfEffect ? new Date(data.dateOfEffect) : new Date(),
+      };
+    } else {
+      // Fallback to default values if data is null or undefined
+      return {
+        baseCurrency: '',
+        destinationCurrency: '',
+        exchangeRate: '',
+        finalRate: '',
+        markup: '',
+        dateOfEffect: new Date(),
+      };
+    }
+  });
+  
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [showSuccessfulUpdate, setShowSuccessfulUpdate] = useState(false); 
   const dispatch = useDispatch();
   const storeData = useSelector((state) => state.currency);
 
-  // Get today's date in the format YYYY-MM-DD
-  const today = new Date().toISOString().split('T')[0];
-
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     let newForm = { ...form, [name]: value };
-  
+
     if (name === "markup") {
       const markup = parseFloat(value) || 0;
       newForm.finalRate = (form.exchangeRate * (1 + markup / 100)).toFixed(2);
@@ -54,10 +72,13 @@ function EditModal({ data, onClose }) {
       const finalRate = parseFloat(value) || 0;
       newForm.markup = ((finalRate / form.exchangeRate - 1) * 100).toFixed(2);
     }
-  
+
     setForm(newForm);
   };
-  
+
+  const handleDateChange = (date) => {
+    setForm({ ...form, dateOfEffect: date });
+  };
 
   const handleUpdate = () => {
     if (!form.baseCurrency || !form.destinationCurrency || !form.exchangeRate ||
@@ -86,32 +107,34 @@ function EditModal({ data, onClose }) {
       markup: parseFloat(form.markup),
       dateOfEffect: form.dateOfEffect
     };
-  
+
     dispatch(setCurrency(updatedData));
     localStorage.setItem("currencyData", JSON.stringify(updatedData));
 
-    console.log("Data saved to store store:", updatedData);
-  
+    console.log("Data saved to store:", updatedData);
+
     setShowConfirmation(false);
     setShowSuccessfulUpdate(true); 
   };
-  
+
   useEffect(() => {
     const savedData = localStorage.getItem("currencyData");
     if (savedData) {
       setForm(JSON.parse(savedData));
     }
   }, []);
-  
+
   const handleSuccessfulUpdateClose = () => {
     setShowSuccessfulUpdate(false); 
     onClose(); 
   };
+
   const handlecCancel = () => {
     setShowConfirmation(false); 
     setForm(storeData); 
     onClose(); 
   };
+
   useEffect(() => {
     if (data) {
       setForm(data);
@@ -141,13 +164,17 @@ function EditModal({ data, onClose }) {
             <label className="block text-sm font-medium text-gray-500 mb-2">Base Currency</label>
             <div className="flex items-center justify-between gap-2">
               <div className="flex items-center gap-2">
+              {currencyDetails[form.baseCurrency]?.flag ? (
                 <Image
-                  src={currencyDetails[form.baseCurrency]?.flag || ''}
+                  src={currencyDetails[form.baseCurrency]?.flag}
                   alt={`${form.baseCurrency} flag`}
                   width={24}
                   height={16}
                 />
-                <span className="font-medium">{form.baseCurrency}</span>
+              ) : (
+                <span>No flag available</span> // Fallback content or component
+              )}
+
               </div>
             </div>
           </div>
@@ -202,18 +229,20 @@ function EditModal({ data, onClose }) {
           placeholder="Enter final rate"
         />
       </div>
-        <div className="mb-4 border p-4 rounded-md">
-        <label className="block text-sm text-gray-500 font-medium mb-2">Date of Effect</label>
-        <input
-          type="date"
-          name="dateOfEffect"
-          value={form.dateOfEffect}
-          onChange={handleChange}
-          className="w-full border px-3 py-2 rounded-md"
-          min={today}  
+      <div className="mt-6">
+      <label className="block text-gray-600 font-medium mb-2">Date of Effect</label>
+      <div className="relative">
+        <FaCalendarAlt className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-600 z-10 mr-2" />
+        
+        <DatePicker
+          selected={form.dateOfEffect}
+          onChange={handleDateChange}
+          dateFormat="MMMM d, yyyy" // Display only date
+          minDate={new Date()} // Prevent past dates
+          className="pl-10 pr-4 border-2 border-gray-300 rounded-md p-2 w-full focus:outline-none focus:border-gray-500"
         />
       </div>
-
+    </div>
         <div className="flex justify-between gap-4">
           <button onClick={handleReset} className="px-12 py-2 border-2 border-gray-950 rounded-md">
             Reset
