@@ -102,7 +102,7 @@ export default function MarketComparison() {
       <div className="flex gap-4">
         {/* Base Currency Dropdown */}
         <div className="flex flex-col gap-2 w-full">
-          <label className="text-2xl font-medium text-gray-500">Base Currency</label>
+          <label className="text-xl font-medium text-gray-500">Base Currency</label>
           <div className="relative mt-1">
             <button
               className="flex items-center w-full  gap-2 px-4 h-[58px] border border-gray-300 
@@ -136,7 +136,7 @@ export default function MarketComparison() {
 
         {/* Target Currency Dropdown */}
         <div className="flex flex-col gap-2 w-full">
-          <label className="text-2xl   text-gray-500">Target Currency</label>
+          <label className="text-xl   text-gray-500">Target Currency</label>
           <div className="relative mt-1">
             <button
               className="flex items-center w-full  gap-2 px-2 py-1 border h-[58px] border-gray-300 
