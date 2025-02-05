@@ -6,13 +6,6 @@ import Image from "next/image";
 import gbpFlag from "../../public/images/gbp.png";
 import usdFlag from "../../public/images/usd.png";
 import eurFlag from "../../public/images/eur.png";
-import zarFlag from "../../public/images/zar.png";
-import jpyFlag from "../../public/images/jpy.png";
-import audFlag from "../../public/images/aud.png";
-import cadFlag from "../../public/images/cad.png";
-import inrFlag from "../../public/images/inr.png";
-import cnyFlag from "../../public/images/cny.png";
-import mxnFlag from "../../public/images/mxn.png";
 import arrowClose from "../../public/images/arrowclose.png";
 import closeIcon from "../../public/images/close.png";
 import kesFlag from "../../public/images/kes.png"; // Add KES flag
@@ -27,13 +20,18 @@ const currencyDetails = {
   GBP: { flag: gbpFlag, fullName: "British Pound" },
   USD: { flag: usdFlag, fullName: "United States Dollar" },
   EUR: { flag: eurFlag, fullName: "Euro" },
-  ZAR: { flag: zarFlag, fullName: "South African Rand" },
-  JPY: { flag: jpyFlag, fullName: "Japanese Yen" },
-  AUD: { flag: audFlag, fullName: "Australian Dollar" },
-  CAD: { flag: cadFlag, fullName: "Canadian Dollar" },
-  INR: { flag: inrFlag, fullName: "Indian Rupee" },
-  CNY: { flag: cnyFlag, fullName: "Chinese Yuan" },
-  MXN: { flag: mxnFlag, fullName: "Mexican Peso" },
+  BIF: { flag: "/flags/burundi.png", fullName: "Burundian Franc" },
+  CDF: { flag: "/flags/drc.png", fullName: "Congolese Franc" },
+  ETB: { flag: "/flags/ethiopia.png", fullName: "Ethiopian Birr" },
+  MWK: { flag: "/flags/malawi.png", fullName: "Malawian Kwacha" },
+  MZN: { flag: "/flags/mozambique.png", fullName: "Mozambican Metical" },
+  RWF: { flag: "/flags/rwanda.png", fullName: "Rwandan Franc" },
+  ZAR: { flag: "/flags/southafrica.png", fullName: "South African Rand" },
+  SSP: { flag: "/flags/southsudan.png", fullName: "South Sudanese Pound" },
+  TZS: { flag: "/flags/tanzania.png", fullName: "Tanzanian Shilling" },
+  UGX: { flag: "/flags/uganda.png", fullName: "Ugandan Shilling" },
+  ZMW: { flag: "/flags/zambia.png", fullName: "Zambian Kwacha" },
+  ZWL: { flag: "/flags/zimbabwe.png", fullName: "Zimbabwean Dollar" },
   KES: { flag: kesFlag, fullName: "Kenyan Shilling" },
 
 };
