@@ -94,29 +94,29 @@ export default function MarketComparison() {
   };
 
   return (
-    <div className="bg-white font-poppins rounded-lg px-8 py-6">
+    <div className="bg-white font-poppins rounded-lg px-6 py-6">
       {/* Header Section */}
-      <h1 className="font-semibold text-[18px] mb-6">Market Comparison</h1>
+      <h1 className="font-semibold font-lufga text-3xl mb-6">Market Comparison</h1>
 
       {/* Dropdowns for Base and Target Currency */}
       <div className="flex gap-4">
         {/* Base Currency Dropdown */}
         <div className="flex flex-col gap-2 w-full">
-          <label className="text-sm font-medium text-gray-500">Base Currency</label>
-          <div className="relative">
+          <label className="text-2xl font-medium text-gray-500">Base Currency</label>
+          <div className="relative mt-1">
             <button
-              className="flex items-center w-full justify-between gap-2 px-4 h-[50px] border border-gray-300 
-              rounded-lg text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-gray-300"
+              className="flex items-center w-full  gap-2 px-4 h-[58px] border border-gray-300 
+              rounded-lg text-lg font-medium focus:outline-none focus:ring-2 focus:ring-gray-300"
               onClick={() => setIsDropdownOpen((prev) => !prev)}
             >
-              <Image src={currencies[selectedBaseCurrency].flag} alt={selectedBaseCurrency} width={20} height={12} />
+              <Image src={currencies[selectedBaseCurrency].flag} alt={selectedBaseCurrency} width={30} height={12} className="rounded"/>
               {currencies[selectedBaseCurrency].fullName}
-              <Image src={arrowIcon} alt="Arrow" width={12} height={12} />
+              <Image src={arrowIcon} alt="Arrow" width={12} height={12} className="ml-auto" />
             </button>
 
             {/* Dropdown Menu */}
             {isDropdownOpen && (
-              <div className="absolute mt-2 w-40 text-[12px] bg-white border border-gray-300 rounded-lg shadow-lg z-10">
+              <div className="absolute mt-2 w-full text-[16px] text-gray-500 bg-white border border-gray-300 rounded-lg shadow-lg z-10">
                 <ul>
                   {["USD", "EUR", "GBP"].map((currency) => (
                     <li
@@ -136,21 +136,21 @@ export default function MarketComparison() {
 
         {/* Target Currency Dropdown */}
         <div className="flex flex-col gap-2 w-full">
-          <label className="text-sm font-medium text-gray-500">Target Currency</label>
-          <div className="relative">
+          <label className="text-2xl   text-gray-500">Target Currency</label>
+          <div className="relative mt-1">
             <button
-              className="flex items-center w-full justify-between gap-2 px-4 py-1 border h-[50px] border-gray-300 
-              rounded-lg text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-gray-300"
+              className="flex items-center w-full  gap-2 px-2 py-1 border h-[58px] border-gray-300 
+              rounded-lg text-lg  focus:outline-none focus:ring-2 focus:ring-gray-300"
               onClick={() => setIsDropdownOpen((prev) => !prev)}
             >
-              <Image src={currencies[selectedTargetCurrency].flag} alt={selectedTargetCurrency} width={20} height={12} />
+              <Image src={currencies[selectedTargetCurrency].flag} alt={selectedTargetCurrency} width={30} height={12} />
               {currencies[selectedTargetCurrency].fullName}
               <Image src={arrowIcon} alt="Arrow" width={12} height={12} />
             </button>
 
             {/* Dropdown Menu */}
             {isDropdownOpen && (
-              <div className="absolute mt-2 w-40 text-[12px] h-60 overflow-y-scroll bg-white border border-gray-300 rounded-lg shadow-lg z-10">
+              <div className="absolute mt-2 w-full text-[16px] h-60 overflow-y-scroll text-gray-500 bg-white border border-gray-300 rounded-lg shadow-lg z-10">
                 <ul>
                   {Object.keys(currencies).map((currency) => (
                     <li
@@ -173,32 +173,32 @@ export default function MarketComparison() {
       <div className="mt-7">
         {/* Terrapage */}
         <div className="flex gap-2 justify-between mb-6">
-          <Image src={terrapageImage} alt="Terrapage" width={110} height={80} className="py-2" />
-          <span className="px-4 py-1 bg-green-50 text-sm font-semibold text-green-500 w-[90px] my-1 text-center">
+          <Image src={terrapageImage} alt="Terrapage" width={140} height={80} className="py-2" />
+          <span className="px-4 py-1 bg-green-50 text-xl font-semibold text-green-600 w-[140px] my-1 text-center">
             {staticExchangeRates[`${selectedBaseCurrency}-${selectedTargetCurrency}`]?.terrapage}
           </span>
         </div>
 
         {/* Tuma */}
         <div className="flex gap-2 justify-between mb-6">
-          <Image src={tumaImage} alt="Tuma" width={60} height={20} className="py-1"/>
-          <span className="px-4 py-1 bg-blue-50 text-sm font-semibold text-blue-500 w-[90px]  text-center">
+          <Image src={tumaImage} alt="Tuma" width={90} height={20} className="py-1"/>
+          <span className="px-4 py-1 bg-blue-50 text-xl font-semibold text-blue-600 w-[140px]  text-center">
             {staticExchangeRates[`${selectedBaseCurrency}-${selectedTargetCurrency}`]?.tuma}
           </span>
         </div>
 
         {/* Wise */}
         <div className="flex gap-2 justify-between mb-6">
-          <Image src={wiseImage} alt="Wise" width={50} height={25} className="py-1" />
-          <span className="px-4 py-1 bg-orange-50 text-sm font-semibold text-orange-500 w-[90px] text-center">
+          <Image src={wiseImage} alt="Wise" width={90} height={25} className="py-1" />
+          <span className="px-4 py-1 bg-orange-50 text-xl font-semibold text-orange-600 w-[140px] text-center">
             {wiseRate ? wiseRate : "Loading..."}
           </span>
         </div>
 
         {/* Verto */}
         <div className="flex gap-2 justify-between mb-6">
-          <Image src={vertoImage} alt="Verto" width={50} height={25} className="py-1" />
-          <span className="px-4 py-1 bg-yellow-50 text-sm font-semibold text-yellow-500 w-[90px] text-center">
+          <Image src={vertoImage} alt="Verto" width={80} height={25} className="py-1" />
+          <span className="px-4 py-1 bg-yellow-50 text-xl font-semibold text-yellow-600 w-[140px] text-center">
             {staticExchangeRates[`${selectedBaseCurrency}-${selectedTargetCurrency}`]?.verto}
           </span>
         </div>

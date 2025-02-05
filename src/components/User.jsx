@@ -44,14 +44,14 @@ export default function User() {
       >
         {/* User Image and Placeholder Name */}
         <div className="flex items-center">
-          <Image src={userImage} alt="User" width={30} height={30} className="rounded-full" />
-          <span className="ml-3 text-sm font-medium">Shiqs Imani</span>
+          <Image src={userImage} alt="User" width={40} height={30} className="rounded-full" />
+          <span className="ml-3 text-lg font-medium">Shiqs Imani</span>
         </div>
 
         <div className="ml-1">
           {/* Use Image component for log.png */}
           <div className="inline-block mt-2">
-            <Image src={logImage} alt="Log" width={15} height={20} />
+            <Image src={logImage} alt="Log" width={25} height={20} />
           </div>
         </div>
       </div>
@@ -65,7 +65,7 @@ export default function User() {
           {/* Modal Content */}
           <div className="flex items-center mb-1 border-b ">
             <Image src={userImage} alt="User" width={30} height={40} className="rounded-full mb-1" />
-            <span className="ml-3 text-sm font-medium">Shiqs Imani</span>
+            <span className="ml-3 text-lg font-medium">Shiqs Imani</span>
           </div>
 
           <div className="space-y-1">
@@ -74,8 +74,8 @@ export default function User() {
               className="w-full flex items-center p-2 text-left text-xs hover:bg-gray-50 rounded-md"
               onClick={handleButtonClick}
             >
-              <Image src={accountImage} alt="Account" width={16} height={16} />
-              <span className="ml-2">Account</span>
+              <Image src={accountImage} alt="Account" width={24} height={16} />
+              <span className="ml-2 text-lg">Account</span>
             </button>
 
             {/* Notification Button */}
@@ -83,8 +83,8 @@ export default function User() {
               className="w-full flex items-center p-2 text-left text-xs hover:bg-gray-50 border-b mb-1 rounded-md"
               onClick={handleButtonClick}
             >
-              <Image src={notificationImage} alt="Notification" width={16} height={16} />
-              <span className="ml-2">Notification</span>
+              <Image src={notificationImage} alt="Notification" width={22} height={16} />
+              <span className="ml-2 text-lg">Notification</span>
             </button>
 
             {/* Logout Button */}
@@ -92,8 +92,8 @@ export default function User() {
               className="w-full flex items-center p-2 text-left text-xs hover:bg-gray-50 rounded-md"
               onClick={handleButtonClick}
             >
-              <Image src={settingImage} alt="Settings" width={16} height={16} />
-              <span className="ml-2">Logout</span>
+              <Image src={settingImage} alt="Settings" width={22} height={16} />
+              <span className="ml-2 text-lg">Logout</span>
             </button>
           </div>
         </div>

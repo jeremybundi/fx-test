@@ -15,7 +15,10 @@ export default function Home() {
   };
 
   return (
-    <div className="flex bg-gray-100">
+    <div className=" mx-auto">
+
+    
+    <div className="flex bg-gray-100  mx-auto">
       {/* Sidebar */}
       <SideNav />
 
@@ -23,10 +26,10 @@ export default function Home() {
       <div className="flex flex-col w-full px-10 py-6">
         {/* Header Section */}
         <div className="flex justify-between items-center mb-6">
-          <h1 className="text-[24px] font-semibold">Rate Manager</h1>
+          <h1 className="text-2xl  font-semibold">Rate Manager</h1>
           <button
             onClick={() => setShowModal(true)}
-            className="px-4 py-3 bg-[#101820] font-semibold text-sm text-white rounded-xl hover:bg-gray-800 transition duration-300 ease-in-out"
+            className="px-4 py-3 bg-[#101820] font-lufga font-semibold text-lg text-white rounded-xl hover:bg-gray-800 transition duration-300 ease-in-out"
           >
             Bulk Update Rates
           </button>
@@ -48,6 +51,7 @@ export default function Home() {
 
       {/* Modal */}
       {showModal && <BulkUpdate onClose={handleCloseModal} />}
+    </div>
     </div>
   );
 }

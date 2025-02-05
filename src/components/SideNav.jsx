@@ -10,10 +10,10 @@ import User from './User';
 
 export default function SideNav() {
   return (
-    <div className="w-1/4 min-h-screen font-poppins  px-12 pt-8 bg-white flex flex-col">
+    <div className="w-1/4 min-h-screen font-poppins  px-4 pt-8 bg-white flex flex-col">
       <div className="flex justify-start mb-16">
-        <Image src={logo} alt="Logo" width={32} height={32} />
-        <p className="font-semibold text-[22px] ml-3">FX Navigator</p>
+        <Image src={logo} alt="Logo" width={40} height={24} />
+        <div className="font-semibold text-4xl ml-3">FX Navigator</div>
       </div>
       
       <div className="relative group ">
@@ -35,7 +35,7 @@ export default function SideNav() {
                 strokeWidth="2"
               />
             </svg>
-            <span className="text-[16px] font-medium">Dashboard</span>
+            <span className="text-2xl font-medium">Dashboard</span>
           </button>
         </Link>
         <Link href="/"> {/* Link to the homepage */}
@@ -57,7 +57,7 @@ export default function SideNav() {
                 strokeWidth="2"
               />
             </svg>
-            <span className="text-[16px] font-medium">Rate Manager</span>
+            <span className="text-2xl font-medium">Rate Manager</span>
           </button>
         </Link>
         <Link href="/"> {/* Link to the homepage */}
@@ -77,7 +77,7 @@ export default function SideNav() {
               fill="#101820"
             />
           </svg>
-          <span className="text-[16px] font-medium">All Messages</span>
+          <span className="text-2xl font-medium">All Messages</span>
         </button>
       </Link>
         <Link href="/"> 
@@ -91,7 +91,7 @@ export default function SideNav() {
               height={20}
               className="mr-4 font-bold"
             />
-            <span className="text-[16px] font-medium">Trends</span>
+            <span className="text-2xl font-medium">Trends</span>
           </button>
         </Link>
         <Link href="/"> 
@@ -112,7 +112,7 @@ export default function SideNav() {
                 stroke-linejoin="round"
               />
             </svg>
-            <span className="text-[16px] font-medium">Reports</span>
+            <span className="text-2xl font-medium">Reports</span>
           </button>
         </Link>
         <Link href="/"> {/* Link to the homepage */}
@@ -126,7 +126,7 @@ export default function SideNav() {
               height={20}
               className="mr-4"
             />
-            <span className="text-[16px] font-medium">Settings</span>
+            <span className="text-2xl font-medium">Settings</span>
           </button>
         </Link>
       </div>

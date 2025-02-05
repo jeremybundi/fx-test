@@ -119,22 +119,22 @@ export default function Footer() {
   return (
     <footer className="bg-white font-poppins rounded-lg py-6 px-6">
       <div className="flex items-center justify-between">
-        <h1 className="font-semibold text-[16px]">Exchange Rates</h1>
+        <h1 className="font-semibold font-lufga text-2xl">Exchange Rates</h1>
 
         <div className="flex items-center gap-4">
-          <label className="font-medium text-sm text-gray-500">Base Currency</label>
+          <label className="font-medium text-lg text-gray-500">Base Currency</label>
           <div className="relative">
             <button
               className="flex items-center gap-2 pl-2 pr-4 py-2 border border-gray-300 rounded-lg text-sm text-gray-700 focus:outline-none"
               onClick={() => setIsDropdownOpen(!isDropdownOpen)} // Toggling dropdown here
             >
-              <Image src={currencyDetails[selectedCurrency].flag} alt={`${selectedCurrency} flag`} width={20} height={16} />
-              <span className="font-semibold text-sm">{selectedCurrency}</span>
+              <Image src={currencyDetails[selectedCurrency].flag} alt={`${selectedCurrency} flag`} width={25} height={20} className="rounded" />
+              <span className="font-semibold text-lg">{selectedCurrency}</span>
               <Image src={arrowIcon} alt="Arrow" width={12} height={12} className="ml-6" />
             </button>
 
             {isDropdownOpen && (
-              <div className="absolute mt-2 w-40 bg-white border border-gray-300 rounded-lg shadow-lg z-10 dropdown">
+              <div className="absolute mt-2 w-full bg-white border border-gray-300 rounded-lg shadow-lg z-10 dropdown">
                 <ul>
                   {["GBP", "USD", "EUR"].map((currency) => (
                     <li
@@ -142,7 +142,7 @@ export default function Footer() {
                       className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100 cursor-pointer"
                       onClick={() => handleCurrencyChange(currency)}
                     >
-                      <Image src={currencyDetails[currency].flag} alt={`${currency} flag`} width={16} height={12} />
+                      <Image src={currencyDetails[currency].flag} alt={`${currency} flag`} width={24} height={12} className="rounded"/>
                       {currency}
                     </li>
                   ))}
@@ -155,20 +155,20 @@ export default function Footer() {
 
       <div className="mt-4 mb-6 border-t border-gray-300"></div>
 
-      <div className="space-y-5 text-sm font-medium">
+      <div className="space-y-7  font-medium">
         {paginatedCurrencies.map((currency) => (
           <div key={currency} className="flex items-center justify-between gap-2">
             <div className="flex items-center gap-2">
-              <Image src={currencyDetails[currency].flag} alt={`${currency} flag`} width={25} height={15} />
-              <span className="font-medium text-[13px]">{currencyDetails[currency].fullName}</span>
+              <Image src={currencyDetails[currency].flag} alt={`${currency} flag`} width={36} height={30} className="rounded" />
+              <span className="font-medium text-lg text-gray-500">{currencyDetails[currency].fullName}</span>
             </div>
-            <div className="flex items-center gap-6">
-              <span className="px-4 bg-green-50 text-sm w-[70px] text-center font-semibold text-green-600">
+            <div className="flex items-center gap-14">
+              <span className="px-4 bg-green-50 text-lg w-[110px] text-center font-semibold text-green-600">
                 {exchangeRates[currency] && !isNaN(exchangeRates[currency])
                   ? Number(exchangeRates[currency]).toFixed(2)
                   : "Loading..."}
               </span>
-              <button className="text-sm underline focus:outline-none" onClick={() => handleEditClick(currency, exchangeRates[currency])}>
+              <button className="text-lg pr-4 underline focus:outline-none" onClick={() => handleEditClick(currency, exchangeRates[currency])}>
                 Edit
               </button>
             </div>
@@ -181,31 +181,31 @@ export default function Footer() {
         <button
           onClick={() => handlePageChange(currentPage - 1)}
           disabled={currentPage === 1}
-          className="px-3 py-1 bg-gray-200 rounded-md disabled:opacity-50"
+          className="px-3 py-2 bg-gray-200 rounded-md disabled:opacity-50"
         >
           &lt;&lt;
         </button>
         <button
           onClick={() => handlePageChange(currentPage - 1)}
           disabled={currentPage === 1}
-          className="px-3 py-1 bg-gray-200 rounded-md disabled:opacity-50"
+          className="px-3 py-2 bg-gray-200 rounded-md disabled:opacity-50"
         >
           &lt;
         </button>
-        <span className="flex items-center text-xs justify-center px-4 py-1 bg-gray-200 rounded-md">
+        <span className="flex items-center text-sm justify-center px-4 py-2 bg-gray-200 rounded-md">
           Page {currentPage} of {totalPages}
         </span>
         <button
           onClick={() => handlePageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
-          className="px-3 py-1 bg-gray-200 rounded-md disabled:opacity-50"
+          className="px-3 py-2 bg-gray-200 rounded-md disabled:opacity-50"
         >
           &gt;
         </button>
         <button
           onClick={() => handlePageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
-          className="px-3 py-1 bg-gray-200 rounded-md disabled:opacity-50"
+          className="px-3 py-2 bg-gray-200 rounded-md disabled:opacity-50"
         >
           &gt;&gt;
         </button>

@@ -99,16 +99,16 @@ export default function AuditTrail() {
 
   return (
     <div className="p-4 rounded-t-lg  bg-white w-full flex flex-col">
-      <h1 className="text-[19px] ml-3 font-bold mb-4">Audit Trail</h1>
+      <h1 className="text-2xl ml-3 font-bold mb-4">Audit Trail</h1>
 
       {/* Scrollable Table Container */}
       <div className="flex-1 rounded-lg pb-6">
         <table className="w-full bg-white">
           {/* Table Head */}
           <thead className="bg-white top-0 z-10">
-            <tr className="text-left text-[#808A92] font-light text-sm">
-              <th className="py-2 px-4 border-b">Currency Pair</th>
-              <th className="py-2 px-4 border-b">Rate</th>
+            <tr className="text-left text-gray-500  text-xl">
+              <th className="py- px-4 border-b">Currency Pair</th>
+              <th className="py-2 px-4  border-b">Rate</th>
               <th className="py-2 px-4 border-b">Date of Effect</th>
               <th className="py-2 px-4 border-b">Last Updated</th>
               <th className="py-2 px-4 border-b">Updated By</th>
@@ -119,17 +119,17 @@ export default function AuditTrail() {
           <tbody>
             {currentRecords.map((record) => (
               <tr key={record.id} className="border-b">
-                <td className="py-1 text-xs px-4">{record.currencyPair}</td>
+                <td className="py-2 text-lg font-lufga px-4">{record.currencyPair}</td>
                 <td>
-                  <span className="py-1 text-xs px-6 bg-green-50 text-center font-semibold text-green-500">
+                  <span className="py-2 font-lufga text-lg px-12 bg-green-50 text-center font-semibold text-green-500">
                     {record.rate}
                   </span>
                 </td>
-                <td className="py-1 text-xs px-4">{record.dateOfEffect}</td>
-                <td className="py-1 text-xs text-gray-500 px-4">{record.lastUpdated}</td>
-                <td className="py-1 text-xs text-gray-500 px-4">{record.updatedBy}</td>
-                <td className="py-1 text-xs px-4">
-                  <button className="px-4 py-1  rounded-lg text-xs underline focus:outline-none">
+                <td className="py-2 font-lufga text-lg px-4">{record.dateOfEffect}</td>
+                <td className="py-2 font-lufga text-lg text-gray-500 px-4">{record.lastUpdated}</td>
+                <td className="py-2 font-lufga text-lg text-gray-500 px-4">{record.updatedBy}</td>
+                <td className="py-2  font-lufga text-lg px-4">
+                  <button className="px-4 py-2 font-lufga rounded-lg text-lg underline focus:outline-none">
                     Edit
                   </button>
                 </td>
@@ -137,7 +137,7 @@ export default function AuditTrail() {
             ))}
             {/* Spacer Row */}
             <tr>
-              <td colSpan="6" className="h-3"></td>
+              <td colSpan="6" className="h-6"></td>
             </tr>
           </tbody>
         </table>
@@ -148,7 +148,7 @@ export default function AuditTrail() {
         <div>
           <button
             onClick={() => paginate(1)}
-            className="px-4 py-1 mx-1 bg-gray-700 text-white rounded-lg disabled:opacity-50"
+            className="px-4 py-2 mx-1 bg-gray-700 text-white font-semibold rounded-lg disabled:opacity-50"
             disabled={currentPage === 1}
           >
             &lt;&lt; First
@@ -156,7 +156,7 @@ export default function AuditTrail() {
 
           <button
             onClick={() => paginate(currentPage - 1)}
-            className="px-2 py-1 mx-1 ml-4 bg-gray-700 text-white rounded-lg disabled:opacity-50"
+            className="px-2 py-2 mx-1 ml-4 bg-gray-700 text-white font-semibold rounded-lg disabled:opacity-50"
             disabled={currentPage === 1}
           >
             &lt; Previous
@@ -165,7 +165,7 @@ export default function AuditTrail() {
         <div>
           <button
             onClick={() => paginate(currentPage + 1)}
-            className="px-4 py-1 mx-1 bg-gray-700 text-white rounded-lg disabled:opacity-50"
+            className="px-4 py-2 mx-1 bg-gray-700 text-white font-semibold rounded-lg disabled:opacity-50"
             disabled={currentPage === totalPages}
           >
             Next &gt;
@@ -173,7 +173,7 @@ export default function AuditTrail() {
 
           <button
             onClick={() => paginate(totalPages)}
-            className="px-4 py-1 mx-1 ml-4 bg-gray-700 text-white rounded-lg disabled:opacity-50"
+            className="px-4 py-2 mx-1 ml-4 bg-gray-700 text-white font-semibold rounded-lg disabled:opacity-50"
             disabled={currentPage === totalPages}
           >
             Last &gt;&gt;
