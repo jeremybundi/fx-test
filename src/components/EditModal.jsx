@@ -67,7 +67,7 @@ const EditModal = ({ data, onClose }) => {
 
     if (name === "markup") {
       const markup = parseFloat(value) || 0;
-      newForm.finalRate = (form.exchangeRate * (1 + markup / 100)).toFixed(2);
+      newForm.finalRate = (form.exchangeRate * (1 - markup / 100)).toFixed(2);
     } else if (name === "finalRate") {
       const finalRate = parseFloat(value) || 0;
       newForm.markup = ((finalRate / form.exchangeRate - 1) * 100).toFixed(2);
