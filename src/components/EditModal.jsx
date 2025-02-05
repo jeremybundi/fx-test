@@ -259,7 +259,7 @@ const EditModal = ({ data, onClose }) => {
         />
       </div>
     </div>
-        <div className="flex justify-between gap-4">
+        <div className="flex justify-between gap-4 mt-6">
           <button onClick={handleReset} className="px-12 py-2 text-sm border-2 border-gray-950 rounded-md">
             Reset
           </button>
