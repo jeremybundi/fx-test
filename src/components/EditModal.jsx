@@ -15,12 +15,12 @@ import cnyFlag from "../../public/images/cny.png";
 import mxnFlag from "../../public/images/mxn.png";
 import arrowClose from "../../public/images/arrowclose.png";
 import closeIcon from "../../public/images/close.png";
-//import arrow from "../../public/images/arrow.png";
+import kesFlag from "../../public/images/kes.png"; // Add KES flag
 import SingleConfirmationModal from './SingleConfirmationModal';
 import SuccessfulUpdateModal from './SuccessfulUpdateModal'; 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { FaCalendarAlt } from 'react-icons/fa'; // Import calendar icon
+import { FaCalendarAlt } from 'react-icons/fa'; 
 
 
 const currencyDetails = {
@@ -34,6 +34,8 @@ const currencyDetails = {
   INR: { flag: inrFlag, fullName: "Indian Rupee" },
   CNY: { flag: cnyFlag, fullName: "Chinese Yuan" },
   MXN: { flag: mxnFlag, fullName: "Mexican Peso" },
+  KES: { flag: kesFlag, fullName: "Kenyan Shilling" },
+
 };
 
 const EditModal = ({ data, onClose }) => {
@@ -44,7 +46,7 @@ const EditModal = ({ data, onClose }) => {
         dateOfEffect: data.dateOfEffect ? new Date(data.dateOfEffect) : new Date(),
       };
     } else {
-      // Fallback to default values if data is null or undefined
+      // Fallback to default values if data is null,
       return {
         baseCurrency: '',
         destinationCurrency: '',
@@ -153,7 +155,7 @@ const EditModal = ({ data, onClose }) => {
         exchangeRate: '',
         finalRate: '',
         markup: '',
-        dateOfEffect: new Date(), // Set today's date when no data is provided
+        dateOfEffect: new Date(), 
       });
     } else {
       setForm({
@@ -162,12 +164,10 @@ const EditModal = ({ data, onClose }) => {
       });
     }
   }, [data]);
-  
-  
 
   return (
     <div className="fixed font-poppins inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-10">
-      <div className="bg-white px-14 py-6 rounded-xl w-[35%] h-[calc(100vh*0.78)] relative">
+      <div className="bg-white px-14 py-6 rounded-xl w-[35%] h-[calc(100vh*0.83)] relative">
       <button onClick={handlecCancel} className="absolute top-3 right-3">
           <Image src={closeIcon} alt="Close Modal" width={30} height={30} />
         </button>
@@ -255,8 +255,8 @@ const EditModal = ({ data, onClose }) => {
         <DatePicker
           selected={form.dateOfEffect}
           onChange={handleDateChange}
-          dateFormat="MMMM d, yyyy" // Display only date
-          minDate={new Date()} // Prevent past dates
+          dateFormat="MMMM d, yyyy" 
+          minDate={new Date()} 
           className="pl-10 pr-4 border-2 border-gray-300 text-sm rounded-md p-2 w-full focus:outline-none focus:border-gray-500"
         />
       </div>

@@ -12,7 +12,7 @@ const SingleConfirmationModal = ({ form, onConfirm, onCancel, oncClose }) => {
 
   return (
     <div className="fixed font-poppins inset-0 bg-gray-500 bg-opacity-5 flex justify-center items-center z-10">
-      <div className="bg-white px-8 py-6 rounded-xl w-[35%] h-[calc(100vh*0.78)] relative">
+      <div className="bg-white px-8 py-6 rounded-xl w-[35%] h-[calc(100vh*0.83)] relative">
       <button className="absolute top-3 right-3" onClick={oncClose}>
           <Image src={closeIcon} alt="Close Modal" width={30} height={30} />
         </button>
