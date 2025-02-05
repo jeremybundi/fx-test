@@ -40,16 +40,16 @@ const SingleConfirmationModal = ({ form, onConfirm, onCancel, oncClose }) => {
         <p className="text-center text-[#808A92] px-16 text-2xl mt-14 mb-16">
           Confirm you want to proceed with applying these rates to the destination currency?
         </p>
-        <div className="flex justify-between px-16">
+        <div className="flex justify-between px-12">
           <button
             onClick={onCancel}
-            className="px-16 py-3 border-2 border-gray-800 tetx-lg font-semibold rounded-md hover:text-white hover:bg-gray-600"
+            className="px-12 py-3 border-2 border-gray-800 tetx-lg font-semibold rounded-md hover:text-white hover:bg-gray-600"
           >
             Back
           </button>
           <button
             onClick={onConfirm}
-            className="px-16 py-3 bg-gray-800 text-lg font-semibold text-white rounded-md hover:bg-gray-600"
+            className="px-12 py-3 bg-gray-800 text-lg font-semibold text-white rounded-md hover:bg-gray-600"
           >
             Confirm
           </button>
