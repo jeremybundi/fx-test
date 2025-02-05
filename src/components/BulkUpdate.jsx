@@ -112,7 +112,7 @@ const BulkUpdate = ({ onClose }) => {
           </div>
 
           {/* Buttons */}
-          <div className="flex justify-between px-6 mt-auto mb-1">
+          <div className="flex justify-between px-6 mt-auto mb-16">
             <button
               className="px-10 py-1 border-2 border-gray-800 text-lg font-semibold rounded-md hover:text-white hover:bg-gray-600"
               onClick={handleReset}
