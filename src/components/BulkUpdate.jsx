@@ -52,8 +52,8 @@ const BulkUpdate = ({ onClose }) => {
   return (
     <div>
       {/* Main BulkUpdate Modal */}
-      <div className="fixed font-poppins inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center z-10">
-      <div className="bg-white px-12 py-6 rounded-xl w-[35%] h-[calc(100vh*0.78)] relative">
+      <div className="fixed font-poppins inset-0 bg-gray-500 bg-opacity-50 flex justify-center flex-col items-center z-10">
+      <div className="bg-white px-12 pt-6 rounded-xl w-[35%] h-[calc(100vh*0.78)] flex flex-col relative">
           {/* Close Button */}
           <button className="absolute top-3 right-3" onClick={onClose}>
             <Image src={closeIcon} alt="Close Modal" width={30} height={30} />
@@ -96,7 +96,7 @@ const BulkUpdate = ({ onClose }) => {
           </div>
           {/* Date of Effect */}
           <div className="mt-5">
-            <label className="block text-gray-600 font-medium mb-2">Date of Effect</label>
+            <label className="block text-gray-600 font-medium ">Date of Effect</label>
             <div className="relative">
               {/* Calendar Icon inside the DatePicker */}
               <FaCalendarAlt className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-600 z-10 mr-2" />
@@ -112,7 +112,7 @@ const BulkUpdate = ({ onClose }) => {
           </div>
 
           {/* Buttons */}
-          <div className="flex justify-between px-6 mt-16">
+          <div className="flex justify-between px-6 mt-auto mb-1">
             <button
               className="px-10 py-1 border-2 border-gray-800 text-lg font-semibold rounded-md hover:text-white hover:bg-gray-600"
               onClick={handleReset}

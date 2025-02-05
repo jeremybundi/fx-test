@@ -13,7 +13,7 @@ export default function SideNav() {
     <div className="w-1/4 min-h-screen font-poppins  px-4 pt-8 bg-white flex flex-col">
       <div className="flex justify-start mb-16">
         <Image src={logo} alt="Logo" width={40} height={24} />
-        <div className="font-semibold text-4xl ml-3">FX Navigator</div>
+        <div className="font-semibold text-3xl  ml-3">FX Navigator</div>
       </div>
       
       <div className="relative group ">

@@ -55,8 +55,7 @@ export default function MarketComparison() {
   const [selectedBaseCurrency, setSelectedBaseCurrency] = useState("USD");
   const [selectedTargetCurrency, setSelectedTargetCurrency] = useState("KES");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [wiseRate, setWiseRate] = useState(null); // To store the dynamic exchange rate from Wise
-
+  const [wiseRate, setWiseRate] = useState(null); 
   // Fetch Wise exchange rate
   useEffect(() => {
     const fetchWiseRate = async () => {
