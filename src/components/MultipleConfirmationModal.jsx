@@ -16,10 +16,10 @@ const MultipleConfirmationModal = ({ onClose, usdMarkup, gbpMarkup, eurMarkup, d
           <Image src={closeIcon} alt="Close Modal" width={30} height={30} />
         </button>
 
-        <h2 className="text-2xl font-semibold mt-16 px-16 text-center">
+        <h2 className="text-3xl mb-2 font-semibold mt-16 px-16 text-center">
           You've Set
         </h2>
-        <h2 className="text-2xl font-semibold px-1 text-center mb-6">
+        <h2 className="text-3xl font-semibold px-1 text-center mb-6">
           Tuma Markups as follows:
         </h2>
 
@@ -29,7 +29,7 @@ const MultipleConfirmationModal = ({ onClose, usdMarkup, gbpMarkup, eurMarkup, d
           <p className="text-center">EUR → <span className="text-gray-500">{eurMarkup}%</span></p>
         </div>
 
-        <div className="flex justify-center mt-4">
+        <div className="flex text-xl justify-center mt-4">
         <p className="mt-4">
             <span className="mr-3 font-semibold">Date of Effect:</span>
             <span className="text-gray-600">
@@ -41,20 +41,20 @@ const MultipleConfirmationModal = ({ onClose, usdMarkup, gbpMarkup, eurMarkup, d
           </p>    
               </div>
 
-        <p className="text-gray-500 text-center text-xl mt-16 px-6 mb-16">
+        <p className="text-gray-500 text-center text-2xl mt-16 px-6 mb-16">
           Confirm you want to proceed with applying these rates to all destination currencies?
         </p>
 
         {/* Buttons */}
-        <div className="flex justify-between px-6">
+        <div className="flex justify-between px-10">
           <button
-            className="px-12 py-1 border-2 border-gray-800 text-lg font-semibold rounded-md hover:text-white hover:bg-gray-600"
+            className="px-12 py-2 border-2 border-gray-800 text-xl font-semibold rounded-md hover:text-white hover:bg-gray-600"
             onClick={onClose}
           >
             Back
           </button>
           <button
-            className="px-12 py-1 bg-gray-800 text-lg font-semibold text-white rounded-md hover:bg-gray-600"
+            className="px-12 py-2 bg-gray-800 text-xl font-semibold text-white rounded-md hover:bg-gray-600"
             onClick={onSave}
           >
             Confirm

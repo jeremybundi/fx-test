@@ -59,23 +59,23 @@ const BulkUpdate = ({ onClose }) => {
             <Image src={closeIcon} alt="Close Modal" width={30} height={30} />
           </button>
 
-          <h2 className="text-2xl font-semibold text-center mb-6 mt-6">Edit Tuma Markups</h2>
-          <p className="text-center text-lg text-gray-400 mb-6">
+          <h2 className="text-3xl font-semibold text-center mb-6 mt-6">Edit Tuma Markups</h2>
+          <p className="text-center text-xl text-gray-400 mb-6">
             Changes made here will apply across all destination currencies. Ensure you review before saving.
           </p>
                   {/* Headings for Labels and Inputs */}
                   <div className="flex justify-between text-gray-600 font-medium mb-2">
-            <span>Base Currency</span>
-            <span className="mr-24">Tuma Markup</span>
+            <span className='text-xl'>Base Currency</span>
+            <span className="mr-24 text-xl">Tuma Markup</span>
           </div>
 
           {/* Currency Inputs */}
-          <div className="space-y-4">
+          <div className="space-y-7">
             {[{ label: 'USD', flag: usdFlag, value: usdMarkup, setValue: setUsdMarkup },
               { label: 'GBP', flag: gbpFlag, value: gbpMarkup, setValue: setGbpMarkup },
               { label: 'EUR', flag: eurFlag, value: eurMarkup, setValue: setEurMarkup }].map((currency, index) => (
               <div key={index} className="flex space-x-3">
-                <span className="border flex items-center rounded-md py-1 w-64">
+                <span className="border flex items-center rounded-md py-2 w-64">
                   <Image src={currency.flag} alt={`${currency.label} Flag`} width={30} height={20} className="ml-2" />
                   <label className="font-semibold ml-2">{currency.label}</label>
                 </span>
@@ -86,7 +86,7 @@ const BulkUpdate = ({ onClose }) => {
                     value={currency.value}
                     onChange={(e) => currency.setValue(e.target.value)}
                     onBlur={() => currency.setValue(currency.value || '0')}
-                    className="w-full px-4 py-2 pr-10 border rounded-md focus:outline-none  text-gray-500 focus:ring-2 focus:ring-gray-500"
+                    className="w-full px-4 py-3 pr-10 border rounded-md focus:outline-none  text-gray-500 focus:ring-2 focus:ring-gray-500"
                   />
                   <span className="absolute right-4 top-1/2 text-gray-500
                    transform -translate-y-1/2 text-xl">%</span>
@@ -96,7 +96,7 @@ const BulkUpdate = ({ onClose }) => {
           </div>
           {/* Date of Effect */}
           <div className="mt-5">
-            <label className="block text-gray-600 font-medium ">Date of Effect</label>
+            <label className="block text-gray-600 text-xl mb-2 font-medium ">Date of Effect</label>
             <div className="relative">
               {/* Calendar Icon inside the DatePicker */}
               <FaCalendarAlt className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-600 z-10 mr-2" />
@@ -106,13 +106,13 @@ const BulkUpdate = ({ onClose }) => {
             onChange={(date) => setDateOfEffect(date)}
             dateFormat="MMMM d, yyyy" 
             minDate={new Date()} 
-            className="pl-10 pr-4 border-2 text-sm border-gray-300 rounded-md p-2 w-full focus:outline-none focus:border-gray-500"
+            className="pl-10 pr-4 py-3 border-2 text-sm border-gray-300 rounded-md p-2 w-full focus:outline-none focus:border-gray-500"
           />
             </div>
           </div>
 
           {/* Buttons */}
-          <div className="flex justify-between px-6 mt-auto mb-16">
+          <div className="flex justify-between px-6 mt-auto  mb-16">
             <button
               className="px-10 py-1 border-2 border-gray-800 text-lg font-semibold rounded-md hover:text-white hover:bg-gray-600"
               onClick={handleReset}
@@ -136,8 +136,8 @@ const BulkUpdate = ({ onClose }) => {
           usdMarkup={usdMarkup}
           gbpMarkup={gbpMarkup}
           eurMarkup={eurMarkup}
-          dateOfEffect={dateOfEffect ? dateOfEffect.toISOString() : null} // Convert Date to string
-          onSave={handleConfirm} // Call success modal on confirm
+          dateOfEffect={dateOfEffect ? dateOfEffect.toISOString() : null} 
+          onSave={handleConfirm} 
         />
       )}
 

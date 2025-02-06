@@ -34,13 +34,13 @@ const SuccessfulUpdate = ({ onClose, usdMarkup, gbpMarkup, eurMarkup, dateOfEffe
                 <h2 className="text-3xl font-semibold text-center">Successfully Updated</h2>
 
                 {/* Updated Markups */}
-                <div className="text-center mt-10 text-[16px] mb-4">
-                    <p className="text-gray-900 font-semibold">
+                <div className="text-center mt-10  mb-4">
+                    <p className="text-gray-900 text-2xl font-semibold">
                         GBP - <span className="text-gray-500">{gbpMarkup}%</span>,
                          USD - <span className="text-gray-500">{usdMarkup}%</span>, 
                          EUR - <span className="text-gray-500"> {eurMarkup}%</span> 
                     </p>
-                    <p className="mt-4">
+                    <p className="mt-4 text-xl">
                         <span className="mr-3 font-semibold">Date of Effect:</span>
                         {isValidDate
                             ? parsedDate.toLocaleString("en-US", { month: "long", day: "numeric", year: "numeric" })
@@ -48,7 +48,7 @@ const SuccessfulUpdate = ({ onClose, usdMarkup, gbpMarkup, eurMarkup, dateOfEffe
                     </p>
                 </div>
 
-                <p className="text-[#808A92] mt-12 px-16 text-center text-xl mb-16">
+                <p className="text-[#808A92] mt-12 px-16 text-center text-2xl mb-16">
                     The changes have been applied to the destination currency.
                 </p>
 

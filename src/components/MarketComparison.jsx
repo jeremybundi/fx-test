@@ -72,7 +72,7 @@ export default function MarketComparison() {
         );
         const data = await response.json();
         if (data && data[0]) {
-          setWiseRate(data[0].rate); // Set the Wise exchange rate
+          setWiseRate(data[0].rate); 
         }
       } catch (error) {
         console.error("Error fetching Wise exchange rate:", error);
@@ -177,7 +177,7 @@ export default function MarketComparison() {
             {staticExchangeRates[`${selectedBaseCurrency}-${selectedTargetCurrency}`]?.terrapage}
           </span>
         </div>
-
+         
         {/* Tuma */}
         <div className="flex gap-2 justify-between mb-6">
           <Image src={tumaImage} alt="Tuma" width={90} height={20} className="py-1"/>
