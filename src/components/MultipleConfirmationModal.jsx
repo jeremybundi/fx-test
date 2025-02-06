@@ -46,15 +46,15 @@ const MultipleConfirmationModal = ({ onClose, usdMarkup, gbpMarkup, eurMarkup, d
         </p>
 
         {/* Buttons */}
-        <div className="flex justify-between px-10">
+        <div className="flex justify-between px-6">
           <button
-            className="px-12 py-2 border-2 border-gray-800 text-xl font-semibold rounded-md hover:text-white hover:bg-gray-600"
+            className="px-8 py-2 border-2 border-gray-800 text-xl font-semibold rounded-md hover:text-white hover:bg-gray-600"
             onClick={onClose}
           >
             Back
           </button>
           <button
-            className="px-12 py-2 bg-gray-800 text-xl font-semibold text-white rounded-md hover:bg-gray-600"
+            className="px-8 py-2 bg-gray-800 text-xl font-semibold text-white rounded-md hover:bg-gray-600"
             onClick={onSave}
           >
             Confirm
