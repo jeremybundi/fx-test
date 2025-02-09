@@ -40,12 +40,12 @@ const BulkUpdate = ({ onClose }) => {
     setUsdMarkup('0');
     setGbpMarkup('0');
     setEurMarkup('0');
-    setDateOfEffect(new Date()); // Reset to today's date
+    setDateOfEffect(new Date()); 
   };
   const handleCloseAll = () => {
     setShowConfirmationModal(false);
     setShowSuccessModal(false);
-    onClose(); // Close the BulkUpdate modal
+    onClose(); 
   };
   
 

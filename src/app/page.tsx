@@ -43,6 +43,8 @@ export default function Home() {
               <Market />
             </div>
           </div>
+
+          
           <div className="mt-8 ">
             <AuditTrail />
           </div>

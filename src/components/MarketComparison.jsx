@@ -174,32 +174,42 @@ export default function MarketComparison() {
         <div className="flex gap-2 justify-between mb-6">
           <Image src={terrapageImage} alt="Terrapage" width={140} height={80} className="py-2" />
           <span className="px-4 py-1 bg-green-50 text-xl font-semibold text-green-600 w-[140px] my-1 text-center">
-            {staticExchangeRates[`${selectedBaseCurrency}-${selectedTargetCurrency}`]?.terrapage}
-          </span>
+          {staticExchangeRates[`${selectedBaseCurrency}-${selectedTargetCurrency}`]?.terrapage
+            ? Number(staticExchangeRates[`${selectedBaseCurrency}-${selectedTargetCurrency}`].terrapage).toFixed(2)
+            : "N/A"}
+        </span>
+
         </div>
          
         {/* Tuma */}
         <div className="flex gap-2 justify-between mb-6">
           <Image src={tumaImage} alt="Tuma" width={90} height={20} className="py-1"/>
-          <span className="px-4 py-1 bg-blue-50 text-xl font-semibold text-blue-600 w-[140px]  text-center">
-            {staticExchangeRates[`${selectedBaseCurrency}-${selectedTargetCurrency}`]?.tuma}
-          </span>
+          <span className="px-4 py-1 bg-blue-50 text-xl font-semibold text-blue-600 w-[140px] text-center">
+          {staticExchangeRates[`${selectedBaseCurrency}-${selectedTargetCurrency}`]?.tuma
+            ? Number(staticExchangeRates[`${selectedBaseCurrency}-${selectedTargetCurrency}`].tuma).toFixed(2)
+            : "N/A"}
+        </span>
+
         </div>
 
         {/* Wise */}
         <div className="flex gap-2 justify-between mb-6">
           <Image src={wiseImage} alt="Wise" width={90} height={25} className="py-1" />
           <span className="px-4 py-1 bg-orange-50 text-xl font-semibold text-orange-600 w-[140px] text-center">
-            {wiseRate ? wiseRate : "Loading..."}
-          </span>
+          {wiseRate ? Number(wiseRate).toFixed(2) : "Loading..."}
+        </span>
+
+
         </div>
 
         {/* Verto */}
         <div className="flex gap-2 justify-between mb-6">
           <Image src={vertoImage} alt="Verto" width={80} height={25} className="py-1" />
           <span className="px-4 py-1 bg-yellow-50 text-xl font-semibold text-yellow-600 w-[140px] text-center">
-            {staticExchangeRates[`${selectedBaseCurrency}-${selectedTargetCurrency}`]?.verto}
-          </span>
+          {staticExchangeRates[`${selectedBaseCurrency}-${selectedTargetCurrency}`]?.verto
+            ? Number(staticExchangeRates[`${selectedBaseCurrency}-${selectedTargetCurrency}`].verto).toFixed(2)
+            : "N/A"}
+        </span>
         </div>
       </div>
     </div>
