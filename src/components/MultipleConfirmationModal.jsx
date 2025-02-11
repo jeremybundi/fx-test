@@ -1,21 +1,27 @@
-import Image from "next/image";
-import closeIcon from "../../public/images/close.png";
+import Image from 'next/image';
+import closeIcon from '../../public/images/close.png';
 
-const MultipleConfirmationModal = ({ onClose, usdMarkup, gbpMarkup, eurMarkup, dateOfEffect, onSave }) => {
+const MultipleConfirmationModal = ({
+  onClose,
+  usdMarkup,
+  gbpMarkup,
+  eurMarkup,
+  dateOfEffect,
+  onSave,
+}) => {
+  // Convert dateOfEffect to a Date
+  const parsedDate = dateOfEffect ? new Date(dateOfEffect) : null;
 
-    // Convert dateOfEffect to a Date 
-    const parsedDate = dateOfEffect ? new Date(dateOfEffect) : null;
-
-    // Check if parsedDate is a valid Date object
-    const isValidDate = parsedDate instanceof Date && !isNaN(parsedDate);
+  // Check if parsedDate is a valid Date object
+  const isValidDate = parsedDate instanceof Date && !isNaN(parsedDate);
   return (
     <div className="fixed font-poppins inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center z-20">
       <div className="bg-white px-12 py-6 rounded-xl w-[35%] h-[calc(100vh*0.78)] relative">
-      {/* Close Button */}
+        {/* Close Button */}
         <button className="absolute top-3 right-3" onClick={onClose}>
           <Image src={closeIcon} alt="Close Modal" width={30} height={30} />
         </button>
-
+ 
         <h2 className="text-3xl mb-2 font-semibold mt-16 px-16 text-center">
           You've Set
         </h2>
@@ -24,25 +30,35 @@ const MultipleConfirmationModal = ({ onClose, usdMarkup, gbpMarkup, eurMarkup, d
         </h2>
 
         <div className="flex justify-center  text-[16px]">
-          <p className="mr-6 text-center">USD → <span className="text-gray-500">{usdMarkup}%,</span></p>
-          <p className="mr-6 text-center">GBP → <span className="text-gray-500">{gbpMarkup}%,</span></p>
-          <p className="text-center">EUR → <span className="text-gray-500">{eurMarkup}%</span></p>
+          <p className="mr-6 text-center">
+            USD → <span className="text-gray-500">{usdMarkup}%,</span>
+          </p>
+          <p className="mr-6 text-center">
+            GBP → <span className="text-gray-500">{gbpMarkup}%,</span>
+          </p>
+          <p className="text-center">
+            EUR → <span className="text-gray-500">{eurMarkup}%</span>
+          </p>
         </div>
 
         <div className="flex text-xl justify-center mt-4">
-        <p className="mt-4">
+          <p className="mt-4">
             <span className="mr-3 font-semibold">Date of Effect:</span>
             <span className="text-gray-600">
-            {isValidDate
-              ? parsedDate.toLocaleString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
-              : "No Date Selected"}
+              {isValidDate
+                ? parsedDate.toLocaleString('en-US', {
+                    month: 'long',
+                    day: 'numeric',
+                    year: 'numeric',
+                  })
+                : 'No Date Selected'}
             </span>
-          
-          </p>    
-              </div>
+          </p>
+        </div>
 
         <p className="text-gray-500 text-center text-2xl mt-16 px-6 mb-16">
-          Confirm you want to proceed with applying these rates to all destination currencies?
+          Confirm you want to proceed with applying these rates to all
+          destination currencies?
         </p>
 
         {/* Buttons */}

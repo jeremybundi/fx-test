@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from "react";
-import Image from "next/image";
-import { useDispatch } from "react-redux";
-import { setCurrency } from "../redux/features/currencySlice";
-import arrowIcon from "../../public/images/arrow.png";
-import gbpFlag from "../../public/images/gbp.png";
-import usdFlag from "../../public/images/usd.png";
-import eurFlag from "../../public/images/eur.png";
-import kesFlag from "../../public/flags/kenya.png";
-import EditModal from "./EditModal";
+import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
+import { useDispatch } from 'react-redux';
+import { setCurrency } from '../redux/features/currencySlice';
+import arrowIcon from '../../public/images/arrow.png';
+import gbpFlag from '../../public/images/gbp.png';
+import usdFlag from '../../public/images/usd.png';
+import eurFlag from '../../public/images/eur.png';
+import kesFlag from '../../public/flags/kenya.png';
+import EditModal from './EditModal';
 
 export default function Footer() {
-  const [selectedCurrency, setSelectedCurrency] = useState("GBP");
+  const [selectedCurrency, setSelectedCurrency] = useState('GBP');
   const [exchangeRates, setExchangeRates] = useState({});
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -33,40 +33,39 @@ export default function Footer() {
             `https://api.transferwise.com/v1/rates?source=${selectedCurrency}&target=${target}`,
             {
               headers: {
-                Authorization: "Bearer 4e8f4270-8d0e-46f2-a6a2-405029e49bca",
+                Authorization: 'Bearer 4e8f4270-8d0e-46f2-a6a2-405029e49bca',
               },
             }
           );
           const data = await response.json();
-          return { [target]: data.length > 0 ? data[0].rate : "N/A" };
+          return { [target]: data.length > 0 ? data[0].rate : 'N/A' };
         })
       );
 
       setExchangeRates(Object.assign({}, ...responses));
     } catch (error) {
-      console.error("Error fetching exchange rates:", error);
+      console.error('Error fetching exchange rates:', error);
     }
   };
 
   const currencyDetails = {
-    GBP: { flag: gbpFlag, fullName: "British Pound" },
-    USD: { flag: usdFlag, fullName: "United States Dollar" },
-    EUR: { flag: eurFlag, fullName: "Euro" },
-    KES: { flag: kesFlag, fullName: "Kenyan Shilling" },
-    TZS: { flag: "/flags/tanzania.png", fullName: "Tanzanian Shilling" },
-    BIF: { flag: "/flags/burundi.png", fullName: "Burundian Franc" },
-    CDF: { flag: "/flags/drc.png", fullName: "Congolese Franc" },
-    ETB: { flag: "/flags/ethiopia.png", fullName: "Ethiopian Birr" },
-    MWK: { flag: "/flags/malawi.png", fullName: "Malawian Kwacha" },
-    MZN: { flag: "/flags/mozambique.png", fullName: "Mozambican Metical" },
-    RWF: { flag: "/flags/rwanda.png", fullName: "Rwandan Franc" },
-    ZAR: { flag: "/flags/southafrica.png", fullName: "South African Rand" },
-    SSP: { flag: "/flags/southsudan.png", fullName: "South Sudanese Pound" },
-    UGX: { flag: "/flags/uganda.png", fullName: "Ugandan Shilling" },
-    ZMW: { flag: "/flags/zambia.png", fullName: "Zambian Kwacha" },
-    ZWL: { flag: "/flags/zimbabwe.png", fullName: "Zimbabwean Dollar" },
+    GBP: { flag: gbpFlag, fullName: 'British Pound' },
+    USD: { flag: usdFlag, fullName: 'United States Dollar' },
+    EUR: { flag: eurFlag, fullName: 'Euro' },
+    KES: { flag: kesFlag, fullName: 'Kenyan Shilling' },
+    TZS: { flag: '/flags/tanzania.png', fullName: 'Tanzanian Shilling' },
+    BIF: { flag: '/flags/burundi.png', fullName: 'Burundian Franc' },
+    CDF: { flag: '/flags/drc.png', fullName: 'Congolese Franc' },
+    ETB: { flag: '/flags/ethiopia.png', fullName: 'Ethiopian Birr' },
+    MWK: { flag: '/flags/malawi.png', fullName: 'Malawian Kwacha' },
+    MZN: { flag: '/flags/mozambique.png', fullName: 'Mozambican Metical' },
+    RWF: { flag: '/flags/rwanda.png', fullName: 'Rwandan Franc' },
+    ZAR: { flag: '/flags/southafrica.png', fullName: 'South African Rand' },
+    SSP: { flag: '/flags/southsudan.png', fullName: 'South Sudanese Pound' },
+    UGX: { flag: '/flags/uganda.png', fullName: 'Ugandan Shilling' },
+    ZMW: { flag: '/flags/zambia.png', fullName: 'Zambian Kwacha' },
+    ZWL: { flag: '/flags/zimbabwe.png', fullName: 'Zimbabwean Dollar' },
   };
-
 
   const handleCurrencyChange = (currency) => {
     setSelectedCurrency(currency);
@@ -80,13 +79,15 @@ export default function Footer() {
       exchangeRate: rate,
       markup: 0,
       finalRate: rate,
-      dateOfEffect: "",
+      dateOfEffect: '',
     });
 
     setIsModalOpen(true);
   };
 
-  const totalPages = Math.ceil(Object.keys(currencyDetails).length / itemsPerPage);
+  const totalPages = Math.ceil(
+    Object.keys(currencyDetails).length / itemsPerPage
+  );
   const paginatedCurrencies = Object.keys(currencyDetails).slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
@@ -106,11 +107,11 @@ export default function Footer() {
         setIsDropdownOpen(false);
       }
     };
-  
+
     if (isDropdownOpen) {
       document.addEventListener('click', handleClickOutside);
     }
-  
+
     return () => {
       document.removeEventListener('click', handleClickOutside);
     };
@@ -119,30 +120,50 @@ export default function Footer() {
   return (
     <footer className="bg-white font-poppins rounded-lg py-6 px-6">
       <div className="flex items-center justify-between">
-        <h1 className="font-semibold font-lufga text-2xl">Exchange Rates</h1>
+        <h1 className="font-semibold font-poppins text-xl">Exchange Rates</h1>
 
         <div className="flex items-center gap-4">
-          <label className="font-medium text-lg text-gray-500">Base Currency</label>
+          <label className="font-medium text-lg text-gray-500">
+            Base Currency
+          </label>
           <div className="relative">
             <button
               className="flex items-center gap-2 pl-2 pr-4 py-2 border border-gray-300 rounded-lg text-sm text-gray-700 focus:outline-none"
               onClick={() => setIsDropdownOpen(!isDropdownOpen)} // Toggling dropdown here
             >
-              <Image src={currencyDetails[selectedCurrency].flag} alt={`${selectedCurrency} flag`} width={25} height={20} className="rounded" />
+              <Image
+                src={currencyDetails[selectedCurrency].flag}
+                alt={`${selectedCurrency} flag`}
+                width={25}
+                height={20}
+                className="rounded"
+              />
               <span className="font-semibold text-lg">{selectedCurrency}</span>
-              <Image src={arrowIcon} alt="Arrow" width={12} height={12} className="ml-6" />
+              <Image
+                src={arrowIcon}
+                alt="Arrow"
+                width={12}
+                height={12}
+                className="ml-6"
+              />
             </button>
 
             {isDropdownOpen && (
               <div className="absolute mt-2 w-full bg-white border border-gray-300 rounded-lg shadow-lg z-10 dropdown">
                 <ul>
-                  {["GBP", "USD", "EUR"].map((currency) => (
+                  {['GBP', 'USD', 'EUR'].map((currency) => (
                     <li
                       key={currency}
                       className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100 cursor-pointer"
                       onClick={() => handleCurrencyChange(currency)}
                     >
-                      <Image src={currencyDetails[currency].flag} alt={`${currency} flag`} width={24} height={12} className="rounded"/>
+                      <Image
+                        src={currencyDetails[currency].flag}
+                        alt={`${currency} flag`}
+                        width={24}
+                        height={12}
+                        className="rounded"
+                      />
                       {currency}
                     </li>
                   ))}
@@ -157,18 +178,34 @@ export default function Footer() {
 
       <div className="space-y-7  font-medium">
         {paginatedCurrencies.map((currency) => (
-          <div key={currency} className="flex items-center justify-between gap-2">
+          <div
+            key={currency}
+            className="flex items-center justify-between gap-2"
+          >
             <div className="flex items-center gap-2">
-              <Image src={currencyDetails[currency].flag} alt={`${currency} flag`} width={36} height={30} className="rounded" />
-              <span className="font-medium text-lg text-gray-500">{currencyDetails[currency].fullName}</span>
+              <Image
+                src={currencyDetails[currency].flag}
+                alt={`${currency} flag`}
+                width={36}
+                height={30}
+                className="rounded"
+              />
+              <span className="font-medium text-lg text-gray-500">
+                {currencyDetails[currency].fullName}
+              </span>
             </div>
             <div className="flex items-center gap-14">
               <span className="px-4 bg-green-50 text-lg w-[110px] text-center font-semibold text-green-600">
                 {exchangeRates[currency] && !isNaN(exchangeRates[currency])
                   ? Number(exchangeRates[currency]).toFixed(2)
-                  : "Loading..."}
+                  : 'Loading...'}
               </span>
-              <button className="text-lg pr-4 underline focus:outline-none" onClick={() => handleEditClick(currency, exchangeRates[currency])}>
+              <button
+                className="text-lg pr-4 underline focus:outline-none"
+                onClick={() =>
+                  handleEditClick(currency, exchangeRates[currency])
+                }
+              >
                 Edit
               </button>
             </div>
@@ -211,7 +248,9 @@ export default function Footer() {
         </button>
       </div>
 
-      {isModalOpen && <EditModal data={modalData} onClose={() => setIsModalOpen(false)} />}
+      {isModalOpen && (
+        <EditModal data={modalData} onClose={() => setIsModalOpen(false)} />
+      )}
     </footer>
   );
 }

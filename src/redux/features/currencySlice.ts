@@ -22,12 +22,12 @@ const currencySlice = createSlice({
   reducers: {
     setCurrency: (
       state,
-      action: PayloadAction<{ 
-        baseCurrency: string; 
-        destinationCurrency: string; 
-        exchangeRate: number; 
-        markup: number; 
-        dateOfEffect: string; 
+      action: PayloadAction<{
+        baseCurrency: string;
+        destinationCurrency: string;
+        exchangeRate: number;
+        markup: number;
+        dateOfEffect: string;
       }>
     ) => {
       // Update state

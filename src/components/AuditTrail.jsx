@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import EditModal from "./EditModal";
+import React, { useState, useEffect } from 'react';
+import EditModal from './EditModal';
 
 export default function AuditTrail() {
   const [records, setRecords] = useState([]);
@@ -9,7 +9,7 @@ export default function AuditTrail() {
   const recordsPerPage = 9;
 
   useEffect(() => {
-    const savedRecords = JSON.parse(localStorage.getItem("auditTrail")) || [];
+    const savedRecords = JSON.parse(localStorage.getItem('auditTrail')) || [];
     setRecords(savedRecords);
   }, []);
 
@@ -27,12 +27,12 @@ export default function AuditTrail() {
 
   return (
     <div className="p-4 bg-white w-full flex flex-col">
-      <h1 className="text-2xl font-bold ml-6 mb-4">Audit Trail</h1>
+      <h1 className="text-xl font-bold ml-6 mb-4">Audit Trail</h1>
 
       <div className="flex-1 pb-6">
         <table className="w-full bg-white">
           <thead>
-            <tr className="text-left text-gray-500 text-xl">
+            <tr className="text-left text-gray-500 text-lg">
               <th className="py-2 px-4 border-b">Currency Pair</th>
               <th className="py-2 px-4 border-b">Rate</th>
               <th className="py-2 px-4 border-b">Date of Effect</th>
@@ -47,7 +47,9 @@ export default function AuditTrail() {
                 <td className="py-2 px-4">{record.currencyPair}</td>
                 <td className="py-2 px-4">{record.rate}</td>
                 <td className="py-2 px-4">{record.dateOfEffect}</td>
-                <td className="py-2 text-gray-500 px-4">{record.lastUpdated}</td>
+                <td className="py-2 text-gray-500 px-4">
+                  {record.lastUpdated}
+                </td>
                 <td className="py-2  text-gray-500 px-4">{record.updatedBy}</td>
                 <td className="py-2 px-4">
                   <button
@@ -104,7 +106,12 @@ export default function AuditTrail() {
         </div>
       </div>
 
-      {selectedRecord && <EditModal data={selectedRecord} onClose={() => setSelectedRecord(null)} />}
+      {selectedRecord && (
+        <EditModal
+          data={selectedRecord}
+          onClose={() => setSelectedRecord(null)}
+        />
+      )}
     </div>
   );
 }

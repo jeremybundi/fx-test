@@ -1,18 +1,16 @@
 import { useState } from 'react';
-import Image from "next/image";
-import closeIcon from "../../public/images/close.png";
-import usdFlag from "../../public/images/usd.png";
-import gbpFlag from "../../public/images/gbp.png";
-import eurFlag from "../../public/images/eur.png";
+import Image from 'next/image';
+import closeIcon from '../../public/images/close.png';
+import usdFlag from '../../public/images/usd.png';
+import gbpFlag from '../../public/images/gbp.png';
+import eurFlag from '../../public/images/eur.png';
 import ConfirmationModal from './MultipleConfirmationModal';
-import SuccessfulUpdateModal from './SuccessfulUpdate'; 
-import { FaCalendarAlt } from 'react-icons/fa'; 
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css"; 
+import SuccessfulUpdateModal from './SuccessfulUpdate';
+import { FaCalendarAlt } from 'react-icons/fa';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 //import { setHours, setMinutes } from 'date-fns';
-import '@/app/globals.css'; 
-
-
+import '@/app/globals.css';
 
 const BulkUpdate = ({ onClose }) => {
   const [usdMarkup, setUsdMarkup] = useState('0');
@@ -26,7 +24,7 @@ const BulkUpdate = ({ onClose }) => {
 
   const handleUpdate = () => {
     if (!dateOfEffect) {
-      alert("Please select a valid date of effect.");
+      alert('Please select a valid date of effect.');
       return;
     }
     setShowConfirmationModal(true);
@@ -40,43 +38,68 @@ const BulkUpdate = ({ onClose }) => {
     setUsdMarkup('0');
     setGbpMarkup('0');
     setEurMarkup('0');
-    setDateOfEffect(new Date()); 
+    setDateOfEffect(new Date());
   };
   const handleCloseAll = () => {
     setShowConfirmationModal(false);
     setShowSuccessModal(false);
-    onClose(); 
+    onClose();
   };
-  
 
   return (
     <div>
       {/* Main BulkUpdate Modal */}
       <div className="fixed font-poppins inset-0 bg-gray-500 bg-opacity-50 flex justify-center flex-col items-center z-10">
-      <div className="bg-white px-12 pt-6 rounded-xl w-[35%] h-[calc(100vh*0.78)] flex flex-col relative">
+        <div className="bg-white px-12 pt-6 rounded-xl w-[35%] h-[calc(100vh*0.78)] flex flex-col relative">
           {/* Close Button */}
           <button className="absolute top-3 right-3" onClick={onClose}>
             <Image src={closeIcon} alt="Close Modal" width={30} height={30} />
           </button>
 
-          <h2 className="text-3xl font-semibold text-center mb-6 mt-6">Edit Tuma Markups</h2>
+          <h2 className="text-3xl font-semibold text-center mb-6 mt-6">
+            Edit Tuma Markups
+          </h2>
           <p className="text-center text-xl text-gray-400 mb-6">
-            Changes made here will apply across all destination currencies. Ensure you review before saving.
+            Changes made here will apply across all destination currencies.
+            Ensure you review before saving.
           </p>
-                  {/* Headings for Labels and Inputs */}
-                  <div className="flex justify-between text-gray-600 font-medium mb-2">
-            <span className='text-xl'>Base Currency</span>
+          {/* Headings for Labels and Inputs */}
+          <div className="flex justify-between text-gray-600 font-medium mb-2">
+            <span className="text-xl">Base Currency</span>
             <span className="mr-24 text-xl">Tuma Markup</span>
           </div>
 
           {/* Currency Inputs */}
           <div className="space-y-7">
-            {[{ label: 'USD', flag: usdFlag, value: usdMarkup, setValue: setUsdMarkup },
-              { label: 'GBP', flag: gbpFlag, value: gbpMarkup, setValue: setGbpMarkup },
-              { label: 'EUR', flag: eurFlag, value: eurMarkup, setValue: setEurMarkup }].map((currency, index) => (
+            {[
+              {
+                label: 'USD',
+                flag: usdFlag,
+                value: usdMarkup,
+                setValue: setUsdMarkup,
+              },
+              {
+                label: 'GBP',
+                flag: gbpFlag,
+                value: gbpMarkup,
+                setValue: setGbpMarkup,
+              },
+              {
+                label: 'EUR',
+                flag: eurFlag,
+                value: eurMarkup,
+                setValue: setEurMarkup,
+              },
+            ].map((currency, index) => (
               <div key={index} className="flex space-x-3">
                 <span className="border flex items-center rounded-md py-2 w-64">
-                  <Image src={currency.flag} alt={`${currency.label} Flag`} width={30} height={20} className="ml-2" />
+                  <Image
+                    src={currency.flag}
+                    alt={`${currency.label} Flag`}
+                    width={30}
+                    height={20}
+                    className="ml-2"
+                  />
                   <label className="font-semibold ml-2">{currency.label}</label>
                 </span>
                 <div className="relative w-full">
@@ -88,26 +111,32 @@ const BulkUpdate = ({ onClose }) => {
                     onBlur={() => currency.setValue(currency.value || '0')}
                     className="w-full px-4 py-3 pr-10 border rounded-md focus:outline-none  text-gray-500 focus:ring-2 focus:ring-gray-500"
                   />
-                  <span className="absolute right-4 top-1/2 text-gray-500
-                   transform -translate-y-1/2 text-xl">%</span>
+                  <span
+                    className="absolute right-4 top-1/2 text-gray-500
+                   transform -translate-y-1/2 text-xl"
+                  >
+                    %
+                  </span>
                 </div>
               </div>
             ))}
           </div>
           {/* Date of Effect */}
           <div className="mt-5">
-            <label className="block text-gray-600 text-xl mb-2 font-medium ">Date of Effect</label>
+            <label className="block text-gray-600 text-xl mb-2 font-medium ">
+              Date of Effect
+            </label>
             <div className="relative">
               {/* Calendar Icon inside the DatePicker */}
               <FaCalendarAlt className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-600 z-10 mr-2" />
 
               <DatePicker
-            selected={dateOfEffect}
-            onChange={(date) => setDateOfEffect(date)}
-            dateFormat="MMMM d, yyyy" 
-            minDate={new Date()} 
-            className="pl-10 pr-4 py-3 border-2 text-sm border-gray-300 rounded-md p-2 w-full focus:outline-none focus:border-gray-500"
-          />
+                selected={dateOfEffect}
+                onChange={(date) => setDateOfEffect(date)}
+                dateFormat="MMMM d, yyyy"
+                minDate={new Date()}
+                className="pl-10 pr-4 py-3 border-2 text-sm border-gray-300 rounded-md p-2 w-full focus:outline-none focus:border-gray-500"
+              />
             </div>
           </div>
 
@@ -136,37 +165,23 @@ const BulkUpdate = ({ onClose }) => {
           usdMarkup={usdMarkup}
           gbpMarkup={gbpMarkup}
           eurMarkup={eurMarkup}
-          dateOfEffect={dateOfEffect ? dateOfEffect.toISOString() : null} 
-          onSave={handleConfirm} 
+          dateOfEffect={dateOfEffect ? dateOfEffect.toISOString() : null}
+          onSave={handleConfirm}
         />
       )}
 
-          {/* Success Modal */}
+      {/* Success Modal */}
       {showSuccessModal && (
         <SuccessfulUpdateModal
-        onClose={handleCloseAll}
-        usdMarkup={usdMarkup}
+          onClose={handleCloseAll}
+          usdMarkup={usdMarkup}
           gbpMarkup={gbpMarkup}
           eurMarkup={eurMarkup}
           dateOfEffect={dateOfEffect}
         />
       )}
-          </div>
-        );
-      };
+    </div>
+  );
+};
 
 export default BulkUpdate;
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 /* Add this to your global styles */
 .scrollbar-thin::-webkit-scrollbar {
   width: 6px;

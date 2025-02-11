@@ -1,14 +1,14 @@
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import userImage from '../../public/images/user.png';
-import logImage from '../../public/images/log.png'; 
+import logImage from '../../public/images/log.png';
 import accountImage from '../../public/images/account.png';
-import notificationImage from '../../public/images/notification.png'; 
+import notificationImage from '../../public/images/notification.png';
 import settingImage from '../../public/images/logout.png';
 
 export default function User() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const modalRef = useRef(null); 
+  const modalRef = useRef(null);
 
   const handleModalToggle = () => {
     setIsModalOpen(!isModalOpen);
@@ -33,18 +33,24 @@ export default function User() {
 
   // Handle button clicks inside the modal to close it
   const handleButtonClick = () => {
-    setIsModalOpen(false); 
+    setIsModalOpen(false);
   };
 
   return (
     <div className="relative font-poppins">
-      <div 
-        className="flex cursor-pointer justify-between rounded-md bg-gray-50 p-2 py-1" 
+      <div
+        className="flex cursor-pointer justify-between rounded-md bg-gray-50 p-2 py-1"
         onClick={handleModalToggle}
       >
         {/* User Image and Placeholder Name */}
         <div className="flex items-center">
-          <Image src={userImage} alt="User" width={40} height={30} className="rounded-full" />
+          <Image
+            src={userImage}
+            alt="User"
+            width={40}
+            height={30}
+            className="rounded-full"
+          />
           <span className="ml-3 text-lg font-medium">Shiqs Imani</span>
         </div>
 
@@ -64,13 +70,19 @@ export default function User() {
         >
           {/* Modal Content */}
           <div className="flex items-center mb-1 border-b ">
-            <Image src={userImage} alt="User" width={30} height={40} className="rounded-full mb-1" />
+            <Image
+              src={userImage}
+              alt="User"
+              width={30}
+              height={40}
+              className="rounded-full mb-1"
+            />
             <span className="ml-3 text-lg font-medium">Shiqs Imani</span>
           </div>
 
           <div className="space-y-1">
             {/* Account Button */}
-            <button 
+            <button
               className="w-full flex items-center p-2 text-left text-xs hover:bg-gray-50 rounded-md"
               onClick={handleButtonClick}
             >
@@ -79,16 +91,21 @@ export default function User() {
             </button>
 
             {/* Notification Button */}
-            <button 
+            <button
               className="w-full flex items-center p-2 text-left text-xs hover:bg-gray-50 border-b mb-1 rounded-md"
               onClick={handleButtonClick}
             >
-              <Image src={notificationImage} alt="Notification" width={22} height={16} />
+              <Image
+                src={notificationImage}
+                alt="Notification"
+                width={22}
+                height={16}
+              />
               <span className="ml-2 text-lg">Notification</span>
             </button>
 
             {/* Logout Button */}
-            <button 
+            <button
               className="w-full flex items-center p-2 text-left text-xs hover:bg-gray-50 rounded-md"
               onClick={handleButtonClick}
             >
