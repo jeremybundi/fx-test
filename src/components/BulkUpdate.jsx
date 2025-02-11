@@ -56,10 +56,10 @@ const BulkUpdate = ({ onClose }) => {
             <Image src={closeIcon} alt="Close Modal" width={30} height={30} />
           </button>
 
-          <h2 className="text-3xl font-semibold text-center mb-6 mt-6">
+          <h2 className="text-2xl font-semibold text-center mb-6 mt-6">
             Edit Tuma Markups
           </h2>
-          <p className="text-center text-xl text-gray-400 mb-6">
+          <p className="text-center text-lg text-gray-400 mb-6">
             Changes made here will apply across all destination currencies.
             Ensure you review before saving.
           </p>

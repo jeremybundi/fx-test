@@ -42,10 +42,10 @@ const SuccessfulUpdate = ({
           <div className="mx-auto mt-8 w-[70px] h-[60px] bg-gray-200 animate-pulse"></div>
         )}
 
-        <h2 className="text-3xl font-semibold text-center mb-2 mt-4">
+        <h2 className="text-2xl font-semibold text-center mb-2 mt-4">
           Tuma Markup
         </h2>
-        <h2 className="text-3xl font-semibold text-center">
+        <h2 className="text-2xl font-semibold text-center">
           Successfully Updated
         </h2>
 
@@ -68,7 +68,7 @@ const SuccessfulUpdate = ({
           </p>
         </div>
 
-        <p className="text-[#808A92] mt-12 px-16 text-center text-2xl mb-16">
+        <p className="text-[#808A92] mt-12 px-16 text-center text-xl mb-16">
           The changes have been applied to the destination currency.
         </p>
 

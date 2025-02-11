@@ -22,10 +22,10 @@ const MultipleConfirmationModal = ({
           <Image src={closeIcon} alt="Close Modal" width={30} height={30} />
         </button>
  
-        <h2 className="text-3xl mb-2 font-semibold mt-16 px-16 text-center">
+        <h2 className="text-2xl mb-2 font-semibold mt-16 px-16 text-center">
           You've Set
         </h2>
-        <h2 className="text-3xl font-semibold px-1 text-center mb-6">
+        <h2 className="text-2xl font-semibold px-1 text-center mb-6">
           Tuma Markups as follows:
         </h2>
 
@@ -56,7 +56,7 @@ const MultipleConfirmationModal = ({
           </p>
         </div>
 
-        <p className="text-gray-500 text-center text-2xl mt-16 px-6 mb-16">
+        <p className="text-gray-500 text-center text-xl mt-16 px-6 mb-16">
           Confirm you want to proceed with applying these rates to all
           destination currencies?
         </p>
