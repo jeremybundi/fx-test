@@ -10,7 +10,7 @@ export default function SideNav() {
     <div className="w-1/4 min-h-screen font-poppins  px-4 pt-8 bg-blue-600 text-white flex flex-col">
       <div className="flex justify-start mb-16">
         <Image src={logo} alt="Logo" width={35} height={24} />
-        <div className="font-semibold text-2xl mt-1  ml-3">FX Navigator</div>
+        <div className="font-semibold text-xl mt-1  ml-3">FX Navigator</div>
       </div>
 
       <div className="relative group ">
@@ -32,7 +32,7 @@ export default function SideNav() {
                 className="group-hover:stroke-blue-600"
               />
             </svg>
-            <span className="text-xl font-medium hover:text-blue-600">
+            <span className="text-lg font-medium hover:text-blue-600">
               Dashboard
             </span>
           </button>
@@ -55,7 +55,7 @@ export default function SideNav() {
                 className="group-hover:stroke-blue-600"
               />
             </svg>
-            <span className="text-xl font-medium hover:text-blue-600">
+            <span className="text-lg font-medium hover:text-blue-600">
               Rate Manager
             </span>
           </button>
@@ -101,7 +101,7 @@ export default function SideNav() {
                 className="group-hover:fill-blue-600"
               />
             </svg>
-            <span className="text-xl font-medium group-hover:text-blue-600 ">
+            <span className="text-lg font-medium group-hover:text-blue-600 ">
               All Messages
             </span>
           </button>
@@ -145,7 +145,7 @@ export default function SideNav() {
             </svg>
 
             {/* Trends Text */}
-            <span className="text-xl font-medium transition duration-300 ease-in-out">
+            <span className="text-lg font-medium transition duration-300 ease-in-out">
               Trends
             </span>
           </button>
@@ -170,7 +170,7 @@ export default function SideNav() {
             </svg>
 
             {/* Reports Text */}
-            <span className="text-xl font-medium transition duration-300 ease-in-out">
+            <span className="text-lg font-medium transition duration-300 ease-in-out">
               Reports
             </span>
           </button>
@@ -201,7 +201,7 @@ export default function SideNav() {
             </svg>
 
             {/* Settings Text */}
-            <span className="text-xl font-medium transition duration-300 ease-in-out">
+            <span className="text-lg font-medium transition duration-300 ease-in-out">
               Settings
             </span>
           </button>

@@ -42,12 +42,12 @@ export default function AuditTrail() {
 
   return (
     <div className="p-4 bg-white w-full flex flex-col">
-      <h1 className="text-xl font-bold ml-6 mb-4">Audit Trail</h1>
+      <h1 className="text-lg font-bold ml-6 mb-4">Audit Trail</h1>
 
       <div className="flex-1 pb-6">
         <table className="w-full bg-white">
           <thead>
-            <tr className="text-left text-gray-500 text-lg">
+            <tr className="text-left text-gray-500 text-sm">
               <th className="py-2 px-4 border-b">Currency Pair</th>
               <th className="py-2 px-4 border-b">Rate</th>
               <th className="py-2 px-4 border-b">Date of Effect</th>

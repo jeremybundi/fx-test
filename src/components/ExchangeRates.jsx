@@ -120,7 +120,7 @@ export default function Footer() {
   return (
     <footer className="bg-white font-poppins rounded-lg py-6 px-6">
       <div className="flex items-center justify-between">
-        <h1 className="font-semibold font-poppins text-xl">Exchange Rates</h1>
+        <h1 className="font-semibold font-poppins text-lg">Exchange Rates</h1>
 
         <div className="flex items-center gap-4">
           <label className="font-medium text-lg text-gray-500">
@@ -128,7 +128,7 @@ export default function Footer() {
           </label>
           <div className="relative">
             <button
-              className="flex items-center gap-2 pl-2 pr-4 py-2 border border-gray-300 rounded-lg text-sm text-gray-700 focus:outline-none"
+              className="flex items-center gap-2 pl-2 pr-2 py-1 border  border-gray-300 rounded-md text-sm text-gray-700 focus:outline-none"
               onClick={() => setIsDropdownOpen(!isDropdownOpen)} // Toggling dropdown here
             >
               <Image
@@ -149,7 +149,7 @@ export default function Footer() {
             </button>
 
             {isDropdownOpen && (
-              <div className="absolute mt-2 w-full bg-white border border-gray-300 rounded-lg shadow-lg z-10 dropdown">
+              <div className="absolute mt-2 w-full bg-white border border-gray-300  text-sm rounded-sm shadow-lg z-10 dropdown">
                 <ul>
                   {['GBP', 'USD', 'EUR'].map((currency) => (
                     <li
