@@ -56,16 +56,16 @@ export default function User() {
 
         <div className="ml-1">
           {/* Use Image component for log.png */}
-          <div className="inline-block mt-2">
-            <Image src={logImage} alt="Log" width={25} height={20} />
-          </div>
+         
+          <div class="inline-block mt-2 rotate-90 text-3xl">&gt;</div>
+      
         </div>
       </div>
 
       {/* Modal */}
       {isModalOpen && (
         <div
-          className="absolute left-28 -bottom-3 font-poppins transform translate-x-1/2 mb-2 bg-white border z-10 p-3 rounded-md w-48 shadow-lg"
+          className="absolute left-28 -bottom-3 font-poppins transform translate-x-1/2 mb-2 bg-gray-50 text-gray-600 border z-10 p-3 rounded-md w-48 shadow-lg"
           ref={modalRef}
         >
           {/* Modal Content */}
