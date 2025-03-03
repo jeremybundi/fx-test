@@ -56,13 +56,13 @@ const SingleConfirmationModal = ({ form, onConfirm, onCancel, oncClose }) => {
         <div className="flex justify-between px-8">
           <button
             onClick={onCancel}
-            className="px-12 py-2 border-2 border-gray-800 tetx-lg font-semibold rounded-md hover:text-white hover:bg-gray-600"
+            className="px-8 py-2 border-2 border-gray-800 tetx-lg font-semibold rounded-md hover:text-white hover:bg-gray-600"
           >
             Back
           </button>
           <button
             onClick={onConfirm}
-            className="px-12 py-2 bg-gray-800 text-lg font-semibold text-white rounded-md hover:bg-gray-600"
+            className="px-5 py-2 bg-gray-800 text-lg font-semibold text-white rounded-md hover:bg-gray-600"
           >
             Confirm
           </button>

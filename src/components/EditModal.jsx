@@ -192,8 +192,8 @@ const EditModal = ({ data, onClose }) => {
         </div>
 
         <div className="mb-4 flex justify-between gap-4">
-          <div className="flex-1 border px-4 py-1 rounded-md">
-            <label className="block text-sm font-medium text-gray-500 mb-1">
+          <div className="flex-1 border px-4  rounded-md">
+            <label className="block text-xs font-medium mt-1 text-gray-500 mb-1">
               Base Currency
             </label>
             <div className="flex items-center  gap-2">
@@ -216,7 +216,7 @@ const EditModal = ({ data, onClose }) => {
           </div>
 
           <div className="flex-1 border px-4 py-1 rounded-md">
-            <label className="block text-sm font-medium text-gray-500 mb-1">
+            <label className="block text-xs font-medium text-gray-500 mb-1">
               Destination Currency
             </label>
             <div className="flex items-center justify-between gap-2">
@@ -236,7 +236,7 @@ const EditModal = ({ data, onClose }) => {
           </div>
         </div>
 
-        <div className="mb-4 border px-4 py-2 rounded-md">
+        <div className="mb-4 border px-4 py-1 rounded-md">
           <label className="block text-lg font-medium text-gray-500 mb-2">
             Current Bank Rate
           </label>
@@ -245,7 +245,7 @@ const EditModal = ({ data, onClose }) => {
           </div>
         </div>
 
-        <div className="mb-4 border px-4 py-2 rounded-md">
+        <div className="mb-4 border px-4 py-1 rounded-md">
           <label className="block text-lg text-gray-500 font-medium mb-2">
             Tuma Markup
           </label>
@@ -262,7 +262,7 @@ const EditModal = ({ data, onClose }) => {
           </div>
         </div>
 
-        <div className="mb-4 border px-4 py-2 rounded-md">
+        <div className="mb-4 border px-4 py-1 rounded-md">
           <label className="block text-lg text-gray-500 font-medium mb-2">
             Final Rate
           </label>
@@ -288,7 +288,7 @@ const EditModal = ({ data, onClose }) => {
               onChange={handleDateChange}
               dateFormat="MMMM d, yyyy"
               minDate={new Date()}
-              className="pl-10 pr-4 border-2 border-gray-300 text-gray-500 text-lg rounded-md p-2 w-full focus:outline-none focus:border-gray-500"
+              className="pl-10 pr-4 border-2 border-gray-300 text-gray-500 text-lg rounded-md px-2 py-1 w-full focus:outline-none focus:border-gray-500"
             />
           </div>
         </div>
