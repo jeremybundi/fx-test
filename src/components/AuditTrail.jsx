@@ -1,20 +1,35 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import EditModal from './EditModal';
 
 export default function AuditTrail() {
   const [records, setRecords] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedRecord, setSelectedRecord] = useState(null);
-
   const recordsPerPage = 9;
 
+
+  const convertToKenyanTime = (utcDateString) => {
+    const date = new Date(utcDateString);
+    return date.toLocaleString("en-KE", { timeZone: "Africa/Nairobi" });
+  };
+  
+
   useEffect(() => {
-    const savedRecords = JSON.parse(localStorage.getItem('auditTrail')) || [];
-    setRecords(savedRecords);
+    const fetchRecords = async () => {
+      try {
+        const response = await axios.get(
+          'https://tuma-dev-backend-alb-1553448571.us-east-1.elb.amazonaws.com/api/treasury/currency-exchange-history'
+        );
+        setRecords(response.data);
+      } catch (error) {
+        console.error('Error fetching audit trail:', error);
+      }
+    };
+    fetchRecords();
   }, []);
 
   const totalPages = Math.ceil(records.length / recordsPerPage);
-
   const paginate = (pageNumber) => {
     if (pageNumber >= 1 && pageNumber <= totalPages) {
       setCurrentPage(pageNumber);
@@ -44,16 +59,16 @@ export default function AuditTrail() {
           <tbody>
             {currentRecords.map((record) => (
               <tr key={record.id} className="border-b">
-                <td className="py-2 px-4 text-sm">{record.currencyPair}</td>
-                <td className="py-2 px-4 text-sm">{record.rate}</td>
-                <td className="py-2 px-4 text-sm">{record.dateOfEffect}</td>
+                <td className="py-2 px-4 text-sm">{`${record.baseCurrency}/${record.targetCurrency}`}</td>
+                <td className="py-2 px-4 text-sm">{record.newRate}</td>
+                <td className="py-2 px-4 text-sm">—</td> {/* Keeping it null */}
                 <td className="py-2 text-gray-500 text-sm px-4">
-                  {record.lastUpdated}
+                  {convertToKenyanTime(record.changedAt)}
                 </td>
-                <td className="py-2  text-gray-500 text-sm px-4">{record.updatedBy}</td>
+                <td className="py-2 text-gray-500 text-sm px-4">{record.changedBy}</td>
                 <td className="py-2 px-4">
                   <button
-                    className="px-4 py-2 underline text-sm  rounded-lg"
+                    className="px-4 py-2 underline text-sm rounded-lg"
                     onClick={() => setSelectedRecord(record)}
                   >
                     Edit
@@ -75,7 +90,6 @@ export default function AuditTrail() {
           >
             &lt;&lt; First
           </button>
-
           <button
             onClick={() => paginate(currentPage - 1)}
             className="px-4 py-2 mx-1 bg-gray-700 text-white font-semibold rounded-lg disabled:opacity-50"
@@ -95,7 +109,6 @@ export default function AuditTrail() {
           >
             Next &gt;
           </button>
-
           <button
             onClick={() => paginate(totalPages)}
             className="px-4 py-2 mx-1 bg-gray-700 text-white font-semibold rounded-lg disabled:opacity-50"
@@ -107,10 +120,7 @@ export default function AuditTrail() {
       </div>
 
       {selectedRecord && (
-        <EditModal
-          data={selectedRecord}
-          onClose={() => setSelectedRecord(null)}
-        />
+        <EditModal data={selectedRecord} onClose={() => setSelectedRecord(null)} />
       )}
     </div>
   );
