@@ -94,7 +94,7 @@ export default function MarketComparison() {
   return (
     <div className="bg-white font-poppins rounded-lg px-6 py-6">
       {/* Header Section */}
-      <h1 className="font-semibold font-lufga text-xl mb-6">
+      <h1 className="font-semibold font-lufga text-lg mt-2 mb-6">
         Market Comparison
       </h1>
 

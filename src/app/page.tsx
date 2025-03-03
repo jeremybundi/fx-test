@@ -23,8 +23,8 @@ export default function Home() {
         {/* Main Content */}
         <div className="flex flex-col w-full px-10 py-6">
           {/* Header Section */}
-          <div className="flex justify-between items-center mb-6">
-            <h1 className="text-lg  font-semibold">Rate Manager</h1>
+          <div className="flex justify-between items-center mt-2 mb-3">
+            <h1 className="text-xl  font-semibold">Rate Manager</h1>
             <button
               onClick={() => setShowModal(true)}
               className="px-4 py-3 bg-[#101820] font-lufga font-semibold text-sm text-white rounded-xl hover:bg-gray-800 transition duration-300 ease-in-out"

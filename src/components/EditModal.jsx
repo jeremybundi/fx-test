@@ -172,14 +172,14 @@ const EditModal = ({ data, onClose }) => {
 
   return (
     <div className="fixed font-poppins inset-0 bg-gray-600 bg-opacity-50 flex justify-center flex-col items-center z-10">
-      <div className="bg-white px-14 pt-6 rounded-xl w-[39%] h-[calc(100vh*0.87)] flex flex-col relative">
+      <div className="bg-white px-14 pt-6 rounded-xl w-[31%] h-[calc(100vh*0.75)] flex flex-col relative">
         <button onClick={handlecCancel} className="absolute top-3 right-3">
           <Image src={closeIcon} alt="Close Modal" width={30} height={30} />
         </button>
-        <h2 className="text-2xl font-lufga text-center font-semibold mb-2">
+        <h2 className="text-lg font-lufga text-center font-semibold mb-2">
           Edit Rate
         </h2>
-        <div className="flex items-center text-3xl font-semibold mb-4 justify-center">
+        <div className="flex items-center text-xl font-semibold mb-4 justify-center">
           <span className="mx-2">{form.baseCurrency}</span>
           <Image
             src={arrowClose}
@@ -192,30 +192,30 @@ const EditModal = ({ data, onClose }) => {
         </div>
 
         <div className="mb-4 flex justify-between gap-4">
-          <div className="flex-1 border px-4 py-3 rounded-md">
+          <div className="flex-1 border px-4 py-1 rounded-md">
             <label className="block text-sm font-medium text-gray-500 mb-1">
               Base Currency
             </label>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center  gap-2">
               {currencyDetails[form.baseCurrency]?.flag ? (
                 <Image
                   src={currencyDetails[form.baseCurrency]?.flag}
                   alt={`${form.baseCurrency} flag`}
-                  width={30}
+                  width={20}
                   height={16}
                   className="rounded"
                 />
               ) : (
                 <span>No flag available</span>
               )}
-              <span className="font-medium text-2xl ml-3 ">
+              <span className="font-medium text-lg ml-3 ">
                 {form.baseCurrency}
               </span>{' '}
               {/* Display currency code */}
             </div>
           </div>
 
-          <div className="flex-1 border px-4 py-2 rounded-md">
+          <div className="flex-1 border px-4 py-1 rounded-md">
             <label className="block text-sm font-medium text-gray-500 mb-1">
               Destination Currency
             </label>
@@ -224,11 +224,11 @@ const EditModal = ({ data, onClose }) => {
                 <Image
                   src={currencyDetails[form.destinationCurrency]?.flag || ''}
                   alt={`${form.destinationCurrency} flag`}
-                  width={30}
+                  width={20}
                   height={16}
                   className="rounded"
                 />
-                <span className="font-medium ml-3 text-2xl">
+                <span className="font-medium ml-3 text-lg">
                   {form.destinationCurrency}
                 </span>
               </div>
@@ -237,16 +237,16 @@ const EditModal = ({ data, onClose }) => {
         </div>
 
         <div className="mb-4 border px-4 py-2 rounded-md">
-          <label className="block text-xl font-medium text-gray-500 mb-2">
+          <label className="block text-lg font-medium text-gray-500 mb-2">
             Current Bank Rate
           </label>
-          <div className="px-3 py-1 font-semibold text-lg rounded-md w-[120px] bg-green-50 text-green-800">
+          <div className="px-3 py-1 font-semibold text-sm rounded-md w-[120px] bg-green-50 text-green-800">
             {form.exchangeRate}
           </div>
         </div>
 
         <div className="mb-4 border px-4 py-2 rounded-md">
-          <label className="block text-xl text-gray-500 font-medium mb-2">
+          <label className="block text-lg text-gray-500 font-medium mb-2">
             Tuma Markup
           </label>
           <div className="flex items-center justify-between">
@@ -263,7 +263,7 @@ const EditModal = ({ data, onClose }) => {
         </div>
 
         <div className="mb-4 border px-4 py-2 rounded-md">
-          <label className="block text-xl text-gray-500 font-medium mb-2">
+          <label className="block text-lg text-gray-500 font-medium mb-2">
             Final Rate
           </label>
           <input
@@ -271,17 +271,17 @@ const EditModal = ({ data, onClose }) => {
             name="finalRate"
             value={form.finalRate}
             onChange={handleChange}
-            className="px-3 py-1 font-semibold text-lg  rounded-md w-[120px] placeholder:text-xs placeholder:px-0
+            className="px-3 py-1 font-semibold text-sm  rounded-md w-[120px] placeholder:text-xs placeholder:px-0
            bg-green-50 text-green-800 focus:border-gray-800 focus:border-2 focus:outline-none"
             placeholder="Enter final rate"
           />
         </div>
         <div className=" ">
-          <label className="block text-gray-600  text-xl font-medium mb-2">
+          <label className="block text-gray-600  text-lg font-medium mb-2">
             Date of Effect
           </label>
           <div className="relative">
-            <FaCalendarAlt className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-600 z-10 mr-2" />
+            <FaCalendarAlt className="absolute left-3 top-1/2 text-sm transform -translate-y-1/2 text-gray-600 z-10 mr-2" />
 
             <DatePicker
               selected={form.dateOfEffect}

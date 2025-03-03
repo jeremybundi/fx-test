@@ -9,7 +9,7 @@ const SuccessfulUpdateModal = ({ onClose }) => {
 
   return (
     <div className="fixed font-poppins inset-0 bg-gray-500 bg-opacity-5 flex justify-center items-center z-10">
-      <div className="bg-white px-14 pt-6 rounded-xl w-[39%] h-[calc(100vh*0.87)] flex flex-col relative">
+      <div className="bg-white px-14 pt-6 rounded-xl w-[31%] h-[calc(100vh*0.75)] flex flex-col relative">
         <button className="absolute top-3 right-3" onClick={onClose}>
           <Image src={closeIcon} alt="Close Modal" width={30} height={30} />
         </button>
@@ -21,11 +21,11 @@ const SuccessfulUpdateModal = ({ onClose }) => {
           className="mx-auto mt-8"
         />
 
-        <h2 className="text-4xl font-semibold text-center mb-2 mt-4">
+        <h2 className="text-2xl font-semibold text-center mb-2 mt-4">
           Tuma markup
         </h2>
 
-        <h2 className="text-4xl font-semibold text-center">
+        <h2 className="text-2xl font-semibold text-center">
           successfully updated
         </h2>
         <ul className="text-center mt-10 text-lg mb-4">
@@ -36,15 +36,15 @@ const SuccessfulUpdateModal = ({ onClose }) => {
             </span>
           </li>
           <li>
-            <p className="font-semibold text-2xl text-gray-600">
-              <span className="text-gray-900 mr-3 text-2xl">
+            <p className="font-semibold text-xl text-gray-600">
+              <span className="text-gray-900 mr-3 text-xl">
                 Exchange Rate:
               </span>
               {updatedData.exchangeRate}
             </p>
           </li>
           <li className="my-2">
-            <p className="font-semibold text-2xl text-gray-600">
+            <p className="font-semibold text-xl text-gray-600">
               <span className="mr-3 text-gray-900 font-semibold">Markup:</span>{' '}
               {updatedData.markup}%
             </p>
@@ -52,7 +52,7 @@ const SuccessfulUpdateModal = ({ onClose }) => {
           <li>
             <p>
               <span className="mr-3 font-semibold">Date of Effect:</span>
-              <span className="text-gray-500 text-2xl font-semibold">
+              <span className="text-gray-500 text-xl font-semibold">
                 {updatedData.dateOfEffect
                   ? new Date(updatedData.dateOfEffect).toLocaleDateString()
                   : 'N/A'}
@@ -60,7 +60,7 @@ const SuccessfulUpdateModal = ({ onClose }) => {
             </p>
           </li>
         </ul>
-        <p className="text-[#808A92] mt-8 px-12 text-center text-3xl mb-12">
+        <p className="text-[#808A92] mt-8 px-12 text-center text-xl mb-12">
           The changes have been applied to the destination currency.
         </p>
         <div className="flex justify-center px-10">

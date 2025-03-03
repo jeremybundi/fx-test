@@ -50,13 +50,13 @@ const BulkUpdate = ({ onClose }) => {
     <div>
       {/* Main BulkUpdate Modal */}
       <div className="fixed font-poppins inset-0 bg-gray-500 bg-opacity-50 flex justify-center flex-col items-center z-10">
-        <div className="bg-white px-12 pt-6 rounded-xl w-[35%] h-[calc(100vh*0.78)] flex flex-col relative">
+        <div className="bg-white px-12 pt-6 rounded-xl w-[31%] h-[calc(100vh*0.75)] flex flex-col relative">
           {/* Close Button */}
           <button className="absolute top-3 right-3" onClick={onClose}>
             <Image src={closeIcon} alt="Close Modal" width={30} height={30} />
           </button>
 
-          <h2 className="text-2xl font-semibold text-center mb-6 mt-6">
+          <h2 className="text-xl font-semibold text-center mb-6 mt-6">
             Edit Tuma Markups
           </h2>
           <p className="text-center text-lg text-gray-400 mb-6">
@@ -65,8 +65,8 @@ const BulkUpdate = ({ onClose }) => {
           </p>
           {/* Headings for Labels and Inputs */}
           <div className="flex justify-between text-gray-600 font-medium mb-2">
-            <span className="text-xl">Base Currency</span>
-            <span className="mr-24 text-xl">Tuma Markup</span>
+            <span className="text-lg">Base Currency</span>
+            <span className="mr-24 text-lg">Tuma Markup</span>
           </div>
 
           {/* Currency Inputs */}
@@ -123,7 +123,7 @@ const BulkUpdate = ({ onClose }) => {
           </div>
           {/* Date of Effect */}
           <div className="mt-5">
-            <label className="block text-gray-600 text-xl mb-2 font-medium ">
+            <label className="block text-gray-600 text-lg mb-2 font-medium ">
               Date of Effect
             </label>
             <div className="relative">
