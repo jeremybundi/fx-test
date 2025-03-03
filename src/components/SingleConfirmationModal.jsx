@@ -1,19 +1,55 @@
 import React from 'react';
 import Image from 'next/image';
+import axios from 'axios';
 import closeIcon from '../../public/images/close.png';
 
 const SingleConfirmationModal = ({ form, onConfirm, onCancel, oncClose }) => {
-  console.log('SingleConfirmationModal props:', {
-    form,
-    onConfirm,
-    onCancel,
-    oncClose,
-  });
+  console.log('SingleConfirmationModal props:', { form, onConfirm, onCancel, oncClose });
 
   // Ensure the modal is being rendered
   if (!form) {
     return <div>Loading...</div>;
   }
+
+const formatDate = (date) => {
+  const d = new Date(date);
+  return d.toISOString().slice(0, 19); // Formats to "YYYY-MM-DDTHH:mm:ss"
+};
+
+const buildPayload = (form) => ({
+  baseCurrency: form.baseCurrency,
+  targetCurrency: form.destinationCurrency,
+  rate: parseFloat(form.finalRate), // Ensuring it's a number
+  manualExpiry: formatDate(form.dateOfEffect),
+});
+const handleConfirm = async () => {
+  const formatDate = (date) => {
+    const d = new Date(date);
+    return d.toISOString().slice(0, 19); // Formats to "YYYY-MM-DDTHH:mm:ss"
+  };
+
+  const params = new URLSearchParams({
+    baseCurrency: form.baseCurrency,
+    targetCurrency: form.destinationCurrency,
+    rate: form.finalRate,
+    manualExpiry: formatDate(form.dateOfEffect),
+  }).toString();
+
+  const url = `https://tuma-dev-backend-alb-1553448571.us-east-1.elb.amazonaws.com/api/treasury/update-exchange-rate?${params}`;
+
+  console.log('Request URL:', url);
+
+  try {
+    const response = await axios.put(url);
+    console.log('Success:', response.data);
+    onConfirm();
+  } catch (error) {
+    console.error(
+      'Error updating exchange rate:',
+      error.response ? error.response.data : error
+    );
+  }
+};
 
   return (
     <div className="fixed font-poppins inset-0 bg-gray-500 bg-opacity-5 flex justify-center items-center z-10">
@@ -44,7 +80,7 @@ const SingleConfirmationModal = ({ form, onConfirm, onCancel, oncClose }) => {
             <span className="mr-3 font-semibold text-xl">Date of Effect:</span>
             <span className="text-gray-600">
               {form.dateOfEffect
-                ? new Date(form.dateOfEffect).toLocaleDateString()
+                ? new Date(form.dateOfEffect).toISOString()
                 : 'N/A'}
             </span>
           </li>
@@ -56,12 +92,12 @@ const SingleConfirmationModal = ({ form, onConfirm, onCancel, oncClose }) => {
         <div className="flex justify-between px-8">
           <button
             onClick={onCancel}
-            className="px-8 py-2 border-2 border-gray-800 tetx-lg font-semibold rounded-md hover:text-white hover:bg-gray-600"
+            className="px-8 py-2 border-2 border-gray-800 text-lg font-semibold rounded-md hover:text-white hover:bg-gray-600"
           >
             Back
           </button>
           <button
-            onClick={onConfirm}
+            onClick={handleConfirm}
             className="px-5 py-2 bg-gray-800 text-lg font-semibold text-white rounded-md hover:bg-gray-600"
           >
             Confirm

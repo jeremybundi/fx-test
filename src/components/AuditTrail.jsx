@@ -26,8 +26,16 @@ export default function AuditTrail() {
         console.error('Error fetching audit trail:', error);
       }
     };
+  
+    // Fetch initially
     fetchRecords();
+  
+    // Poll every 1 second
+    const interval = setInterval(fetchRecords, 1000);
+  
+    return () => clearInterval(interval); // Cleanup on unmount
   }, []);
+  
 
   const totalPages = Math.ceil(records.length / recordsPerPage);
   const paginate = (pageNumber) => {
@@ -61,7 +69,7 @@ export default function AuditTrail() {
               <tr key={record.id} className="border-b">
                 <td className="py-2 px-4 text-sm">{`${record.baseCurrency}/${record.targetCurrency}`}</td>
                 <td className="py-2 px-4 text-sm">{record.newRate}</td>
-                <td className="py-2 px-4 text-sm">—</td> {/* Keeping it null */}
+                <td className="py-2 px-4 text-sm">{convertToKenyanTime(record.dateOfEffect)}</td> {/* Keeping it null */}
                 <td className="py-2 text-gray-500 text-sm px-4">
                   {convertToKenyanTime(record.changedAt)}
                 </td>

@@ -23,30 +23,45 @@ export default function Footer() {
   useEffect(() => {
     fetchExchangeRates();
   }, [selectedCurrency]);
-
   const fetchExchangeRates = async () => {
     try {
       const targets = Object.keys(currencyDetails);
       const responses = await Promise.all(
         targets.map(async (target) => {
-          const response = await fetch(
-            `https://api.transferwise.com/v1/rates?source=${selectedCurrency}&target=${target}`,
-            {
-              headers: {
-                Authorization: 'Bearer 4e8f4270-8d0e-46f2-a6a2-405029e49bca',
-              },
-            }
-          );
+          let apiUrl = `https://api.transferwise.com/v1/rates?source=${selectedCurrency}&target=${target}`;
+  
+          // Use the custom API when USD or GBP is selected and target is KES
+          if ((selectedCurrency === 'USD' || selectedCurrency === 'GBP') && target === 'KES') {
+            apiUrl = `https://tuma-dev-backend-alb-1553448571.us-east-1.elb.amazonaws.com/api/treasury/latest-exchange-rate?baseCurrency=${selectedCurrency}&targetCurrency=kes`;
+          }
+  
+          const response = await fetch(apiUrl, {
+            headers: {
+              Authorization: 'Bearer 4e8f4270-8d0e-46f2-a6a2-405029e49bca',
+              Accept: 'application/json', // Ensure correct response format
+            },
+          });
+  
           const data = await response.json();
-          return { [target]: data.length > 0 ? data[0].rate : 'N/A' };
+  
+          // Extract exchange rate correctly
+          let exchangeRate;
+          if ((selectedCurrency === 'USD' || selectedCurrency === 'GBP') && target === 'KES') {
+            exchangeRate = data.currentRate || 'N/A'; // Use `currentRate` from API response
+          } else {
+            exchangeRate = Array.isArray(data) && data.length > 0 ? data[0].rate : 'N/A';
+          }
+  
+          return { [target]: exchangeRate };
         })
       );
-
+  
       setExchangeRates(Object.assign({}, ...responses));
     } catch (error) {
       console.error('Error fetching exchange rates:', error);
     }
   };
+  
 
   const currencyDetails = {
     GBP: { flag: gbpFlag, fullName: 'British Pound' },
