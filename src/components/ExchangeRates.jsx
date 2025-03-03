@@ -186,22 +186,22 @@ export default function Footer() {
               <Image
                 src={currencyDetails[currency].flag}
                 alt={`${currency} flag`}
-                width={36}
-                height={30}
+                width={20}
+                height={20}
                 className="rounded"
               />
-              <span className="font-medium text-lg text-gray-500">
+              <span className="font-medium text-sm text-gray-500">
                 {currencyDetails[currency].fullName}
               </span>
             </div>
             <div className="flex items-center gap-14">
-              <span className="px-4 bg-green-50 text-lg w-[110px] text-center font-semibold text-green-600">
+              <span className="px-4 bg-green-50 text-sm py-1 w-[110px] rounded text-center font-semibold text-green-600">
                 {exchangeRates[currency] && !isNaN(exchangeRates[currency])
                   ? Number(exchangeRates[currency]).toFixed(2)
                   : 'Loading...'}
               </span>
               <button
-                className="text-lg pr-4 underline focus:outline-none"
+                className="text-sm pr-4 underline focus:outline-none"
                 onClick={() =>
                   handleEditClick(currency, exchangeRates[currency])
                 }

@@ -102,13 +102,13 @@ export default function MarketComparison() {
       <div className="flex gap-4">
         {/* Base Currency Dropdown */}
         <div className="flex flex-col gap-2 w-full">
-          <label className="text-xl font-medium text-gray-500">
+          <label className="text-lg font-medium text-gray-500">
             Base Currency
           </label>
           <div className="relative mt-1">
             <button
-              className="flex items-center w-full  gap-2 px-4 h-[58px] border border-gray-300 
-              rounded-lg text-lg font-medium focus:outline-none focus:ring-2 focus:ring-gray-300"
+              className="flex items-center w-full  gap-2 px-4 h-[46px] border border-gray-300 
+              rounded-lg text-sm font-medium focus:outline-none focus:ring-2 focus:ring-gray-300"
               onClick={() => setIsDropdownOpen((prev) => !prev)}
             >
               <Image
@@ -155,11 +155,11 @@ export default function MarketComparison() {
 
         {/* Target Currency Dropdown */}
         <div className="flex flex-col gap-2 w-full">
-          <label className="text-xl   text-gray-500">Target Currency</label>
+          <label className="text-lg   text-gray-500">Target Currency</label>
           <div className="relative mt-1">
             <button
-              className="flex items-center w-full  gap-2 px-2 py-1 border h-[58px] border-gray-300 
-              rounded-lg text-lg  focus:outline-none focus:ring-2 focus:ring-gray-300"
+              className="flex items-center w-full  gap-2 px-2 py-1 border h-[46px] border-gray-300 
+              rounded-lg text-sm  focus:outline-none focus:ring-2 focus:ring-gray-300"
               onClick={() => setIsDropdownOpen((prev) => !prev)}
             >
               <Image
@@ -205,11 +205,11 @@ export default function MarketComparison() {
           <Image
             src={terrapageImage}
             alt="Terrapage"
-            width={140}
+            width={100}
             height={80}
             className="py-2"
           />
-          <span className="px-4 py-1 bg-green-50 text-xl font-semibold text-green-600 w-[140px] my-1 text-center">
+          <span className="px-4 py-1 bg-green-50 text-lg rounded font-semibold text-green-600 w-[140px] my-1 text-center">
             {staticExchangeRates[
               `${selectedBaseCurrency}-${selectedTargetCurrency}`
             ]?.terrapage
@@ -227,11 +227,11 @@ export default function MarketComparison() {
           <Image
             src={tumaImage}
             alt="Tuma"
-            width={90}
-            height={20}
-            className="py-1"
+            width={70}
+            height={15}
+            className="py-2"
           />
-          <span className="px-4 py-1 bg-blue-50 text-xl font-semibold text-blue-600 w-[140px] text-center">
+          <span className="px-4 py-1 bg-blue-50 text-lg rounded  font-semibold text-blue-600 w-[140px] text-center">
             {staticExchangeRates[
               `${selectedBaseCurrency}-${selectedTargetCurrency}`
             ]?.tuma
@@ -249,11 +249,11 @@ export default function MarketComparison() {
           <Image
             src={wiseImage}
             alt="Wise"
-            width={90}
-            height={25}
-            className="py-1"
+            width={70}
+            height={15}
+            className="py-2"
           />
-          <span className="px-4 py-1 bg-orange-50 text-xl font-semibold text-orange-600 w-[140px] text-center">
+          <span className="px-4 py-1 bg-orange-50 text-lg rounded font-semibold text-orange-600 w-[140px] text-center">
             {wiseRate ? Number(wiseRate).toFixed(2) : 'Loading...'}
           </span>
         </div>
@@ -263,11 +263,11 @@ export default function MarketComparison() {
           <Image
             src={vertoImage}
             alt="Verto"
-            width={80}
-            height={25}
-            className="py-1"
+            width={60}
+            height={15} 
+            className="py-2 ml-2"
           />
-          <span className="px-4 py-1 bg-yellow-50 text-xl font-semibold text-yellow-600 w-[140px] text-center">
+          <span className="px-4 py-1 bg-yellow-50 text-lg rounded font-semibold text-yellow-600 w-[140px] text-center">
             {staticExchangeRates[
               `${selectedBaseCurrency}-${selectedTargetCurrency}`
             ]?.verto

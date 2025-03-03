@@ -44,16 +44,16 @@ export default function AuditTrail() {
           <tbody>
             {currentRecords.map((record) => (
               <tr key={record.id} className="border-b">
-                <td className="py-2 px-4">{record.currencyPair}</td>
-                <td className="py-2 px-4">{record.rate}</td>
-                <td className="py-2 px-4">{record.dateOfEffect}</td>
-                <td className="py-2 text-gray-500 px-4">
+                <td className="py-2 px-4 text-sm">{record.currencyPair}</td>
+                <td className="py-2 px-4 text-sm">{record.rate}</td>
+                <td className="py-2 px-4 text-sm">{record.dateOfEffect}</td>
+                <td className="py-2 text-gray-500 text-sm px-4">
                   {record.lastUpdated}
                 </td>
-                <td className="py-2  text-gray-500 px-4">{record.updatedBy}</td>
+                <td className="py-2  text-gray-500 text-sm px-4">{record.updatedBy}</td>
                 <td className="py-2 px-4">
                   <button
-                    className="px-4 py-2 underline  rounded-lg"
+                    className="px-4 py-2 underline text-sm  rounded-lg"
                     onClick={() => setSelectedRecord(record)}
                   >
                     Edit

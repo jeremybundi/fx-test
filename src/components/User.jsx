@@ -39,7 +39,7 @@ export default function User() {
   return (
     <div className="relative font-poppins">
       <div
-        className="flex cursor-pointer justify-between rounded-md bg-gray-50 p-2 py-1"
+        className="flex cursor-pointer justify-between rounded-md bg-blue-600 p-2 py-1"
         onClick={handleModalToggle}
       >
         {/* User Image and Placeholder Name */}
