@@ -16,7 +16,7 @@ const MultipleConfirmationModal = ({
   const isValidDate = parsedDate instanceof Date && !isNaN(parsedDate);
   return (
     <div className="fixed font-poppins inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center z-20">
-      <div className="bg-white px-12 py-6 rounded-xl w-[31%] h-[calc(100vh*0.75)] relative">
+      <div className="bg-white px-12 py-6 rounded-xl w-[33%] h-[calc(100vh*0.77)] relative">
         {/* Close Button */}
         <button className="absolute top-3 right-3" onClick={onClose}>
           <Image src={closeIcon} alt="Close Modal" width={30} height={30} />
