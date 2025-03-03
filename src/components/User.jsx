@@ -57,7 +57,7 @@ export default function User() {
         <div className="ml-1">
           {/* Use Image component for log.png */}
          
-          <div class="inline-block mt-2 rotate-90 text-3xl">&gt;</div>
+          <div class="inline-block  rotate-90 text-3xl">&gt;</div>
       
         </div>
       </div>
