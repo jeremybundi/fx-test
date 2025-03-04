@@ -77,8 +77,12 @@ const EditModal = ({ data, onClose }) => {
   };
 
   const handleDateChange = (date) => {
-    setForm({ ...form, dateOfEffect: date });
+    // Convert the selected date to Kenyan time (UTC+3)
+    const kenyanTime = new Date(date);
+    kenyanTime.setHours(kenyanTime.getHours() + 3);
+    setForm({ ...form, dateOfEffect: kenyanTime });
   };
+  
 
   const handleUpdate = () => {
     if (
@@ -281,16 +285,20 @@ const EditModal = ({ data, onClose }) => {
             Date of Effect
           </label>
           <div className="relative">
-            <FaCalendarAlt className="absolute left-3 top-1/2 text-sm transform -translate-y-1/2 text-gray-600 z-10 mr-2" />
+          <FaCalendarAlt className="absolute left-3 top-1/2 text-sm transform -translate-y-1/2 text-gray-600 z-10 mr-2" />
 
-            <DatePicker
-              selected={form.dateOfEffect}
-              onChange={handleDateChange}
-              dateFormat="MMMM d, yyyy"
-              minDate={new Date()}
-              className="pl-10 pr-4 border-2 border-gray-300 text-gray-500 text-lg rounded-md px-2 py-1 w-full focus:outline-none focus:border-gray-500"
-            />
-          </div>
+          <DatePicker
+            selected={form.dateOfEffect}
+            onChange={handleDateChange}
+            dateFormat="MMMM d, yyyy h:mm:ss aa" // Includes hours, minutes, and seconds
+            minDate={new Date()}
+            showTimeSelect // Enables time selection
+            showSecond // Enables seconds selection
+            timeFormat="HH:mm:ss" // Uses 24-hour format
+            className="pl-10 pr-4 border-2 border-gray-300 text-gray-500 text-lg rounded-md px-2 py-1 w-full focus:outline-none focus:border-gray-500"
+          />
+        </div>
+
         </div>
         <div className="flex justify-between px-12 gap-4 mt-auto mb-6">
           <button

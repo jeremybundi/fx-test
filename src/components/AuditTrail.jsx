@@ -13,15 +13,14 @@ export default function AuditTrail() {
     const date = new Date(utcDateString);
     return date.toLocaleString("en-KE", { timeZone: "Africa/Nairobi" });
   };
-  
-
   useEffect(() => {
     const fetchRecords = async () => {
       try {
         const response = await axios.get(
           'https://tuma-dev-backend-alb-1553448571.us-east-1.elb.amazonaws.com/api/treasury/currency-exchange-history'
         );
-        setRecords(response.data);
+        const sortedRecords = response.data.sort((a, b) => new Date(b.changedAt) - new Date(a.changedAt)); // Sorting by latest first
+        setRecords(sortedRecords);
       } catch (error) {
         console.error('Error fetching audit trail:', error);
       }
@@ -35,6 +34,7 @@ export default function AuditTrail() {
   
     return () => clearInterval(interval); // Cleanup on unmount
   }, []);
+  
   
 
   const totalPages = Math.ceil(records.length / recordsPerPage);
@@ -75,12 +75,23 @@ export default function AuditTrail() {
                 </td>
                 <td className="py-2 text-gray-500 text-sm px-4">{record.changedBy}</td>
                 <td className="py-2 px-4">
-                  <button
-                    className="px-4 py-2 underline text-sm rounded-lg"
-                    onClick={() => setSelectedRecord(record)}
-                  >
-                    Edit
-                  </button>
+                <button
+                className="px-4 py-2 underline text-sm rounded-lg"
+                onClick={() => {
+                  const modifiedRecord = {
+                    ...record,
+                    destinationCurrency: record.targetCurrency,
+                    exchangeRate: record.newRate,
+                    finalRate: record.newRate,
+                  };
+                  console.log("Modified Record:", modifiedRecord);
+                  setSelectedRecord(modifiedRecord);
+                }}
+              >
+                Edit
+              </button>
+
+
                 </td>
               </tr>
             ))}
