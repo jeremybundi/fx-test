@@ -254,7 +254,7 @@ export default function MarketComparison() {
             alt="Wise"
             width={70}
             height={15}
-            className="py-2"
+            className="py-3"
           />
           <span className="px-4 py-1 bg-orange-50 text-lg rounded font-semibold text-orange-600 w-[140px] text-center">
             {wiseRate ? Number(wiseRate).toFixed(2) : 'Loading...'}

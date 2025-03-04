@@ -191,7 +191,7 @@ export default function Footer() {
 
       <div className="mt-4 mb-6 border-t border-gray-300"></div>
 
-      <div className="space-y-5  font-medium">
+      <div className="space-y-7  font-medium">
         {paginatedCurrencies.map((currency) => (
           <div
             key={currency}
@@ -233,31 +233,31 @@ export default function Footer() {
         <button
           onClick={() => handlePageChange(currentPage - 1)}
           disabled={currentPage === 1}
-          className="px-3 py-2 bg-gray-200 rounded-md disabled:opacity-50"
+          className="px-3 py-1 bg-gray-200 rounded-md disabled:opacity-50"
         >
           &lt;&lt;
         </button>
         <button
           onClick={() => handlePageChange(currentPage - 1)}
           disabled={currentPage === 1}
-          className="px-3 py-2 bg-gray-200 rounded-md disabled:opacity-50"
+          className="px-3 py-1 bg-gray-200 rounded-md disabled:opacity-50"
         >
           &lt;
         </button>
-        <span className="flex items-center text-sm justify-center px-4 py-2 bg-gray-200 rounded-md">
+        <span className="flex items-center text-sm justify-center px-4 py-1 bg-gray-200 rounded-md">
           Page {currentPage} of {totalPages}
         </span>
         <button
           onClick={() => handlePageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
-          className="px-3 py-2 bg-gray-200 rounded-md disabled:opacity-50"
+          className="px-3 py-1 bg-gray-200 rounded-md disabled:opacity-50"
         >
           &gt;
         </button>
         <button
           onClick={() => handlePageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
-          className="px-3 py-2 bg-gray-200 rounded-md disabled:opacity-50"
+          className="px-3 py-1 bg-gray-200 rounded-md disabled:opacity-50"
         >
           &gt;&gt;
         </button>
