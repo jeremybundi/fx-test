@@ -13,20 +13,20 @@ const SingleConfirmationModal = ({ form, onConfirm, onCancel, oncClose }) => {
 
 const formatDate = (date) => {
   const d = new Date(date);
-  return d.toISOString().slice(0, 19); // Formats to "YYYY-MM-DDTHH:mm:ss"
+  return d.toISOString().slice(0, 19); 
 };
 
 
 const buildPayload = (form) => ({
   baseCurrency: form.baseCurrency,
   targetCurrency: form.destinationCurrency,
-  rate: parseFloat(form.finalRate), // Ensuring it's a number
+  rate: parseFloat(form.finalRate), 
   manualExpiry: formatDate(form.dateOfEffect),
 });
 const handleConfirm = async () => {
   const formatDate = (date) => {
     const d = new Date(date);
-    return d.toISOString().slice(0, 19); // Formats to "YYYY-MM-DDTHH:mm:ss"
+    return d.toISOString().slice(0, 19); 
   };
 
   const params = new URLSearchParams({

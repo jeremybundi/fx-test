@@ -191,7 +191,7 @@ export default function Footer() {
 
       <div className="mt-4 mb-6 border-t border-gray-300"></div>
 
-      <div className="space-y-7  font-medium">
+      <div className="space-y-5  font-medium">
         {paginatedCurrencies.map((currency) => (
           <div
             key={currency}
@@ -229,7 +229,7 @@ export default function Footer() {
       </div>
 
       {/* Pagination Controls */}
-      <div className="flex justify-center gap-4 mt-8">
+      <div className="flex justify-center gap-4 mt-14">
         <button
           onClick={() => handlePageChange(currentPage - 1)}
           disabled={currentPage === 1}
