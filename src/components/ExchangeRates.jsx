@@ -12,6 +12,7 @@ import EditModal from './EditModal';
 export default function Footer() {
   const [selectedCurrency, setSelectedCurrency] = useState('GBP');
   const [exchangeRates, setExchangeRates] = useState({});
+  const [exchangeRate, setExchangeRate] = useState({});
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalData, setModalData] = useState(null);
@@ -23,6 +24,12 @@ export default function Footer() {
   useEffect(() => {
     fetchExchangeRates();
   }, [selectedCurrency]);
+
+  useEffect(() => {
+    fetchExchangeRate();
+  }, [selectedCurrency]);
+
+
   const fetchExchangeRates = async () => {
     try {
       const targets = Object.keys(currencyDetails);
@@ -47,7 +54,7 @@ export default function Footer() {
           // Extract exchange rate correctly
           let exchangeRate;
           if ((selectedCurrency === 'USD' || selectedCurrency === 'GBP') && target === 'KES') {
-            exchangeRate = data.currentRate || 'N/A'; // Use `currentRate` from API response
+            exchangeRate = data.currentRate || 'N/A'; 
           } else {
             exchangeRate = Array.isArray(data) && data.length > 0 ? data[0].rate : 'N/A';
           }
@@ -61,6 +68,36 @@ export default function Footer() {
       console.error('Error fetching exchange rates:', error);
     }
   };
+
+  const fetchExchangeRate = async () => {
+    try {
+      const targets = Object.keys(currencyDetails);
+      const responses = await Promise.all(
+        targets.map(async (target) => {
+          const apiUrl = `https://api.transferwise.com/v1/rates?source=${selectedCurrency}&target=${target}`;
+  
+          const response = await fetch(apiUrl, {
+            headers: {
+              Authorization: 'Bearer 4e8f4270-8d0e-46f2-a6a2-405029e49bca',
+              Accept: 'application/json', 
+            },
+          });
+  
+          const data = await response.json();
+  
+          // Extract exchange rate directly
+          const exchangeRate = Array.isArray(data) && data.length > 0 ? data[0].rate : 'N/A';
+  
+          return { [target]: exchangeRate };
+        })
+      );
+  
+      setExchangeRate(Object.assign({}, ...responses));
+    } catch (error) {
+      console.error('Error fetching exchange rates:', error);
+    }
+  };
+  
   
 
   const currencyDetails = {
@@ -87,18 +124,21 @@ export default function Footer() {
     setIsDropdownOpen(false);
   };
 
-  const handleEditClick = (currency, rate) => {
+  const handleEditClick = (currency) => {
+    const rates = exchangeRate[currency]; 
+  
     setModalData({
       baseCurrency: selectedCurrency,
       destinationCurrency: currency,
-      exchangeRate: rate,
+      exchangeRate: rates, // Pass the correct rate
       markup: 0,
-      finalRate: rate,
+      finalRate: rates,
       dateOfEffect: '',
     });
-
+  
     setIsModalOpen(true);
   };
+  
 
   const totalPages = Math.ceil(
     Object.keys(currencyDetails).length / itemsPerPage
@@ -164,7 +204,7 @@ export default function Footer() {
             </button>
 
             {isDropdownOpen && (
-              <div className="absolute mt-2 w-full bg-white border border-gray-300  text-sm rounded-sm shadow-lg z-10 dropdown">
+              <div className="absolute mt-2 w-full bg-white border border-gray-300  text-sm rounded-md shadow-lg z-10 dropdown">
                 <ul>
                   {['GBP', 'USD', 'EUR'].map((currency) => (
                     <li
@@ -189,47 +229,67 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="mt-4 mb-6 border-t border-gray-300"></div>
+      <div className="mt-4 mb-2 border-t border-gray-300"></div>
 
-      <div className="space-y-7  font-medium">
-        {paginatedCurrencies.map((currency) => (
-          <div
-            key={currency}
-            className="flex items-center justify-between gap-2"
-          >
-            <div className="flex items-center gap-2">
-              <Image
-                src={currencyDetails[currency].flag}
-                alt={`${currency} flag`}
-                width={20}
-                height={20}
-                className="rounded"
-              />
-              <span className="font-medium text-sm text-gray-500">
-                {currencyDetails[currency].fullName}
-              </span>
-            </div>
-            <div className="flex items-center gap-14">
-              <span className="px-4 bg-green-50 text-sm py-1 w-[110px] rounded text-center font-semibold text-green-600">
-                {exchangeRates[currency] && !isNaN(exchangeRates[currency])
-                  ? Number(exchangeRates[currency]).toFixed(2)
-                  : 'Loading...'}
-              </span>
-              <button
-                className="text-sm pr-4 underline focus:outline-none"
-                onClick={() =>
-                  handleEditClick(currency, exchangeRates[currency])
-                }
-              >
-                Edit
-              </button>
-            </div>
-          </div>
-        ))}
+{/* Table Header */}
+<div className="flex items-center justify-between gap-2 font-semibold text-gray-600 text-sm  pb-2">
+  <span className="w-[300px]"></span>
+  <div className="flex items-center gap-6">
+    <span className="w-[120px] text-blue-600 text-center">Market Rate</span>
+    <span className="w-[120px] text-center">Tuma Rate</span>
+    <span className="w-[50px]"></span> {/* Empty space for Edit button */}
+  </div>
+</div>
+
+<div className="space-y-7 font-medium">
+  {paginatedCurrencies.map((currency) => (
+    <div
+      key={currency}
+      className="flex items-center justify-between gap-2"
+    >
+      <div className="flex items-center gap-2 w-[300px]">
+        <Image
+          src={currencyDetails[currency].flag}
+          alt={`${currency} flag`}
+          width={20}
+          height={20}
+          className="rounded"
+        />
+        <span className="font-medium text-sm text-gray-500">
+          {currencyDetails[currency].fullName}
+        </span>
       </div>
 
+      <div className="flex items-center gap-6">
+        {/* Market Rate */}
+        <span className="px-4 bg-red-50 text-sm py-1 w-[110px] rounded text-center font-semibold text-red-400">
+          {exchangeRate[currency] && !isNaN(exchangeRate[currency])
+            ? Number(exchangeRate[currency]).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+            : 'Loading...'}
+        </span>
+
+        {/* Tuma Rate */}
+        <span className="px-4 bg-green-50 text-sm py-1 w-[110px] rounded text-center font-semibold text-green-600">
+          {exchangeRates[currency] && !isNaN(exchangeRates[currency])
+            ? Number(exchangeRates[currency]).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+            : 'Loading...'}
+        </span>
+
+        {/* Edit Button */}
+        <button 
+          onClick={() => handleEditClick(currency)} 
+          className="px-4 py-1 underline rounded"
+        >
+          Edit
+        </button>
+      </div>
+    </div>
+  ))}
+</div>
+
+
       {/* Pagination Controls */}
-      <div className="flex justify-center gap-4 mt-14">
+      <div className="flex justify-center gap-4 mt-14 ">
         <button
           onClick={() => handlePageChange(currentPage - 1)}
           disabled={currentPage === 1}

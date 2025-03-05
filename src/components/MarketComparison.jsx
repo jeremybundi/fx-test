@@ -158,21 +158,24 @@ export default function MarketComparison() {
         <div className="flex flex-col gap-2 w-full">
           <label className="text-lg   text-gray-500">Target Currency</label>
           <div className="relative mt-1">
-            <button
-              className="flex items-center w-full  gap-2 px-2 py-1 border h-[46px] border-gray-300 
-              rounded-lg text-sm  focus:outline-none focus:ring-2 focus:ring-gray-300"
-              onClick={() => setIsDropdownOpen((prev) => !prev)}
-            >
-              <Image
-                src={currencies[selectedTargetCurrency].flag}
-                alt={selectedTargetCurrency}
-                width={30}
-                height={12}
-                className='rounded'
-              />
+          <button
+            className="flex items-center w-full gap-2 px-2 py-1 border h-[46px] border-gray-300 
+            rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-gray-300 overflow-hidden"
+            onClick={() => setIsDropdownOpen((prev) => !prev)}
+          >
+            <Image
+              src={currencies[selectedTargetCurrency].flag}
+              alt={selectedTargetCurrency}
+              width={30}
+              height={12}
+              className="rounded"
+            />
+            <span className="truncate max-w-[100px]"> 
               {currencies[selectedTargetCurrency].fullName}
-              <Image src={arrowIcon} alt="Arrow" width={12} height={12} />
-            </button>
+            </span>
+            <Image src={arrowIcon} alt="Arrow" width={12} height={12} />
+          </button>
+
 
             {/* Dropdown Menu */}
             {isDropdownOpen && (
@@ -181,7 +184,7 @@ export default function MarketComparison() {
                   {Object.keys(currencies).map((currency) => (
                     <li
                       key={currency}
-                      className="flex items-center gap-2 px-4 py-2  hover:bg-gray-100 cursor-pointer"
+                      className="flex items-center gap-2 px-2 py-2  hover:bg-gray-100 cursor-pointer"
                       onClick={() => handleCurrencyChange('target', currency)}
                     >
                       <Image
@@ -191,7 +194,9 @@ export default function MarketComparison() {
                         height={12}
                         className='rounded'
                       />
+                       <span className="truncate max-w-[145px]"> 
                       {currencies[currency].fullName}
+                      </span>
                     </li>
                   ))}
                 </ul>
@@ -212,17 +217,18 @@ export default function MarketComparison() {
             height={80}
             className="py-2"
           />
-          <span className="px-4 py-1 bg-green-50 text-lg rounded font-semibold text-green-600 w-[140px] my-1 text-center">
-            {staticExchangeRates[
-              `${selectedBaseCurrency}-${selectedTargetCurrency}`
-            ]?.terrapage
-              ? Number(
-                  staticExchangeRates[
-                    `${selectedBaseCurrency}-${selectedTargetCurrency}`
-                  ].terrapage
-                ).toFixed(2)
-              : 'N/A'}
-          </span>
+        <span className="px-4 py-1 bg-green-50 text-lg rounded font-semibold text-green-600 w-[140px] my-1 text-center">
+        {staticExchangeRates[
+          `${selectedBaseCurrency}-${selectedTargetCurrency}`
+        ]?.terrapage
+          ? Number(
+              staticExchangeRates[
+                `${selectedBaseCurrency}-${selectedTargetCurrency}`
+              ].terrapage
+            ).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+          : 'N/A'}
+      </span>
+
         </div>
 
         {/* Tuma */}
@@ -234,17 +240,18 @@ export default function MarketComparison() {
             height={15}
             className="py-2"
           />
-          <span className="px-4 py-1 bg-blue-50 text-lg rounded  font-semibold text-blue-600 w-[140px] text-center">
-            {staticExchangeRates[
-              `${selectedBaseCurrency}-${selectedTargetCurrency}`
-            ]?.tuma
-              ? Number(
-                  staticExchangeRates[
-                    `${selectedBaseCurrency}-${selectedTargetCurrency}`
-                  ].tuma
-                ).toFixed(2)
-              : 'N/A'}
-          </span>
+      <span className="px-4 py-1 bg-blue-50 text-lg rounded font-semibold text-blue-600 w-[140px] text-center">
+        {staticExchangeRates[
+          `${selectedBaseCurrency}-${selectedTargetCurrency}`
+        ]?.tuma
+          ? Number(
+              staticExchangeRates[
+                `${selectedBaseCurrency}-${selectedTargetCurrency}`
+              ].tuma
+            ).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+          : 'N/A'}
+      </span>
+
         </div>
 
         {/* Wise */}
@@ -256,9 +263,12 @@ export default function MarketComparison() {
             height={15}
             className="py-3"
           />
-          <span className="px-4 py-1 bg-orange-50 text-lg rounded font-semibold text-orange-600 w-[140px] text-center">
-            {wiseRate ? Number(wiseRate).toFixed(2) : 'Loading...'}
-          </span>
+        <span className="px-4 py-1 bg-orange-50 text-lg rounded font-semibold text-orange-600 w-[140px] text-center">
+        {wiseRate
+          ? Number(wiseRate).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) 
+          : 'Loading...'}
+      </span>
+
         </div>
 
         {/* Verto */}
@@ -270,17 +280,13 @@ export default function MarketComparison() {
             height={15} 
             className="py-2 ml-2"
           />
-          <span className="px-4 py-2 bg-yellow-50 text-lg rounded font-semibold text-yellow-600 w-[140px] text-center">
-            {staticExchangeRates[
-              `${selectedBaseCurrency}-${selectedTargetCurrency}`
-            ]?.verto
-              ? Number(
-                  staticExchangeRates[
-                    `${selectedBaseCurrency}-${selectedTargetCurrency}`
-                  ].verto
-                ).toFixed(2)
-              : 'N/A'}
-          </span>
+            <span className="px-4 py-2 bg-yellow-50 text-lg rounded font-semibold text-yellow-600 w-[140px] text-center">
+          {staticExchangeRates[`${selectedBaseCurrency}-${selectedTargetCurrency}`]?.verto
+            ? Number(staticExchangeRates[`${selectedBaseCurrency}-${selectedTargetCurrency}`].verto)
+                .toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) // ✅ Correct
+            : 'N/A'}
+        </span>
+
         </div>
       </div>
     </div>

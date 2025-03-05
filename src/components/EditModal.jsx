@@ -244,7 +244,7 @@ const EditModal = ({ data, onClose }) => {
           <label className="block text-lg font-medium text-gray-500 mb-2">
             Current Bank Rate
           </label>
-          <div className="px-3 py-1 font-semibold text-sm rounded-md w-[120px] bg-green-50 text-green-800">
+          <div className="px-3 py-1 font-semibold text-sm rounded-md w-[120px] bg-red-50 text-red-400">
             {form.exchangeRate}
           </div>
         </div>
@@ -280,9 +280,37 @@ const EditModal = ({ data, onClose }) => {
             placeholder="Enter final rate"
           />
         </div>
+
+
+      <div className='flex gap-3 '>
+ 
+
+        
         <div className=" ">
           <label className="block text-gray-600  text-lg font-medium mb-2">
             Date of Effect
+          </label>
+          <div className="relative">
+          <FaCalendarAlt className="absolute left-3 top-1/2 text-sm transform -translate-y-1/2 text-gray-600 z-10 mr-2" />
+
+          <DatePicker
+            selected={form.dateOfEffect}
+            onChange={handleDateChange}
+            dateFormat="MMMM d, yyyy h:mm:ss aa" 
+            minDate={new Date()}
+            showTimeSelect 
+            showSecond 
+            timeFormat="HH:mm:ss" 
+            className="pl-10 pr-4 border-2 border-gray-300 text-gray-500 text-sm rounded-md px-2 py-1 w-full focus:outline-none focus:border-gray-500"
+          />
+        </div>
+      
+
+
+        </div>
+        <div className=" ">
+          <label className="block text-gray-600  text-lg font-medium mb-2">
+            Date of Expiry
           </label>
           <div className="relative">
           <FaCalendarAlt className="absolute left-3 top-1/2 text-sm transform -translate-y-1/2 text-gray-600 z-10 mr-2" />
@@ -295,9 +323,13 @@ const EditModal = ({ data, onClose }) => {
             showTimeSelect // Enables time selection
             showSecond // Enables seconds selection
             timeFormat="HH:mm:ss" // Uses 24-hour format
-            className="pl-10 pr-4 border-2 border-gray-300 text-gray-500 text-lg rounded-md px-2 py-1 w-full focus:outline-none focus:border-gray-500"
+            className="pl-10 pr-4 border-2 border-gray-300 text-gray-500 text-sm rounded-md px-2 py-1 w-full focus:outline-none focus:border-gray-500"
           />
         </div>
+               
+      </div>
+      
+
 
         </div>
         <div className="flex justify-between px-12 gap-4 mt-auto mb-6">
