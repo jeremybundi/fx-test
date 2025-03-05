@@ -38,7 +38,7 @@ export default function Footer() {
           const response = await fetch(apiUrl, {
             headers: {
               Authorization: 'Bearer 4e8f4270-8d0e-46f2-a6a2-405029e49bca',
-              Accept: 'application/json', // Ensure correct response format
+              Accept: 'application/json', 
             },
           });
   

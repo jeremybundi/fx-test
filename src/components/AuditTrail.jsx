@@ -49,19 +49,18 @@ export default function AuditTrail() {
   const currentRecords = records.slice(indexOfFirstRecord, indexOfLastRecord);
 
   return (
-    <div className="p-4 bg-white w-full flex flex-col">
-      <h1 className="text-lg font-bold ml-6 mb-4">Audit Trail</h1>
+    <div className="p-4 bg-white w-full  px-14 flex flex-col">
+      <h1 className="text-lg font-bold ml-6 mb-4 mt-6">Audit Trail</h1>
 
       <div className="flex-1 pb-6">
-        <table className="w-full bg-white">
+        <table className="w-full border bg-white">
           <thead>
-            <tr className="text-left text-gray-500 text-sm">
+            <tr className="text-left bg-gray-50  text-gray-500 text-sm">
               <th className="py-2 px-4 border-b">Currency Pair</th>
               <th className="py-2 px-4 border-b">Rate</th>
               <th className="py-2 px-4 border-b">Date of Effect</th>
               <th className="py-2 px-4 border-b">Last Updated</th>
               <th className="py-2 px-4 border-b">Updated By</th>
-              <th className="py-2 px-4 border-b">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -74,25 +73,10 @@ export default function AuditTrail() {
                   {convertToKenyanTime(record.changedAt)}
                 </td>
                 <td className="py-2 text-gray-500 text-sm px-4">{record.changedBy}</td>
-                <td className="py-2 px-4">
-                <button
-                className="px-4 py-2 underline text-sm rounded-lg"
-                onClick={() => {
-                  const modifiedRecord = {
-                    ...record,
-                    destinationCurrency: record.targetCurrency,
-                    exchangeRate: record.newRate,
-                    finalRate: record.newRate,
-                  };
-                  console.log("Modified Record:", modifiedRecord);
-                  setSelectedRecord(modifiedRecord);
-                }}
-              >
-                Edit
-              </button>
+             
 
 
-                </td>
+              
               </tr>
             ))}
           </tbody>
@@ -137,10 +121,6 @@ export default function AuditTrail() {
           </button>
         </div>
       </div>
-
-      {selectedRecord && (
-        <EditModal data={selectedRecord} onClose={() => setSelectedRecord(null)} />
-      )}
     </div>
   );
 }
