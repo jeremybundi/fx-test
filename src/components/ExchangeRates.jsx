@@ -35,11 +35,18 @@ export default function Footer() {
       const targets = Object.keys(currencyDetails);
       const responses = await Promise.all(
         targets.map(async (target) => {
-          let apiUrl = `https://api.transferwise.com/v1/rates?source=${selectedCurrency}&target=${target}`;
+          let apiUrl = '';
+
+          console.log(selectedCurrency);
   
           if ((selectedCurrency === 'USD' || selectedCurrency === 'GBP') && target === 'KES') {
             apiUrl = 'https://tuma-dev-backend-alb-1553448571.us-east-1.elb.amazonaws.com/api/treasury/exchange-rate-list';
+          } else {
+            apiUrl = `https://api.transferwise.com/v1/rates?source=${selectedCurrency}&target=${target}`;
+
           }
+
+          console.log(apiUrl)
   
           try {
             const response = await fetch(apiUrl, {
@@ -256,7 +263,7 @@ export default function Footer() {
 <div className="flex items-center justify-between gap-2 font-semibold text-gray-600 text-sm  pb-2">
   <span className="w-[300px]"></span>
   <div className="flex items-center gap-6">
-    <span className="w-[120px] hidden  text-gray-400 text-center">Market Rate</span>
+    <span className="w-[120px]   text-gray-400 text-center">Market Rate</span>
     <span className="w-[120px]  text-gray-400 text-center">Tuma Rate</span>
     <span className="w-[50px]"></span> {/* Empty space for Edit button */}
   </div>
@@ -283,7 +290,7 @@ export default function Footer() {
 
       <div className="flex items-center gap-6">
         {/* Market Rate */}
-        <span className="px-4 bg-red-50 hidden text-sm py-1 w-[110px] rounded text-center font-semibold text-red-400">
+        <span className="px-4 bg-red-50  text-sm py-1 w-[110px] rounded text-center font-semibold text-red-400">
           {exchangeRate[currency] && !isNaN(exchangeRate[currency])
             ? Number(exchangeRate[currency]).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
             : 'Loading...'}
