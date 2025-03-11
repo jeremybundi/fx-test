@@ -114,11 +114,14 @@ const EditModal = ({ data, onClose }) => {
       destinationCurrency: form.destinationCurrency,
       exchangeRate: parseFloat(form.finalRate),
       markup: parseFloat(form.markup),
-      dateOfEffect: form.dateOfEffect,
+      dateOfEffect: form.dateOfEffect instanceof Date 
+      ? form.dateOfEffect.toISOString()  
+      : form.dateOfEffect,  
     };
-
-    dispatch(setCurrency(updatedData));
-    localStorage.setItem('currencyData', JSON.stringify(updatedData));
+  
+  dispatch(setCurrency(updatedData));
+  localStorage.setItem('currencyData', JSON.stringify(updatedData));
+      localStorage.setItem('currencyData', JSON.stringify(updatedData));
 
     console.log('Data saved to store:', updatedData);
 
@@ -175,7 +178,7 @@ const EditModal = ({ data, onClose }) => {
   }, [data]);
 
   return (
-    <div className="fixed font-poppins inset-0 bg-gray-600 bg-opacity-50 flex justify-center flex-col items-center z-10">
+    <div className="fixed font-poppins inset-0 bg-gray-600 bg-opacity-5 flex justify-center flex-col items-center z-10">
       <div className="bg-white px-14 pt-6 rounded-xl w-[33%] h-[calc(100vh*0.77)] flex flex-col relative">
         <button onClick={handlecCancel} className="absolute top-3 right-3">
           <Image src={closeIcon} alt="Close Modal" width={30} height={30} />
@@ -197,7 +200,7 @@ const EditModal = ({ data, onClose }) => {
 
         <div className="mb-4 flex justify-between gap-4">
           <div className="flex-1 border px-4  rounded-md">
-            <label className="block text-xs font-medium mt-1 text-gray-500 mb-1">
+            <label className="block text-sm font-medium mt-1 text-gray-500 mb-1">
               Base Currency
             </label>
             <div className="flex items-center  gap-2">
@@ -220,7 +223,7 @@ const EditModal = ({ data, onClose }) => {
           </div>
 
           <div className="flex-1 border px-4 py-1 rounded-md">
-            <label className="block text-xs font-medium text-gray-500 mb-1">
+            <label className="block text-sm truncate w-[145px] font-medium text-gray-500 mb-1">
               Destination Currency
             </label>
             <div className="flex items-center justify-between gap-2">
@@ -241,7 +244,7 @@ const EditModal = ({ data, onClose }) => {
         </div>
 
         <div className="mb-4 border px-4 py-1 rounded-md">
-          <label className="block text-lg font-medium text-gray-500 mb-2">
+          <label className="block text-sm font-medium text-gray-500 mb-2">
             Current Bank Rate
           </label>
           <div className="px-3 py-1 font-semibold text-sm rounded-md w-[120px] bg-red-50 text-red-400">
@@ -250,7 +253,7 @@ const EditModal = ({ data, onClose }) => {
         </div>
 
         <div className="mb-4 border px-4 py-1 rounded-md">
-          <label className="block text-lg text-gray-500 font-medium mb-2">
+          <label className="block text-sm text-gray-500 font-medium mb-2">
             Tuma Markup
           </label>
           <div className="flex items-center justify-between">
@@ -267,7 +270,7 @@ const EditModal = ({ data, onClose }) => {
         </div>
 
         <div className="mb-4 border px-4 py-1 rounded-md">
-          <label className="block text-lg text-gray-500 font-medium mb-2">
+          <label className="block text-sm text-gray-500 font-medium mb-2">
             Final Rate
           </label>
           <input
@@ -282,12 +285,11 @@ const EditModal = ({ data, onClose }) => {
         </div>
 
 
-      <div className='flex gap-3 '>
  
 
         
-        <div className=" ">
-          <label className="block text-gray-600  text-lg font-medium mb-2">
+      <div className=" ">
+          <label className="block text-gray-600  text-sm font-medium mb-2">
             Date of Effect
           </label>
           <div className="relative">
@@ -301,33 +303,10 @@ const EditModal = ({ data, onClose }) => {
             showTimeSelect 
             showSecond 
             timeFormat="HH:mm:ss" 
-            className="pl-10 pr-4 border-2 border-gray-300 text-gray-500 text-sm rounded-md px-2 py-1 w-full focus:outline-none focus:border-gray-500"
+            className="pl-10 pr-4 border-2 border-gray-300 text-gray-500 text-lg rounded-md px-2 py-1 w-full focus:outline-none focus:border-gray-500"
           />
-        </div>
-      
-
 
         </div>
-        <div className=" ">
-          <label className="block text-gray-600  text-lg font-medium mb-2">
-            Date of Expiry
-          </label>
-          <div className="relative">
-          <FaCalendarAlt className="absolute left-3 top-1/2 text-sm transform -translate-y-1/2 text-gray-600 z-10 mr-2" />
-
-          <DatePicker
-            selected={form.dateOfEffect}
-            onChange={handleDateChange}
-            dateFormat="MMMM d, yyyy h:mm:ss aa" // Includes hours, minutes, and seconds
-            minDate={new Date()}
-            showTimeSelect // Enables time selection
-            showSecond // Enables seconds selection
-            timeFormat="HH:mm:ss" // Uses 24-hour format
-            className="pl-10 pr-4 border-2 border-gray-300 text-gray-500 text-sm rounded-md px-2 py-1 w-full focus:outline-none focus:border-gray-500"
-          />
-        </div>
-               
-      </div>
       
 
 

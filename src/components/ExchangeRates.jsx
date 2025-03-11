@@ -39,23 +39,28 @@ export default function Footer() {
   
           // Use the custom API when USD or GBP is selected and target is KES
           if ((selectedCurrency === 'USD' || selectedCurrency === 'GBP') && target === 'KES') {
-            apiUrl = `https://tuma-dev-backend-alb-1553448571.us-east-1.elb.amazonaws.com/api/treasury/latest-exchange-rate?baseCurrency=${selectedCurrency}&targetCurrency=kes`;
+            apiUrl = 'https://tuma-dev-backend-alb-1553448571.us-east-1.elb.amazonaws.com/api/treasury/exchange-rate-list';
           }
   
           const response = await fetch(apiUrl, {
             headers: {
               Authorization: 'Bearer 4e8f4270-8d0e-46f2-a6a2-405029e49bca',
-              Accept: 'application/json', 
+              Accept: 'application/json',
             },
           });
   
           const data = await response.json();
   
-          // Extract exchange rate correctly
-          let exchangeRate;
+          let exchangeRate = 'N/A';
+  
           if ((selectedCurrency === 'USD' || selectedCurrency === 'GBP') && target === 'KES') {
-            exchangeRate = data.currentRate || 'N/A'; 
+            // Extract only GBP to KES and USD to KES rates
+            const filteredRate = data.find(
+              (rate) => rate.baseCurrency === selectedCurrency && rate.targetCurrency === 'KES'
+            );
+            exchangeRate = filteredRate ? filteredRate.currentRate : 'N/A';
           } else {
+
             exchangeRate = Array.isArray(data) && data.length > 0 ? data[0].rate : 'N/A';
           }
   
@@ -68,6 +73,19 @@ export default function Footer() {
       console.error('Error fetching exchange rates:', error);
     }
   };
+  
+
+
+  useEffect(() => {
+    fetchExchangeRates(); 
+    const interval = setInterval(() => {
+      fetchExchangeRates();
+    }, 1000); 
+  
+    return () => clearInterval(interval); 
+  }, [selectedCurrency]);
+  
+  
 
   const fetchExchangeRate = async () => {
     try {
@@ -178,7 +196,7 @@ export default function Footer() {
         <h1 className="font-semibold font-poppins text-lg">Exchange Rates</h1>
 
         <div className="flex items-center gap-4">
-          <label className="font-medium text-lg text-gray-500">
+          <label className="font-medium text-sm text-gray-500">
             Base Currency
           </label>
           <div className="relative">
@@ -235,8 +253,8 @@ export default function Footer() {
 <div className="flex items-center justify-between gap-2 font-semibold text-gray-600 text-sm  pb-2">
   <span className="w-[300px]"></span>
   <div className="flex items-center gap-6">
-    <span className="w-[120px] text-blue-600 text-center">Market Rate</span>
-    <span className="w-[120px] text-center">Tuma Rate</span>
+    <span className="w-[120px] hidden md:block text-gray-400 text-center">Market Rate</span>
+    <span className="w-[120px]  text-gray-400 text-center">Tuma Rate</span>
     <span className="w-[50px]"></span> {/* Empty space for Edit button */}
   </div>
 </div>
@@ -255,14 +273,14 @@ export default function Footer() {
           height={20}
           className="rounded"
         />
-        <span className="font-medium text-sm text-gray-500">
+        <span className="font-medium text-lg text-gray-500">
           {currencyDetails[currency].fullName}
         </span>
       </div>
 
       <div className="flex items-center gap-6">
         {/* Market Rate */}
-        <span className="px-4 bg-red-50 text-sm py-1 w-[110px] rounded text-center font-semibold text-red-400">
+        <span className="px-4 hidden md:hidden bg-red-50 text-sm py-1 w-[110px] rounded text-center font-semibold text-red-400">
           {exchangeRate[currency] && !isNaN(exchangeRate[currency])
             ? Number(exchangeRate[currency]).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
             : 'Loading...'}
@@ -278,7 +296,7 @@ export default function Footer() {
         {/* Edit Button */}
         <button 
           onClick={() => handleEditClick(currency)} 
-          className="px-4 py-1 underline rounded"
+          className="px-4 py-1 underline text-gray-500 rounded"
         >
           Edit
         </button>

@@ -19,7 +19,7 @@ export default function AuditTrail() {
         const response = await axios.get(
           'https://tuma-dev-backend-alb-1553448571.us-east-1.elb.amazonaws.com/api/treasury/currency-exchange-history'
         );
-        const sortedRecords = response.data.sort((a, b) => new Date(b.changedAt) - new Date(a.changedAt)); // Sorting by latest first
+        const sortedRecords = response.data.sort((a, b) => new Date(b.changedAt) - new Date(a.changedAt)); 
         setRecords(sortedRecords);
       } catch (error) {
         console.error('Error fetching audit trail:', error);
@@ -32,8 +32,8 @@ export default function AuditTrail() {
     // Poll every 1 second
     const interval = setInterval(fetchRecords, 1000);
   
-    return () => clearInterval(interval); // Cleanup on unmount
-  }, []);
+    return () => clearInterval(interval); 
+  }, []); 
   
   
 
