@@ -253,7 +253,7 @@ export default function Footer() {
 <div className="flex items-center justify-between gap-2 font-semibold text-gray-600 text-sm  pb-2">
   <span className="w-[300px]"></span>
   <div className="flex items-center gap-6">
-    <span className="w-[120px] hidden md:block text-gray-400 text-center">Market Rate</span>
+    <span className="w-[120px]  text-gray-400 text-center">Market Rate</span>
     <span className="w-[120px]  text-gray-400 text-center">Tuma Rate</span>
     <span className="w-[50px]"></span> {/* Empty space for Edit button */}
   </div>
@@ -280,7 +280,7 @@ export default function Footer() {
 
       <div className="flex items-center gap-6">
         {/* Market Rate */}
-        <span className="px-4 hidden md:hidden bg-red-50 text-sm py-1 w-[110px] rounded text-center font-semibold text-red-400">
+        <span className="px-4 bg-red-50 text-sm py-1 w-[110px] rounded text-center font-semibold text-red-400">
           {exchangeRate[currency] && !isNaN(exchangeRate[currency])
             ? Number(exchangeRate[currency]).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
             : 'Loading...'}
