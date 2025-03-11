@@ -37,34 +37,40 @@ export default function Footer() {
         targets.map(async (target) => {
           let apiUrl = `https://api.transferwise.com/v1/rates?source=${selectedCurrency}&target=${target}`;
   
-          // Use the custom API when USD or GBP is selected and target is KES
           if ((selectedCurrency === 'USD' || selectedCurrency === 'GBP') && target === 'KES') {
             apiUrl = 'https://tuma-dev-backend-alb-1553448571.us-east-1.elb.amazonaws.com/api/treasury/exchange-rate-list';
           }
   
-          const response = await fetch(apiUrl, {
-            headers: {
-              Authorization: 'Bearer 4e8f4270-8d0e-46f2-a6a2-405029e49bca',
-              Accept: 'application/json',
-            },
-          });
+          try {
+            const response = await fetch(apiUrl, {
+              headers: {
+                Authorization: 'Bearer 4e8f4270-8d0e-46f2-a6a2-405029e49bca',
+                Accept: 'application/json',
+              },
+            });
   
-          const data = await response.json();
+            if (!response.ok) {
+              console.warn(`Exchange rate for ${target} is unavailable. Setting to 'N/A'.`);
+              return { [target]: 'N/A' }; // Gracefully handle missing exchange rates
+            }
   
-          let exchangeRate = 'N/A';
+            const data = await response.json();
+            let exchangeRate = 'N/A';
   
-          if ((selectedCurrency === 'USD' || selectedCurrency === 'GBP') && target === 'KES') {
-            // Extract only GBP to KES and USD to KES rates
-            const filteredRate = data.find(
-              (rate) => rate.baseCurrency === selectedCurrency && rate.targetCurrency === 'KES'
-            );
-            exchangeRate = filteredRate ? filteredRate.currentRate : 'N/A';
-          } else {
-
-            exchangeRate = Array.isArray(data) && data.length > 0 ? data[0].rate : 'N/A';
+            if ((selectedCurrency === 'USD' || selectedCurrency === 'GBP') && target === 'KES') {
+              const filteredRate = data.find(
+                (rate) => rate.baseCurrency === selectedCurrency && rate.targetCurrency === 'KES'
+              );
+              exchangeRate = filteredRate ? filteredRate.currentRate : 'N/A';
+            } else {
+              exchangeRate = Array.isArray(data) && data.length > 0 ? data[0].rate : 'N/A';
+            }
+  
+            return { [target]: exchangeRate };
+          } catch (error) {
+            console.warn(`Error fetching data for ${target}:`, error);
+            return { [target]: 'N/A' }; // If fetch fails, return 'N/A'
           }
-  
-          return { [target]: exchangeRate };
         })
       );
   
@@ -74,19 +80,8 @@ export default function Footer() {
     }
   };
   
-
-
-  useEffect(() => {
-    fetchExchangeRates(); 
-    const interval = setInterval(() => {
-      fetchExchangeRates();
-    }, 1000); 
-  
-    return () => clearInterval(interval); 
-  }, [selectedCurrency]);
   
   
-
   const fetchExchangeRate = async () => {
     try {
       const targets = Object.keys(currencyDetails);
@@ -94,19 +89,27 @@ export default function Footer() {
         targets.map(async (target) => {
           const apiUrl = `https://api.transferwise.com/v1/rates?source=${selectedCurrency}&target=${target}`;
   
-          const response = await fetch(apiUrl, {
-            headers: {
-              Authorization: 'Bearer 4e8f4270-8d0e-46f2-a6a2-405029e49bca',
-              Accept: 'application/json', 
-            },
-          });
+          try {
+            const response = await fetch(apiUrl, {
+              headers: {
+                Authorization: 'Bearer 4e8f4270-8d0e-46f2-a6a2-405029e49bca',
+                Accept: 'application/json',
+              },
+            });
   
-          const data = await response.json();
+            if (!response.ok) {
+              console.warn(`Exchange rate for ${target} is unavailable. Setting to 'N/A'.`);
+              return { [target]: 'N/A' }; // Gracefully handle missing exchange rates
+            }
   
-          // Extract exchange rate directly
-          const exchangeRate = Array.isArray(data) && data.length > 0 ? data[0].rate : 'N/A';
+            const data = await response.json();
+            const exchangeRate = Array.isArray(data) && data.length > 0 ? data[0].rate : 'N/A';
   
-          return { [target]: exchangeRate };
+            return { [target]: exchangeRate };
+          } catch (error) {
+            console.error(`Error fetching data for ${target}:`, error);
+            return { [target]: 'N/A' }; 
+          }
         })
       );
   
