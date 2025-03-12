@@ -53,7 +53,7 @@ const handleConfirm = async () => {
 };
 
   return (
-    <div className="fixed font-poppins inset-0 bg-gray-500 bg-opacity-5 flex justify-center items-center z-10">
+    <div className="fixed font-poppins inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center z-10">
       <div className="bg-white px-14 pt-6 rounded-xl w-[33%] h-[calc(100vh*0.77)] flex flex-col relative">
         <button className="absolute top-3 right-3" onClick={oncClose}>
           <Image src={closeIcon} alt="Close Modal" width={30} height={30} />

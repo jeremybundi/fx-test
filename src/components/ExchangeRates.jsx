@@ -86,6 +86,18 @@ export default function Footer() {
       console.error('Error fetching exchange rates:', error);
     }
   };
+
+
+  useEffect(() => {
+    fetchExchangeRates();
+    
+    const interval = setInterval(() => {
+      fetchExchangeRates();
+    }, 3000); 
+  
+    return () => clearInterval(interval); 
+  }, [selectedCurrency]);
+  
   
   
   
