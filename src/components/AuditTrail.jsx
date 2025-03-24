@@ -1,41 +1,38 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import EditModal from './EditModal';
+import React, { useState } from 'react';
 
 export default function AuditTrail() {
-  const [records, setRecords] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [selectedRecord, setSelectedRecord] = useState(null);
-  const recordsPerPage = 9;
+  // Function to generate records dynamically
+  const generateRecords = (length) => {
+    const records = [];
+    const channels = ['Paybill', 'M-Pesa', 'Bank', 'Card'];
+    const currencyPairs = ['GBP/KES', 'USD/KES', 'EUR/KES'];
+    const updatedByOptions = ['Admin', 'Manager', 'Supervisor'];
 
+    for (let i = 1; i <= length; i++) {
+      const randomChannel = channels[Math.floor(Math.random() * channels.length)];
+      const randomCurrencyPair = currencyPairs[Math.floor(Math.random() * currencyPairs.length)];
+      const randomUpdatedBy = updatedByOptions[Math.floor(Math.random() * updatedByOptions.length)];
 
-  const convertToKenyanTime = (utcDateString) => {
-    const date = new Date(utcDateString);
-    return date.toLocaleString("en-KE", { timeZone: "Africa/Nairobi" });
+      records.push({
+        id: i,
+        currencyPair: randomCurrencyPair,
+        channel: randomChannel,
+        initialTumaRate: (Math.random() * 200).toFixed(2), // Random rate between 0 and 200
+        finalTumaRate: (Math.random() * 200).toFixed(2), // Random rate between 0 and 200
+        dateOfEffect: `2023-10-${String(Math.floor(Math.random() * 30) + 1).padStart(2, '0')}`, // Random date in October 2023
+        timeOfEffect: `${String(Math.floor(Math.random() * 12) + 1).padStart(2, '0')}:${String(Math.floor(Math.random() * 60)).padStart(2, '0')} ${Math.random() > 0.5 ? 'AM' : 'PM'}`, // Random time
+        updatedBy: randomUpdatedBy,
+      });
+    }
+
+    return records;
   };
-  useEffect(() => {
-    const fetchRecords = async () => {
-      try {
-        const response = await axios.get(
-          'https://tuma-dev-backend-alb-1553448571.us-east-1.elb.amazonaws.com/api/treasury/currency-exchange-history'
-        );
-        const sortedRecords = response.data.sort((a, b) => new Date(b.changedAt) - new Date(a.changedAt)); // Sorting by latest first
-        setRecords(sortedRecords);
-      } catch (error) {
-        console.error('Error fetching audit trail:', error);
-      }
-    };
-  
-    // Fetch initially
-    fetchRecords();
-  
-    // Poll every 1 second
-    const interval = setInterval(fetchRecords, 1000);
-  
-    return () => clearInterval(interval); // Cleanup on unmount
-  }, []);
-  
-  
+
+  // Generate 50 records
+  const [records, setRecords] = useState(generateRecords(50));
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const recordsPerPage = 15;
 
   const totalPages = Math.ceil(records.length / recordsPerPage);
   const paginate = (pageNumber) => {
@@ -49,34 +46,32 @@ export default function AuditTrail() {
   const currentRecords = records.slice(indexOfFirstRecord, indexOfLastRecord);
 
   return (
-    <div className="p-4 bg-white w-full  px-14 flex flex-col">
+    <div className="p-4 bg-white rounded w-full px-14 flex flex-col">
       <h1 className="text-lg font-bold ml-6 mb-4 mt-6">Audit Trail</h1>
 
       <div className="flex-1 pb-6">
         <table className="w-full border bg-white">
           <thead>
-            <tr className="text-left bg-gray-50  text-gray-500 text-sm">
+            <tr className="text-left bg-gray-50 text-gray-500 text-sm">
               <th className="py-2 px-4 border-b">Currency Pair</th>
-              <th className="py-2 px-4 border-b">Rate</th>
+              <th className="py-2 px-4 border-b">Channel</th>
+              <th className="py-2 px-4 border-b">Initial Tuma Rate</th>
+              <th className="py-2 px-4 border-b">Final Tuma Rate</th>
               <th className="py-2 px-4 border-b">Date of Effect</th>
-              <th className="py-2 px-4 border-b">Last Updated</th>
+              <th className="py-2 px-4 border-b">Time of Effect</th>
               <th className="py-2 px-4 border-b">Updated By</th>
             </tr>
           </thead>
           <tbody>
             {currentRecords.map((record) => (
               <tr key={record.id} className="border-b">
-                <td className="py-2 px-4 text-sm">{`${record.baseCurrency}/${record.targetCurrency}`}</td>
-                <td className="py-2 px-4 text-sm">{record.newRate}</td>
-                <td className="py-2 px-4 text-sm">{convertToKenyanTime(record.dateOfEffect)}</td> {/* Keeping it null */}
-                <td className="py-2 text-gray-500 text-sm px-4">
-                  {convertToKenyanTime(record.changedAt)}
-                </td>
-                <td className="py-2 text-gray-500 text-sm px-4">{record.changedBy}</td>
-             
-
-
-              
+                <td className="py-2 px-4 text-sm">{record.currencyPair}</td>
+                <td className="py-2 px-4 text-sm">{record.channel}</td>
+                <td className="py-2 px-4 text-sm">{record.initialTumaRate}</td>
+                <td className="py-2 px-4 text-sm">{record.finalTumaRate}</td>
+                <td className="py-2 px-4 text-sm">{record.dateOfEffect}</td>
+                <td className="py-2 px-4 text-sm">{record.timeOfEffect}</td>
+                <td className="py-2 px-4 text-sm">{record.updatedBy}</td>
               </tr>
             ))}
           </tbody>
