@@ -36,7 +36,7 @@ const UpdateMarkup = ({ isOpen, onClose, apiResponse }) => {
         },
         { 
           paymentRecords: "Bank", 
-          icon: "/svgs/bank.svg", 
+          icon: "/svgs/Bank.svg", 
           tumaRate: parseFloat(apiResponse.bankRateTemp || 0).toFixed(2),
           markup: (parseFloat(apiResponse.bankMarkUp || 0) * 100).toFixed(0),
           finalRate: parseFloat(apiResponse.bankRateTemp || 0).toFixed(2),

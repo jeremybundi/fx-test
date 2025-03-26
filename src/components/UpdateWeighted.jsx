@@ -29,7 +29,7 @@ const UpdateWeighted = ({ isOpen, onClose, apiResponse }) => {
       },
       { 
         paymentRecords: "Bank", 
-        icon: "/svgs/bank.svg", 
+        icon: "/svgs/Bank.svg", 
         tumaRate: parseFloat(apiResponse.bankRateTemp || 0).toFixed(2),
         weightedAvg: parseFloat(apiResponse.bankWeightedAvg || 0).toFixed(0),
       }
