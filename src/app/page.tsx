@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import SideNav from '@/components/SideNav';
 import Section from '@/components/Section';
-import Market from '@/components/MarketComparison';
+//import Market from '@/components/MarketComparison';
 import AuditTrail from '@/components/AuditTrail';
 import BulkUpdate from '../components/BulkUpdate'; // Import the modal
 
