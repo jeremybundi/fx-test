@@ -1,38 +1,109 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 export default function AuditTrail() {
-  // Function to generate records dynamically
-  const generateRecords = (length) => {
-    const records = [];
-    const channels = ['Paybill', 'M-Pesa', 'Bank', 'Card'];
-    const currencyPairs = ['GBP/KES', 'USD/KES', 'EUR/KES'];
-    const updatedByOptions = ['Admin', 'Manager', 'Supervisor'];
-
-    for (let i = 1; i <= length; i++) {
-      const randomChannel = channels[Math.floor(Math.random() * channels.length)];
-      const randomCurrencyPair = currencyPairs[Math.floor(Math.random() * currencyPairs.length)];
-      const randomUpdatedBy = updatedByOptions[Math.floor(Math.random() * updatedByOptions.length)];
-
-      records.push({
-        id: i,
-        currencyPair: randomCurrencyPair,
-        channel: randomChannel,
-        initialTumaRate: (Math.random() * 200).toFixed(2), // Random rate between 0 and 200
-        finalTumaRate: (Math.random() * 200).toFixed(2), // Random rate between 0 and 200
-        dateOfEffect: `2023-10-${String(Math.floor(Math.random() * 30) + 1).padStart(2, '0')}`, // Random date in October 2023
-        timeOfEffect: `${String(Math.floor(Math.random() * 12) + 1).padStart(2, '0')}:${String(Math.floor(Math.random() * 60)).padStart(2, '0')} ${Math.random() > 0.5 ? 'AM' : 'PM'}`, // Random time
-        updatedBy: randomUpdatedBy,
-      });
-    }
-
-    return records;
-  };
-
-  // Generate 50 records
-  const [records, setRecords] = useState(generateRecords(50));
-
+  const [records, setRecords] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const recordsPerPage = 15;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('https://api.tuma-app.com/api/treasury/currency-exchange-history?page=0&size=20');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        
+        // Transform and sort the API data
+        const transformedData = data.map(item => {
+          const dateOfEffectObj = new Date(item.dateOfEffect);
+          const createdAtObj = new Date(item.createdAt);
+          
+          // Add 3 hours to convert to EAT (East African Time)
+          dateOfEffectObj.setHours(dateOfEffectObj.getHours() + 3);
+          createdAtObj.setHours(createdAtObj.getHours() + 3);
+          
+          // Format time in 24-hour format
+          const formatTime24h = (date) => {
+            return date.toLocaleTimeString('en-US', {
+              hour: '2-digit',
+              minute: '2-digit',
+              second: '2-digit',
+              hour12: false
+            });
+          };
+
+          const timeOfEffectString = formatTime24h(dateOfEffectObj);
+          const dateOfEffectString = dateOfEffectObj.toISOString().split('T')[0];
+          
+          // Format created date and time in 24-hour format
+          const createdDateString = createdAtObj.toISOString().split('T')[0];
+          const createdTimeString = formatTime24h(createdAtObj);
+          
+          // Create records for each channel
+          const channelRecords = [
+            {
+              id: item.id + '_mpesa',
+              currencyPair: `${item.baseCurrency}/${item.targetCurrency}`,
+              channel: 'M-Pesa',
+              finalRate: item.mpesaRate?.toFixed(2) || '0.00',
+              markup: (item.mpesaMarkUp * 100) || '0', 
+              weightedAvg: item.mpesaWeightedAvg?.toFixed(2) || '0.00',
+              dateOfEffect: dateOfEffectString,
+              timeOfEffect: timeOfEffectString,
+              createdDate: createdDateString,
+              createdTime: createdTimeString,
+              updatedBy: item.changedBy,
+              timestamp: dateOfEffectObj.getTime()
+            },
+            {
+              id: item.id + '_paybill',
+              currencyPair: `${item.baseCurrency}/${item.targetCurrency}`,
+              channel: 'Paybill',
+              finalRate: item.paybillRate?.toFixed(2) || '0.00',
+              markup: (item.paybillMarkUp * 100)|| '0',
+              weightedAvg: item.paybillWeightedAvg?.toFixed(2) || '0.00',
+              dateOfEffect: dateOfEffectString,
+              timeOfEffect: timeOfEffectString,
+              createdDate: createdDateString,
+              createdTime: createdTimeString,
+              updatedBy: item.changedBy,
+              timestamp: dateOfEffectObj.getTime()
+            },
+            {
+              id: item.id + '_bank',
+              currencyPair: `${item.baseCurrency}/${item.targetCurrency}`,
+              channel: 'Bank',
+              finalRate: item.bankRate?.toFixed(2) || '0.00',
+              markup: (item.bankMarkUp * 100) || '0', 
+              weightedAvg: item.bankWeightedAvg?.toFixed(2) || '0.00',
+              dateOfEffect: dateOfEffectString,
+              timeOfEffect: timeOfEffectString,
+              createdDate: createdDateString,
+              createdTime: createdTimeString,
+              updatedBy: item.changedBy,
+              timestamp: dateOfEffectObj.getTime()
+            }
+          ];
+          
+          return channelRecords;
+        }).flat();
+        
+        // Sort records by timestamp in descending order (newest first)
+        transformedData.sort((a, b) => b.timestamp - a.timestamp);
+        
+        setRecords(transformedData);
+        setLoading(false);
+      } catch (error) {
+        setError(error.message);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const totalPages = Math.ceil(records.length / recordsPerPage);
   const paginate = (pageNumber) => {
@@ -45,6 +116,14 @@ export default function AuditTrail() {
   const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
   const currentRecords = records.slice(indexOfFirstRecord, indexOfLastRecord);
 
+  if (loading) {
+    return <div className="p-4 bg-white rounded w-full px-14 flex flex-col">Loading...</div>;
+  }
+
+  if (error) {
+    return <div className="p-4 bg-white rounded w-full px-14 flex flex-col">Error: {error}</div>;
+  }
+
   return (
     <div className="p-4 bg-white rounded w-full px-14 flex flex-col">
       <h1 className="text-lg font-bold ml-6 mb-4 mt-6">Audit Trail</h1>
@@ -55,23 +134,29 @@ export default function AuditTrail() {
             <tr className="text-left bg-gray-50 text-gray-500 text-sm">
               <th className="py-2 px-4 border-b">Currency Pair</th>
               <th className="py-2 px-4 border-b">Channel</th>
-              <th className="py-2 px-4 border-b">Initial Tuma Rate</th>
-              <th className="py-2 px-4 border-b">Final Tuma Rate</th>
+              <th className="py-2 px-4 border-b">Final Rate</th>
+              <th className="py-2 px-4 border-b">Markup (%)</th>
+              <th className="py-2 px-4 border-b">Weighted Avg</th>
               <th className="py-2 px-4 border-b">Date of Effect</th>
               <th className="py-2 px-4 border-b">Time of Effect</th>
+              <th className="py-2 px-4 border-b">Date Created</th>
+              <th className="py-2 px-4 border-b">Time Created</th>
               <th className="py-2 px-4 border-b">Updated By</th>
             </tr>
           </thead>
           <tbody>
             {currentRecords.map((record) => (
-              <tr key={record.id} className="border-b">
-                <td className="py-2 px-4 text-sm">{record.currencyPair}</td>
-                <td className="py-2 px-4 text-sm">{record.channel}</td>
-                <td className="py-2 px-4 text-sm">{record.initialTumaRate}</td>
-                <td className="py-2 px-4 text-sm">{record.finalTumaRate}</td>
-                <td className="py-2 px-4 text-sm">{record.dateOfEffect}</td>
-                <td className="py-2 px-4 text-sm">{record.timeOfEffect}</td>
-                <td className="py-2 px-4 text-sm">{record.updatedBy}</td>
+              <tr key={record.id} className="text-center border-b">
+                <td className="py-2 px-4 text-[16px]">{record.currencyPair}</td>
+                <td className="py-2 px-4 text-left text-gray-400 font-[600] text-[16px]">{record.channel}</td>
+                <td className="py-2 px-4 text-[16px]">{record.finalRate}</td>
+                <td className="py-2 px-4  text-[16px]">{record.markup}</td>
+                <td className="py-2 px-4 text-[16px]">{record.weightedAvg}</td>
+                <td className="py-2 px-4 text-[16px]">{record.dateOfEffect}</td>
+                <td className="py-2 px-4 text-[16px]">{record.timeOfEffect}</td>
+                <td className="py-2 px-4 text-[16px]">{record.createdDate}</td>
+                <td className="py-2 px-4 text-[16px]">{record.createdTime}</td>
+                <td className="py-2 px-4 text-left text-gray-400 font-[600] text-[16px]">{record.updatedBy}</td>
               </tr>
             ))}
           </tbody>
