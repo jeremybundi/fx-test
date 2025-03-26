@@ -125,7 +125,7 @@ export default function AuditTrail() {
   }
 
   return (
-    <div className="p-4 bg-white rounded w-full px-14 flex flex-col">
+    <div className="p-4 bg-white rounded w-full px-6 flex flex-col">
       <h1 className="text-lg font-bold ml-6 mb-4 mt-6">Audit Trail</h1>
 
       <div className="flex-1 pb-6">
