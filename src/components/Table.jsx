@@ -42,7 +42,7 @@ const Table = () => {
           },
           { 
             paymentRecords: "Bank", 
-            icon: "/svgs/bank.svg", 
+            icon: "/svgs/Bank.svg", 
             tumaRate: formatToTwoDecimals(apiData.rateAtCost),
             weightedAvg: formatToTwoDecimals(apiData.bankWeightedAvg),
             markup: formatToTwoDecimals(apiData.bankMarkUp),
