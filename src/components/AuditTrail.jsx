@@ -131,7 +131,7 @@ export default function AuditTrail() {
       <div className="flex-1 pb-6">
         <table className="w-full border bg-white">
           <thead>
-            <tr className="text-left bg-gray-50 text-gray-500 text-sm">
+            <tr className="text-left bg-gray-50 text-gray-500 text-xs">
               <th className="py-2 px-4 border-b">Currency Pair</th>
               <th className="py-2 px-4 border-b">Channel</th>
               <th className="py-2 px-4 border-b">Final Rate</th>
@@ -139,23 +139,25 @@ export default function AuditTrail() {
               <th className="py-2 px-4 border-b">Weighted Avg</th>
               <th className="py-2 px-4 border-b">Date of Effect</th>
               <th className="py-2 px-4 border-b">Time of Effect</th>
-              <th className="py-2 px-4 border-b">Date Created</th>
-              <th className="py-2 px-4 border-b">Time Created</th>
+              <th className="py-2 px-4 border-b">Date of Expiry</th>
+              <th className="py-2 px-4 border-b">Time of Expiry</th>
+             
               <th className="py-2 px-4 border-b">Updated By</th>
             </tr>
           </thead>
           <tbody>
             {currentRecords.map((record) => (
               <tr key={record.id} className="text-center border-b">
-                <td className="py-2 px-4 text-[16px]">{record.currencyPair}</td>
-                <td className="py-2 px-4 text-left text-gray-400 font-[600] text-[16px]">{record.channel}</td>
-                <td className="py-2 px-4 text-[16px]">{record.finalRate}</td>
-                <td className="py-2 px-4  text-[16px]">{record.markup}</td>
-                <td className="py-2 px-4 text-[16px]">{record.weightedAvg}</td>
-                <td className="py-2 px-4 text-[16px]">{record.dateOfEffect}</td>
-                <td className="py-2 px-4 text-[16px]">{record.timeOfEffect}</td>
-                <td className="py-2 px-4 text-[16px]">{record.createdDate}</td>
-                <td className="py-2 px-4 text-[16px]">{record.createdTime}</td>
+                <td className="py-2 px-4 text-[12px]">{record.currencyPair}</td>
+                <td className="py-2 px-4 text-left text-gray-400 font-[600] text-[12px]">{record.channel}</td>
+                <td className="py-2 px-4 text-[12px]">{record.finalRate}</td>
+                <td className="py-2 px-4  text-[12px]">{record.markup}</td>
+                <td className="py-2 px-4 text-[12px]">{record.weightedAvg}</td>
+                <td className="py-2 px-4 text-[12px]">{record.createdDate}</td>
+                <td className="py-2 px-4 text-[12px]">{record.createdTime}</td>
+                <td className="py-2 px-4 text-[12px]">{record.dateOfEffect}</td>
+                <td className="py-2 px-4 text-[12px]">{record.timeOfEffect}</td>
+              
                 <td className="py-2 px-4 text-left text-gray-400 font-[600] text-[16px]">{record.updatedBy}</td>
               </tr>
             ))}
