@@ -147,7 +147,7 @@ export default function AuditTrail() {
           </thead>
           <tbody>
             {currentRecords.map((record) => (
-              <tr key={record.id} className="text-center border-b">
+              <tr key={record.id} className="text-left border-b">
                 <td className="py-2 px-4 text-[12px]">{record.currencyPair}</td>
                 <td className="py-2 px-4 text-left text-gray-400 font-[600] text-[12px]">{record.channel}</td>
                 <td className="py-2 px-4 text-[12px]">{record.finalRate}</td>
