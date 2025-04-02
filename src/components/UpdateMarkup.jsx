@@ -165,7 +165,7 @@ const UpdateMarkup = ({ isOpen, onClose, apiResponse }) => {
   return (
     <>
       <div className="fixed inset-0 flex items-center font-poppins justify-end bg-black bg-opacity-0 z-50">
-        <div className="bg-[#F3F5F8] p-6 w-[830px] px-10 h-screen rounded-lg shadow-lg flex flex-col">
+        <div className="bg-[#F3F5F8] p-6 w-[740px] px-10 h-screen rounded-lg shadow-lg flex flex-col">
           <div className="flex justify-between">
             <span className="flex flex-col">
               <h2 className="text-xl font-bold mb-4">Update Final Rates</h2>

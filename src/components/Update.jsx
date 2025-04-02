@@ -75,7 +75,7 @@ const Update = ({ isOpen, onClose }) => {
 
   return (
     <div className="fixed inset-0 flex items-center font-poppins justify-end bg-black bg-opacity-50 z-50">
-      <div className="bg-[#F3F5F8] p-6 w-[830px] rounded-lg h-screen shadow-lg">
+      <div className="bg-[#F3F5F8] p-6 w-[740px] rounded-lg h-screen shadow-lg">
         <span className="justify-between">
           <span className="flex flex-col">
             <h2 className="text-xl font-bold mb-4">Tuma App Rates</h2>
@@ -99,16 +99,16 @@ const Update = ({ isOpen, onClose }) => {
         {rateValue ? (
           <div className="bg-white rounded-xl items-center flex px-6 p-5">
             <p className="text-xl font-[700] mr-4">Current Bank Rate</p>
-            <span className="border items-center flex rounded-lg px-3 py-4">
-              <h1 className="px-4 mr-2 text-2xl font-semibold">1</h1>
+            <span className="border items-center flex rounded-lg px-3 py-2">
+              <h1 className="px-4 mr-2 text-[20px] font-semibold">1</h1>
               <span className="px-2 rounded-lg flex gap-3 py-1 bg-[#F3F5F8]">
-                <Image src="/images/gbp.png" alt="GBP" width={30} height={20} />
-                <p className="ml-1 mr-3 text-[20px] font-500">GBP</p>
+                <Image src="/images/gbp.png" alt="GBP" width={25} height={16} />
+                <p className="ml-1 mr- text-[16px] font-500">GBP</p>
                 <Image src="/svgs/arrow.svg" alt="Arrow" width={16} height={20} />
               </span>
             </span>
             <p className="mx-5 text-gray-800 text-2xl font-[600]">=</p>
-            <span className="border items-center flex rounded-lg px-3 py-4">
+            <span className="border items-center flex rounded-lg px-3 py-2">
               {isEditable ? (
                 <input
                   type="text"
@@ -119,13 +119,13 @@ const Update = ({ isOpen, onClose }) => {
                   className="px-2 mr-2 text-2xl font-semibold outline-none"
                 />
               ) : (
-                <h1 className="px-2 mr-2 text-2xl font-semibold cursor-pointer" onClick={handleRateClick}>
+                <h1 className="px-2 mr-2 text-[20px] font-semibold cursor-pointer" onClick={handleRateClick}>
                   {rateValue}
                 </h1>
               )}
               <span className="px-2 rounded-lg flex gap-3 py-1 bg-[#F3F5F8]">
-                <Image src="/images/kes.png" alt="kes" width={30} height={20} />
-                <p className="ml-1 mr-3 text-[20px] font-500">Kes</p>
+                <Image src="/images/kes.png" alt="kes" width={25} height={16} />
+                <p className="ml-1  text-[20px] font-500">KES</p>
                 <Image src="/svgs/arrow.svg" alt="Arrow" width={16} height={20} />
               </span>
             </span>

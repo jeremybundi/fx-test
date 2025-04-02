@@ -51,7 +51,7 @@ const Update1 = ({ isOpen, onClose, rateValue, onRateChange }) => {
   return (
     <>
       <div className="fixed inset-0 flex items-center font-poppins justify-end bg-black bg-opacity-0 z-50">
-        <div className="bg-[#F3F5F8] p-6 w-[830px] px-10 h-screen rounded-lg shadow-lg flex flex-col">
+        <div className="bg-[#F3F5F8] p-6 w-[740px] px-10 h-screen rounded-lg shadow-lg flex flex-col">
           {/* Header Section */}
           <div className="flex justify-between">
             <span className="flex flex-col">
@@ -65,28 +65,28 @@ const Update1 = ({ isOpen, onClose, rateValue, onRateChange }) => {
           </div>
 
           {/* Content Section */}
-          <div className="bg-white rounded-xl items-center flex px-6 p-5">
-            <p className="text-xl font-[700] mr-4">Current Bank Rate</p>
-            <span className="border items-center flex rounded-lg px-3 py-4 max-w-[350px]">
-              <h1 className="px-4 mr-2 text-2xl font-semibold">1</h1>
+          <div className="bg-white rounded-xl items-center flex px-2 p-5">
+            <p className="text-[18px] font-[700] mr-4">Current Bank Rate</p>
+            <span className="border items-center flex rounded-lg px-3 py-2 max-w-[350px]">
+              <h1 className="pr-4 mr-2 text-[20px] font-semibold">1</h1>
               <span className="px-2 rounded-lg flex gap-3 py-1 bg-[#F3F5F8]">
-                <Image src="/images/gbp.png" alt="GBP" width={30} height={20} />
-                <p className="ml-1 mr-3 text-[20px] font-500">GBP</p>
-                <Image src="/svgs/arrow.svg" alt="Arrow" width={16} height={20} />
+                <Image src="/images/gbp.png" alt="GBP" width={24} height={16} />
+                <p className="ml-1 mr-2 text-[17px] font-500">GBP</p>
+                <Image src="/svgs/arrow.svg" alt="Arrow" width={16} height={20} className="mr-1" />
               </span>
             </span>
-            <p className="mx-5 text-gray-800 text-xl font-[600]">=</p>
-            <span className="border items-center flex rounded-lg py-4 max-w-[350px]">
+            <p className="mx-5 text-gray-800 text-[24px] font-[600]">=</p>
+            <span className="border items-center flex rounded-lg py-2 max-w-[350px]">
               <input
                 type="text"
                 value={rateValue}
                 onChange={onRateChange}
-                className="font-[600] text-[20px] w-[100px] px-2 pl-3 font-500 outline-none"
+                className="font-[600] text-[20px] w-[100px] pl-3 font-500 outline-none"
               />
               <span className="bg-[#F3F5F8] rounded-lg flex mx-2 px-2 py-1">
                 <Image src="/images/kes.png" alt="kes" width={30} height={20} />
-                <p className="mx-5 text-[20px] font-500">KES</p>
-                <Image src="/svgs/arrow.svg" alt="Arrow" width={16} height={20} />
+                <p className="mx-5 text-[17px] font-500">KES</p>
+                <Image src="/svgs/arrow.svg" alt="Arrow" width={16} height={20} className="mr-2" />
               </span>
             </span>
           </div>
@@ -106,13 +106,13 @@ const Update1 = ({ isOpen, onClose, rateValue, onRateChange }) => {
               <>
                 <button
                   onClick={onClose}
-                  className="px-28 py-4 text-[18px] font-[600] text-[#276EF1] border-[#276EF1] border rounded-lg hover:bg-gray-100 transition-colors"
+                  className="px-28 py-3 text-[16px] font-[600] text-[#276EF1] border-[#276EF1] border rounded-lg hover:bg-gray-100 transition-colors"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={handleSetNewRate}
-                  className="px-24 py-4 text-[18px] font-[600] text-white bg-[#276EF1] rounded-lg hover:bg-blue-700 transition-colors"
+                  className="px-24 py-3 text-[16px] font-[600] text-white bg-[#276EF1] rounded-lg hover:bg-blue-700 transition-colors"
                 >
                   Set New Rate
                 </button>

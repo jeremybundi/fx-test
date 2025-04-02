@@ -153,12 +153,12 @@ export default function AuditTrail() {
                 <td className="py-2 px-4 text-[12px]">{record.finalRate}</td>
                 <td className="py-2 px-4  text-[12px]">{record.markup}</td>
                 <td className="py-2 px-4 text-[12px]">{record.weightedAvg}</td>
-                <td className="py-2 px-4 text-[12px]">{record.createdDate}</td>
-                <td className="py-2 px-4 text-[12px]">{record.createdTime}</td>
-                <td className="py-2 px-4 text-[12px]">{record.dateOfEffect}</td>
-                <td className="py-2 px-4 text-[12px]">{record.timeOfEffect}</td>
+                <td className="py-2 px-4 text-[11px]">{record.createdDate}</td>
+                <td className="py-2 px-4 text-[11px]">{record.createdTime}</td>
+                <td className="py-2 px-4 text-[11px]">{record.dateOfEffect}</td>
+                <td className="py-2 px-4 text-[11px]">{record.timeOfEffect}</td>
               
-                <td className="py-2 px-4 text-left text-gray-400 font-[600] text-[16px]">{record.updatedBy}</td>
+                <td className="py-2 px-4 text-left text-gray-400 font-[600] text-[12px]">{record.updatedBy}</td>
               </tr>
             ))}
           </tbody>

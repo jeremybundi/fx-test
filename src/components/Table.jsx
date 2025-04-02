@@ -116,7 +116,7 @@ const Table = () => {
     <div className="overflow-x-auto rounded-t-xl bg-white mt-7 p-4">
       <table className="w-full text-left text-gray-700">
         <thead>
-          <tr className="text-gray-500 font-[300] text-left text-[16px]">
+          <tr className="text-gray-500 font-[300] text-left text-[14px]">
             <th className="p-3">Payment Records</th>
             <th className="p-3">Tuma Rate at Cost</th>
             <th className="p-3">Weighted Average</th> 
@@ -132,13 +132,13 @@ const Table = () => {
                 <span className="p-3 bg-gray-200 my-2 rounded-full">
                   <img src={row.icon} alt={row.paymentRecords} className="w-6 h-6" />
                 </span>
-                <span className="text-[#101820] font-[600] text-center">
+                <span className="text-[#101820] font-[600] text-[14px] text-center">
                   {row.paymentRecords}
                 </span>
               </td>
 
               <td className="p-3">
-                <span className="block font-[600] bg-[#CD11261A] text-[#CD1126] p-2 pl-2 mr-8 rounded-md">
+                <span className="block font-[600] bg-[#CD11261A] text-[#CD1126] text-[13px] p-2 pl-2 mr-8 rounded-md">
                   {row.tumaRate}
                 </span>
               </td>
@@ -152,7 +152,7 @@ const Table = () => {
                     step="0.01"
                   />
                 ) : (
-                  <span className="block font-[600] bg-green-100 p-2 pl-2 mr-10 rounded-md">
+                  <span className="block font-[600] bg-green-100 text-[13px] p-2 pl-2 mr-10 rounded-md">
                     {row.weightedAvg}
                   </span>
                 )}
@@ -167,7 +167,7 @@ const Table = () => {
                     step="0.01"
                   />
                 ) : (
-                  <span className="block font-[600] bg-yellow-100 p-2 pl-2 mr-6 rounded-md">
+                  <span className="block font-[600] bg-yellow-100 text-[13px] p-2 pl-2 mr-6 rounded-md">
                     {row.markup}
                   </span>
                 )}
@@ -182,7 +182,7 @@ const Table = () => {
                     step="0.01"
                   />
                 ) : (
-                  <span className="block font-[600] bg-[#27AE601A] text-[#27AE60] p-2 pl-2 mr-8 rounded-md">
+                  <span className="block font-[600] bg-[#27AE601A] text-[13px] text-[#27AE60] p-2 pl-2 mr-8 rounded-md">
                     {row.finalRate}
                   </span>
                 )}

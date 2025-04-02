@@ -24,7 +24,7 @@ const Section = () => {
         paybill: response.data.paybillRate,
         mpesa: response.data.mpesaRate,
         bank: response.data.bankRate,
-        card: response.data.currentRate, // Using currentRate for card
+        card: response.data.currentRate, 
       });
       
       // Format and set the last updated time with +3 hours for EAT
@@ -79,46 +79,46 @@ const Section = () => {
 
       <div className="grid grid-cols-4 gap-10">
         {/* Paybill */}
-        <div className="flex items-center border p-4 bg-white rounded-xl ">
-          <Image src="/svgs/paybill.svg" alt="Paybill" className="mr-4 p-4 bg-[#F3F5F8] rounded-full" width={60} height={50} />
+        <div className="flex items-center border p-3 bg-white rounded-xl ">
+          <Image src="/svgs/paybill.svg" alt="Paybill" className="mr-4 p-3 bg-[#F3F5F8] rounded-full" width={50} height={40} />
           <span className="flex flex-col">
-            <h1 className="font-[700] text-[20px] text-[#101820] ">
+            <h1 className="font-[700] text-[16px] text-[#101820] ">
               {rates.paybill !== null ? `KES ${rates.paybill.toFixed(2)}` : "Loading..."}
             </h1>
-            <p className="text-[#27AAE1] mt-1 text-[14px] bg-[#27AAE11A] w-fit px-2 p- rounded-md font-500">Paybill</p>
+            <p className="text-[#27AAE1] mt-1 text-[12px] bg-[#27AAE11A] w-fit px-2 p- rounded-md font-500">Paybill</p>
           </span>
         </div>
 
         {/* M-Pesa */}
-        <div className="flex items-center p-4 bg-white rounded-xl border">
-          <Image src="/svgs/mpesa.svg" alt="Mpesa" className="mr-4 p-5 px-3 bg-[#F3F5F8] rounded-full" width={60} height={60} />
+        <div className="flex items-center p-3 bg-white rounded-xl border">
+          <Image src="/svgs/mpesa.svg" alt="Mpesa" className="mr-4 p-5 px-3 bg-[#F3F5F8] rounded-full" width={50} height={50} />
           <span className="flex flex-col">
-            <h1 className="font-[700] text-[20px] text-[#101820] ">
+            <h1 className="font-[700] text-[16px] text-[#101820] ">
               {rates.mpesa !== null ? `KES ${rates.mpesa.toFixed(2)}` : "Loading..."}
             </h1>
-            <p className="text-[#3CA8A4] mt-1 text-[14px] bg-[#3CA8A41A] w-fit px-2 p- rounded-md font-500">MPESA</p>
+            <p className="text-[#3CA8A4] mt-1 text-[12px] bg-[#3CA8A41A] w-fit px-2 p- rounded-md font-500">MPESA</p>
           </span>
         </div>
 
         {/* Bank */}
-        <div className="flex items-center p-4 bg-white rounded-xl border">
-          <Image src="/svgs/Bank.svg" alt="Bank" className="mr-4 p-4 px-4 bg-[#F3F5F8] rounded-full" width={60} height={50} />
+        <div className="flex items-center p-3 bg-white rounded-xl border">
+          <Image src="/svgs/Bank.svg" alt="Bank" className="mr-4 p-4 px-4 bg-[#F3F5F8] rounded-full" width={50} height={50} />
           <span className="flex flex-col">
-            <h1 className="font-[700] text-[20px] text-[#101820] ">
+            <h1 className="font-[700] text-[16px] text-[#101820] ">
               {rates.bank !== null ? `KES ${rates.bank.toFixed(2)}` : "Loading..."}
             </h1>
-            <p className="text-[#276EF1] mt-1 text-[14px] bg-[#276EF11A] w-fit px-2 p- rounded-md font-500">Bank</p>
+            <p className="text-[#276EF1] mt-1 text-[12px] bg-[#276EF11A] w-fit px-2 p- rounded-md font-500">Bank</p>
           </span>
         </div>
 
         {/* Card Payment */}
-        <div className="flex items-center p-4 bg-white rounded-xl border">
-          <Image src="/svgs/card.svg" alt="Card Payment" className="mr-4 p-4 bg-[#F3F5F8] rounded-full" width={60} height={50} />
+        <div className="flex items-center p-3 bg-white rounded-xl border">
+          <Image src="/svgs/card.svg" alt="Card Payment" className="mr-4 p-4 bg-[#F3F5F8] rounded-full" width={50} height={50} />
           <span className="flex flex-col">
-            <h1 className="font-[700] text-[20px] text-[#101820] ">
+            <h1 className="font-[700] text-[16px] text-[#101820] ">
               {rates.card !== null ? `KES ${rates.card.toFixed(2)}` : "Loading..."}
             </h1>
-            <p className="text-[#F9CB38] mt-1 text-[14px] bg-[#F9CB381A] w-fit px-2 p- rounded-md font-500">Card</p>
+            <p className="text-[#F9CB38] mt-1 text-[12px] bg-[#F9CB381A] w-fit px-2 p- rounded-md font-500">Card</p>
           </span>
         </div>
       </div>
