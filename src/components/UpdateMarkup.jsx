@@ -12,6 +12,7 @@ const UpdateMarkup = ({ isOpen, onClose, apiResponse }) => {
   const [manualExpiry, setManualExpiry] = useState(new Date());
   const [dateOfEffect, setDateOfEffect] = useState(new Date());
   const [editingFinalRate, setEditingFinalRate] = useState(null);
+  const [editingMarkup, setEditingMarkup] = useState(null);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
 
@@ -22,7 +23,7 @@ const UpdateMarkup = ({ isOpen, onClose, apiResponse }) => {
           paymentRecords: "Paybill", 
           icon: "/svgs/paybill.svg", 
           tumaRate: parseFloat(apiResponse.paybillRateTemp || 0).toFixed(2),
-          markup: (parseFloat(apiResponse.paybillMarkUp || 0) * 100).toFixed(0),
+          markup: (parseFloat(apiResponse.paybillMarkUp) * 100).toFixed(0),
           finalRate: parseFloat(apiResponse.paybillRateTemp || 0).toFixed(2),
           calculatedMarkup: 0
         },
@@ -30,7 +31,7 @@ const UpdateMarkup = ({ isOpen, onClose, apiResponse }) => {
           paymentRecords: "MPESA", 
           icon: "/svgs/mpesa.svg", 
           tumaRate: parseFloat(apiResponse.mpesaRateTemp || 0).toFixed(2),
-          markup: (parseFloat(apiResponse.mpesaMarkUp || 0) * 100).toFixed(0),
+          markup: (parseFloat(apiResponse.mpesaMarkUp) * 100).toFixed(0),
           finalRate: parseFloat(apiResponse.mpesaRateTemp || 0).toFixed(2),
           calculatedMarkup: 0
         },
@@ -38,7 +39,7 @@ const UpdateMarkup = ({ isOpen, onClose, apiResponse }) => {
           paymentRecords: "Bank", 
           icon: "/svgs/Bank.svg", 
           tumaRate: parseFloat(apiResponse.bankRateTemp || 0).toFixed(2),
-          markup: (parseFloat(apiResponse.bankMarkUp || 0) * 100).toFixed(0),
+          markup: (parseFloat(apiResponse.bankMarkUp) * 100).toFixed(0),
           finalRate: parseFloat(apiResponse.bankRateTemp || 0).toFixed(2),
           calculatedMarkup: 0
         }
@@ -55,7 +56,6 @@ const UpdateMarkup = ({ isOpen, onClose, apiResponse }) => {
         setManualExpiry(new Date(apiResponse.manualExpiry));
       }
       
-      // Set current date with time in seconds
       const now = new Date();
       setDateOfEffect(now);
     }
@@ -67,35 +67,56 @@ const UpdateMarkup = ({ isOpen, onClose, apiResponse }) => {
   };
 
   const handleMarkupChange = (index, value) => {
-    const numericValue = parseFloat(value) || 0;
-    // Remove the upper limit (100) and allow negative values
-    const clampedValue = numericValue.toFixed(0);
-    
     const newData = [...data];
-    newData[index].markup = clampedValue;
-    
-    const markupDecimal = parseFloat(clampedValue) / 100;
+  
+    if (value === "") {
+      // Clear all editable values for this row
+      newData[index].markup = "";
+      newData[index].finalRate = "";
+      newData[index].calculatedMarkup = "";
+      setData(newData);
+      return;
+    }
+  
+    const numericValue = parseFloat(value);
+    if (isNaN(numericValue)) return;
+  
+    newData[index].markup = value;
+    const markupDecimal = numericValue / 100;
     const baseRate = parseFloat(newData[index].tumaRate);
     newData[index].finalRate = (baseRate * (1 - markupDecimal)).toFixed(2);
-    newData[index].calculatedMarkup = clampedValue;
-    
+    newData[index].calculatedMarkup = numericValue.toFixed(2);
+  
     setData(newData);
   };
+  
+  
 
   const handleFinalRateChange = (index, value) => {
-    const numericValue = parseFloat(value) || parseFloat(data[index].tumaRate);
-    
     const newData = [...data];
-    newData[index].finalRate = numericValue.toFixed(2);
-    
+  
+    if (value === "") {
+      // Clear all editable values for this row
+      newData[index].finalRate = "";
+      newData[index].markup = "";
+      newData[index].calculatedMarkup = "";
+      setData(newData);
+      return;
+    }
+  
+    const numericValue = parseFloat(value);
+    if (isNaN(numericValue)) return;
+  
+    newData[index].finalRate = numericValue;
+  
     const tumaRate = parseFloat(newData[index].tumaRate);
     const calculatedMarkup = calculateMarkupPercentage(tumaRate, numericValue);
     newData[index].calculatedMarkup = calculatedMarkup;
-    // Update markup to match the new final rate
     newData[index].markup = calculatedMarkup;
-    
+  
     setData(newData);
   };
+  
 
   const prepareApiData = () => {
     const paybillData = data.find(item => item.paymentRecords === "Paybill");
@@ -165,7 +186,7 @@ const UpdateMarkup = ({ isOpen, onClose, apiResponse }) => {
   return (
     <>
       <div className="fixed inset-0 flex items-center font-poppins justify-end bg-black bg-opacity-0 z-50">
-        <div className="bg-[#F3F5F8] p-6 w-[740px] px-10 h-screen rounded-lg shadow-lg flex flex-col">
+        <div className="bg-[#F3F5F8] p-6 w-[760px] px-10 h-screen rounded-lg shadow-lg flex flex-col">
           <div className="flex justify-between">
             <span className="flex flex-col">
               <h2 className="text-xl font-bold mb-4">Update Final Rates</h2>
@@ -203,14 +224,24 @@ const UpdateMarkup = ({ isOpen, onClose, apiResponse }) => {
                       </span>
                     </td>
                     <td className="p-3">
-                      <input
-                        type="number"
-                        // Allow negative values by removing min="0"
-                        step="1"
-                        className="block font-[600] bg-yellow-100 p-2 pl-2 mr-6 rounded-md w-20"
-                        value={row.markup}
-                        onChange={(e) => handleMarkupChange(index, e.target.value)}
-                      />
+                      {editingMarkup === index ? (
+                        <input
+                          type="number"
+                          step="0.01"
+                          className="block font-[600] text-[16px] bg-yellow-100 p-2 pl-2 mr-6 rounded-md w-24"
+                          value={row.markup}
+                          onChange={(e) => handleMarkupChange(index, e.target.value)}
+                          onBlur={() => setEditingMarkup(null)}
+                          autoFocus
+                        />
+                      ) : (
+                        <span 
+                          className="block font-[600] bg-yellow-100 p-2 pl-2 mr-6 rounded-md cursor-pointer"
+                          onClick={() => setEditingMarkup(index)}
+                        >
+                          {row.markup}
+                        </span>
+                      )}
                     </td>
                     <td className="p-3">
                       {editingFinalRate === index ? (
