@@ -65,12 +65,12 @@ export default function AuditTrail() {
               finalRate: item.paybillRate?.toFixed(2) || '0.00',
               markup: (item.paybillMarkUp * 100)|| '0',
               weightedAvg: item.paybillWeightedAvg?.toFixed(2) || '0.00',
-              dateOfEffect: dateOfEffectString,
-              timeOfEffect: timeOfEffectString,
+              /*dateOfEffect: dateOfEffectString,
+              timeOfEffect: timeOfEffectString,*/
               createdDate: createdDateString,
               createdTime: createdTimeString,
               updatedBy: item.changedBy,
-              timestamp: dateOfEffectObj.getTime()
+             // timestamp: dateOfEffectObj.getTime()
             },
             {
               id: item.id + '_bank',
@@ -79,12 +79,12 @@ export default function AuditTrail() {
               finalRate: item.bankRate?.toFixed(2) || '0.00',
               markup: (item.bankMarkUp * 100) || '0', 
               weightedAvg: item.bankWeightedAvg?.toFixed(2) || '0.00',
-              dateOfEffect: dateOfEffectString,
-              timeOfEffect: timeOfEffectString,
+             // dateOfEffect: dateOfEffectString,
+             // timeOfEffect: timeOfEffectString,
               createdDate: createdDateString,
               createdTime: createdTimeString,
               updatedBy: item.changedBy,
-              timestamp: dateOfEffectObj.getTime()
+             // timestamp: dateOfEffectObj.getTime()
             }
           ];
           
@@ -137,10 +137,10 @@ export default function AuditTrail() {
               <th className="py-2 px-4 border-b">Final Rate</th>
               <th className="py-2 px-4 border-b">Markup (%)</th>
               <th className="py-2 px-4 border-b">Weighted Avg</th>
-              <th className="py-2 px-4 border-b">Date of Effect</th>
-              <th className="py-2 px-4 border-b">Time of Effect</th>
-              <th className="py-2 px-4 border-b">Date of Expiry</th>
-              <th className="py-2 px-4 border-b">Time of Expiry</th>
+              <th className="py-2 px-4 border-b">Date of Update</th>
+              <th className="py-2 px-4 border-b">Time of Update</th>
+             {/*} <th className="py-2 px-4 border-b">Date of Expiry</th>
+              <th className="py-2 px-4 border-b">Time of Expiry</th> */}
              
               <th className="py-2 px-4 border-b">Updated By</th>
             </tr>
@@ -155,8 +155,8 @@ export default function AuditTrail() {
                 <td className="py-2 px-4 text-[12px]">{record.weightedAvg}</td>
                 <td className="py-2 px-4 text-[11px]">{record.createdDate}</td>
                 <td className="py-2 px-4 text-[11px]">{record.createdTime}</td>
-                <td className="py-2 px-4 text-[11px]">{record.dateOfEffect}</td>
-                <td className="py-2 px-4 text-[11px]">{record.timeOfEffect}</td>
+              {/*} <td className="py-2 px-4 text-[11px]">{record.dateOfEffect}</td>
+                <td className="py-2 px-4 text-[11px]">{record.timeOfEffect}</td> */}
               
                 <td className="py-2 px-4 text-left text-gray-400 font-[600] text-[12px]">{record.updatedBy}</td>
               </tr>
