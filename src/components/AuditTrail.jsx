@@ -49,7 +49,7 @@ export default function AuditTrail() {
               currencyPair: `${item.baseCurrency}/${item.targetCurrency}`,
               channel: 'M-Pesa',
               finalRate: item.mpesaRate?.toFixed(2) || '0.00',
-              markup: (item.mpesaMarkUp * 100) || '0', 
+              markup: item.mpesaMarkUp || '0', 
               weightedAvg: item.mpesaWeightedAvg?.toFixed(2) || '0.00',
               dateOfEffect: dateOfEffectString,
               timeOfEffect: timeOfEffectString,
@@ -63,7 +63,7 @@ export default function AuditTrail() {
               currencyPair: `${item.baseCurrency}/${item.targetCurrency}`,
               channel: 'Paybill',
               finalRate: item.paybillRate?.toFixed(2) || '0.00',
-              markup: (item.paybillMarkUp * 100)|| '0',
+              markup: item.paybillMarkUp || '0',
               weightedAvg: item.paybillWeightedAvg?.toFixed(2) || '0.00',
               /*dateOfEffect: dateOfEffectString,
               timeOfEffect: timeOfEffectString,*/
@@ -77,7 +77,7 @@ export default function AuditTrail() {
               currencyPair: `${item.baseCurrency}/${item.targetCurrency}`,
               channel: 'Bank',
               finalRate: item.bankRate?.toFixed(2) || '0.00',
-              markup: (item.bankMarkUp * 100) || '0', 
+              markup: item.bankMarkUp || '0', 
               weightedAvg: item.bankWeightedAvg?.toFixed(2) || '0.00',
              // dateOfEffect: dateOfEffectString,
              // timeOfEffect: timeOfEffectString,
@@ -135,7 +135,7 @@ export default function AuditTrail() {
               <th className="py-2 px-4 border-b">Currency Pair</th>
               <th className="py-2 px-4 border-b">Channel</th>
               <th className="py-2 px-4 border-b">Final Rate</th>
-              <th className="py-2 px-4 border-b">Markup (%)</th>
+              <th className="py-2 px-4 border-b">Markup</th>
               <th className="py-2 px-4 border-b">Weighted Avg</th>
               <th className="py-2 px-4 border-b">Date of Update</th>
               <th className="py-2 px-4 border-b">Time of Update</th>
