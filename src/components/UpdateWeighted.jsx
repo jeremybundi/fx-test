@@ -51,7 +51,7 @@ const UpdateWeighted = ({ isOpen, onClose, apiResponse }) => {
       const bankWeightedAverage = data.find(item => item.paymentRecords === "Bank").weightedAvg;
 
       const response = await fetch(
-        `http://tuma-dev-backend-alb-1553448571.us-east-1.elb.amazonaws.com/api/treasury/apply-transaction-fees?baseCurrency=GBP&targetCurrency=KES&mpesaWeightedAverage=${mpesaWeightedAverage}&paybillWeightedAverage=${paybillWeightedAverage}&bankWeightedAverage=${bankWeightedAverage}`,
+        `https://tuma-dev-backend-alb-1553448571.us-east-1.elb.amazonaws.com/api/treasury/apply-transaction-fees?baseCurrency=GBP&targetCurrency=KES&mpesaWeightedAverage=${mpesaWeightedAverage}&paybillWeightedAverage=${paybillWeightedAverage}&bankWeightedAverage=${bankWeightedAverage}`,
         {
           method: 'PUT',
           headers: {

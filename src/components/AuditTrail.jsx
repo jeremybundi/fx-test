@@ -10,7 +10,7 @@ export default function AuditTrail() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://tuma-dev-backend-alb-1553448571.us-east-1.elb.amazonaws.com/api/treasury/currency-exchange-history?page=0&size=20');
+        const response = await fetch('https://tuma-dev-backend-alb-1553448571.us-east-1.elb.amazonaws.com/api/treasury/currency-exchange-history?page=0&size=20');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }

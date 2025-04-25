@@ -148,7 +148,7 @@ const UpdateMarkup = ({ isOpen, onClose, apiResponse }) => {
       const apiData = prepareApiData();
       
       const url = new URL(
-        'http://tuma-dev-backend-alb-1553448571.us-east-1.elb.amazonaws.com/api/treasury/save-final-rates'
+        'https://tuma-dev-backend-alb-1553448571.us-east-1.elb.amazonaws.com/api/treasury/save-final-rates'
       );
       
       Object.entries(apiData).forEach(([key, value]) => {

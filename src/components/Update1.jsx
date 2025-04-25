@@ -22,7 +22,7 @@ const Update1 = ({ isOpen, onClose, rateValue, onRateChange }) => {
   const handleSetNewRate = async () => {
     setIsLoading(true);
     try {
-      const apiUrl = `http://tuma-dev-backend-alb-1553448571.us-east-1.elb.amazonaws.com/api/treasury/new-interbank-rate?baseCurrency=GBP&targetCurrency=KES&interbankRate=${rateValue}&markUp=0&weightedAverage=0`;
+      const apiUrl = `https://tuma-dev-backend-alb-1553448571.us-east-1.elb.amazonaws.com/api/treasury/new-interbank-rate?baseCurrency=GBP&targetCurrency=KES&interbankRate=${rateValue}&markUp=0&weightedAverage=0`;
       
       const response = await axios.put(apiUrl);
       
