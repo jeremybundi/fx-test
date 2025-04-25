@@ -38,7 +38,7 @@ const Update = ({ isOpen, onClose }) => {
     setRateValue(null); // Reset rate value before fetching
     try {
       const response = await axios.get(
-        'https://api.tuma-app.com/api/treasury/temporal-exchange-rates',
+        'http://tuma-dev-backend-alb-1553448571.us-east-1.elb.amazonaws.com/api/treasury/temporal-exchange-rates',
         {
           params: {
             baseCurrency: 'GBP',

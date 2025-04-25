@@ -15,7 +15,7 @@ const Table = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://api.tuma-app.com/api/treasury/temporal-exchange-rates?baseCurrency=GBP&targetCurrency=KES"
+          "http://tuma-dev-backend-alb-1553448571.us-east-1.elb.amazonaws.com/api/treasury/temporal-exchange-rates?baseCurrency=GBP&targetCurrency=KES"
         );
         if (!response.ok) {
           throw new Error("Failed to fetch data");

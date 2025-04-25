@@ -40,9 +40,9 @@ export default function Footer() {
           console.log(selectedCurrency);
   
           if ((selectedCurrency === 'USD' || selectedCurrency === 'GBP') && target === 'KES') {
-            apiUrl = 'https://api.tuma-app.com/api/treasury/exchange-rate-list';
+            apiUrl = 'http://tuma-dev-backend-alb-1553448571.us-east-1.elb.amazonaws.com/api/treasury/exchange-rate-list';
           } else {
-            apiUrl = `https://api.transferwise.com/v1/rates?source=${selectedCurrency}&target=${target}`;
+            apiUrl = `http://tuma-dev-backend-alb-1553448571.us-east-1.elb.amazonaws.com/v1/rates?source=${selectedCurrency}&target=${target}`;
 
           }
 
