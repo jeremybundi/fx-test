@@ -70,7 +70,7 @@ export default function AuditTrail() {
               createdDate: createdDateString,
               createdTime: createdTimeString,
               updatedBy: item.changedBy,
-             // timestamp: dateOfEffectObj.getTime()
+              timestamp: dateOfEffectObj.getTime()
             },
             {
               id: item.id + '_bank',
@@ -84,7 +84,7 @@ export default function AuditTrail() {
               createdDate: createdDateString,
               createdTime: createdTimeString,
               updatedBy: item.changedBy,
-             // timestamp: dateOfEffectObj.getTime()
+             timestamp: dateOfEffectObj.getTime()
             }
           ];
           
@@ -103,7 +103,7 @@ export default function AuditTrail() {
     };
 
     fetchData();
-  }, []);
+  }, );
 
   const totalPages = Math.ceil(records.length / recordsPerPage);
   const paginate = (pageNumber) => {
@@ -135,7 +135,7 @@ export default function AuditTrail() {
               <th className="py-2 px-4 border-b">Currency Pair</th>
               <th className="py-2 px-4 border-b">Channel</th>
               <th className="py-2 px-4 border-b">Final Rate</th>
-              <th className="py-2 px-4 border-b">Markup</th>
+              <th className="py-2 px-4 border-b">Markup (%)</th>
               <th className="py-2 px-4 border-b">Weighted Avg</th>
               <th className="py-2 px-4 border-b">Date of Update</th>
               <th className="py-2 px-4 border-b">Time of Update</th>
